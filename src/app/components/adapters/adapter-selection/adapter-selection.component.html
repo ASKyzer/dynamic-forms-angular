@@ -1,8 +1,4 @@
-<switch-case [case]="adapterType">
-  <case [value]="'input'">
-    <app-input-adapter
-      [contentConfig]="contentConfig"
-      [parentGroup]="parentGroup"
-    ></app-input-adapter>
-  </case>
-</switch-case>
+<ng-container
+  *ngComponentOutlet="getAdapterComponent(); inputs: getAdapterInputs()"
+>
+</ng-container>
