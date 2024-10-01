@@ -3,6 +3,89 @@ export const FORM_CONFIG = [
     row: [
       {
         contentConfig: {
+          content: 'Header 1 Large',
+          isBold: true,
+          type: 'h1',
+        },
+        adapterType: 'texts',
+      },
+    ],
+  },
+  {
+    row: [
+      {
+        contentConfig: {
+          content: 'Header 2 Medium',
+          isBold: true,
+          type: 'h2',
+        },
+        adapterType: 'texts',
+      },
+    ],
+  },
+  {
+    row: [
+      {
+        contentConfig: {
+          content: 'Header 3 Small',
+          type: 'h3',
+        },
+        adapterType: 'texts',
+      },
+    ],
+  },
+  {
+    row: [
+      {
+        contentConfig: {
+          content: 'Paragraph example',
+          type: 'p',
+        },
+        adapterType: 'texts',
+      },
+    ],
+  },
+  {
+    row: [
+      {
+        contentConfig: {
+          listTitle: 'List title',
+          listItems: ['Item 1', 'Item 2', 'Item 3'],
+          isBold: true,
+          type: 'ul',
+        },
+        adapterType: 'texts',
+      },
+    ],
+  },
+  {
+    row: [
+      {
+        contentConfig: {
+          listItems: ['Item 1', 'Item 2', 'Item 3'],
+          type: 'ol',
+          isItalic: true,
+        },
+        adapterType: 'texts',
+      },
+    ],
+  },
+  {
+    row: [
+      {
+        contentConfig: {
+          content:
+            'In reality, you might need to create wrapper components for these HTML elements or use a different approach to create the elements dynamically.',
+          type: 'blockquote',
+        },
+        adapterType: 'texts',
+      },
+    ],
+  },
+  {
+    row: [
+      {
+        contentConfig: {
           label: 'First Name',
           type: 'text',
           controlName: 'firstName',
@@ -123,7 +206,6 @@ export const FORM_CONFIG = [
           type: 'url',
           controlName: 'website',
           placeholder: 'https://example.com',
-          required: true,
           validation: [
             {
               type: 'required',

@@ -8,13 +8,13 @@
     [class]="
       adapter.row.length > 1
         ? adapter.row.length === 3
-          ? 'grid grid-cols-1 md:grid-cols-3 gap-4'
-          : 'grid grid-cols-1 md:grid-cols-2 gap-4'
+          ? 'grid grid-cols-1 md:grid-cols-3 gap-0 md:gap-4'
+          : 'grid grid-cols-1 md:grid-cols-2 gap-0 md:gap-4'
         : ''
     "
   >
     @for (row of adapter.row; track row) {
-    <div class="flex flex-col gap-2">
+    <div class="flex flex-col">
       <app-adapter-selection
         [adapterType]="row.adapterType"
         [contentConfig]="row.contentConfig"

@@ -1,7 +1,8 @@
 import { Component, Input, Type } from '@angular/core';
 import { FormGroup, ReactiveFormsModule } from '@angular/forms';
-import { InputAdapterComponent } from '../input-adapter/input-adapter.component';
 import { CommonModule } from '@angular/common';
+import { InputAdapterComponent } from '../input-adapter/input-adapter.component';
+import { TextsAdapterComponent } from '../texts-adapter/texts-adapter.component';
 
 @Component({
   selector: 'app-adapter-selection',
@@ -25,6 +26,8 @@ export class AdapterSelectionComponent {
     switch (this.adapterType) {
       case 'input':
         return InputAdapterComponent;
+      case 'texts':
+        return TextsAdapterComponent;
       // Add cases for other adapter types
       default:
         throw new Error(`Unsupported adapter type: ${this.adapterType}`);

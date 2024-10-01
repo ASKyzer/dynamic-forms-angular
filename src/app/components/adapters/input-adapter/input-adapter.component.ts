@@ -16,7 +16,15 @@ import { CommonModule } from '@angular/common';
 
 export interface InputAdapterContentConfig {
   label: string;
-  type: string;
+  type:
+    | 'text'
+    | 'email'
+    | 'number'
+    | 'tel'
+    | 'textarea'
+    | 'date'
+    | 'password'
+    | 'url';
   controlName: string;
   value: any;
   validation: any[];
