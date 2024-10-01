@@ -34,20 +34,6 @@
     *ngIf="control.invalid && (control.dirty || control.touched)"
     class="text-red-500 text-sm mt-1"
   >
-    <p *ngIf="control.errors?.['required']">required field.</p>
-    <p *ngIf="control.errors?.['email']">Please enter a valid email address.</p>
-    <p *ngIf="control.errors?.['minlength']">
-      {{ label }} must be at least
-      {{ control.errors?.['minlength'].requiredLength }} characters.
-    </p>
-    <p *ngIf="control.errors?.['pattern']">
-      Please enter a valid {{ label.toLowerCase() }}.
-    </p>
-    <p *ngIf="control.errors?.['min']">
-      {{ label }} must be at least {{ control.errors?.['min'].min }}.
-    </p>
-    <p *ngIf="control.errors?.['max']">
-      {{ label }} must be at most {{ control.errors?.['max'].max }}.
-    </p>
+    <p *ngFor="let error of getErrors()">{{ error }}</p>
   </div>
 </div>
