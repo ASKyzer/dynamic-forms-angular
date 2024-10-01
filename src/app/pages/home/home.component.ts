@@ -1,63 +1,39 @@
-import { Component } from '@angular/core';
-import { FormBuilder, Validators, ReactiveFormsModule } from '@angular/forms';
+import { Component, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { InputFieldComponent } from '../../components/input-field/input-field.component';
+import { CommonModule } from '@angular/common';
+import { InputAdapterComponent } from '../../components/adapters/input-adapter/input-adapter.component';
+import { AdapterSelectionComponent } from '../../components/adapters/adapter-selection/adapter-selection.component';
+import { FORM_CONFIG } from '../../constants/form-config.constant';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [InputFieldComponent, ReactiveFormsModule],
-  template: `
-    <form
-      [formGroup]="form"
-      class="max-w-md mx-auto border p-4 rounded-md shadow-md"
-    >
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <app-input-field
-          label="First Name"
-          type="text"
-          [control]="form.controls['firstName']"
-          placeholder="Enter your first name"
-          [required]="true"
-        >
-        </app-input-field>
-
-        <app-input-field
-          label="Last Name"
-          type="text"
-          [control]="form.controls['lastName']"
-          placeholder="Enter your last name"
-          [required]="true"
-        >
-        </app-input-field>
-      </div>
-
-      <app-input-field
-        label="Email"
-        type="email"
-        [control]="form.controls['email']"
-        placeholder="Enter your email"
-        [required]="true"
-      >
-      </app-input-field>
-
-      <app-input-field
-        label="Message"
-        type="textarea"
-        [control]="form.controls['message']"
-        placeholder="Enter your message"
-        [required]="true"
-      >
-      </app-input-field>
-    </form>
-  `,
+  imports: [
+    InputFieldComponent,
+    ReactiveFormsModule,
+    CommonModule,
+    InputAdapterComponent,
+    AdapterSelectionComponent,
+  ],
+  templateUrl: './home.component.html',
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class HomeComponent {
-  form = this.fb.group({
-    email: ['', [Validators.required, Validators.email]],
-    message: ['', [Validators.required, Validators.minLength(10)]],
-    firstName: ['', [Validators.required]],
-    lastName: ['', [Validators.required]],
-  });
+  config = FORM_CONFIG;
+  form = this.fb.group({});
+  formSubmitted = false;
 
   constructor(private fb: FormBuilder) {}
+
+  onSubmit() {
+    this.formSubmitted = true;
+    this.form.markAllAsTouched();
+    if (this.form.valid) {
+      console.log('Form is valid:', this.form.value);
+      // Handle form submission logic here
+    } else {
+      console.log('Form is invalid');
+    }
+  }
 }

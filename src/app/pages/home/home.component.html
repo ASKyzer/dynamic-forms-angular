@@ -1,0 +1,38 @@
+<form
+  [formGroup]="form"
+  (ngSubmit)="onSubmit()"
+  class="border p-4 rounded-md shadow-md my-8 mx-16"
+>
+  @if (config.length > 0) { @for (adapter of config; track adapter) {
+  <div
+    [class]="
+      adapter.row.length > 1
+        ? adapter.row.length === 3
+          ? 'grid grid-cols-1 md:grid-cols-3 gap-4'
+          : 'grid grid-cols-1 md:grid-cols-2 gap-4'
+        : ''
+    "
+  >
+    @for (row of adapter.row; track row) {
+    <div class="flex flex-col gap-2">
+      <app-adapter-selection
+        [adapterType]="row.adapterType"
+        [contentConfig]="row.contentConfig"
+        [parentGroup]="form"
+      ></app-adapter-selection>
+    </div>
+    }
+  </div>
+  } }
+
+  <button
+    type="submit"
+    class="w-full bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600 mt-4"
+  >
+    Submit
+  </button>
+
+  @if (formSubmitted && form.valid) {
+  <div class="mt-4 text-green-500">Form submitted successfully!</div>
+  }
+</form>

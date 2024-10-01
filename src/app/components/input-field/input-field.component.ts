@@ -12,10 +12,11 @@ import { FormControl, ReactiveFormsModule } from '@angular/forms';
 export class InputFieldComponent implements OnInit {
   @Input() label: string = '';
   @Input() type: string = 'text';
-  @Input() control!: FormControl;
+  @Input() control: FormControl = new FormControl();
   @Input() placeholder: string = '';
   @Input() required: boolean = false;
   @Input() customErrorMessage: string = '';
+  @Input() rows: number = 4;
 
   ngOnInit() {
     if (!this.control) {
@@ -23,19 +24,31 @@ export class InputFieldComponent implements OnInit {
     }
   }
 
-  get errorMessage(): string {
+  getErrors(): string[] {
     if (this.control.errors) {
-      if (this.control.errors['required']) {
-        return 'This field is required';
-      }
-      if (this.control.errors['email']) {
-        return 'Please enter a valid email address';
-      }
-      if (this.control.errors['minlength']) {
-        return `Minimum length is ${this.control.errors['minlength'].requiredLength} characters`;
-      }
-      // Add more error types as needed
+      return Object.keys(this.control.errors).map((key) => {
+        switch (key) {
+          case 'required':
+            return 'Required field.';
+          case 'email':
+            return 'Please enter a valid email address.';
+          case 'minlength':
+            return `${this.label} must be at least ${this.control.errors?.['minlength']?.requiredLength} characters.`;
+          case 'maxlength':
+            return `${this.label} must be at most ${this.control.errors?.['maxlength']?.requiredLength} characters.`;
+          case 'pattern':
+            return `Please enter a valid ${this.label.toLowerCase()}.`;
+          case 'min':
+            return `${this.label} must be at least ${this.control.errors?.['min']?.min}.`;
+          case 'max':
+            return `${this.label} must be at most ${this.control.errors?.['max']?.max}.`;
+          case 'custom':
+            return this.customErrorMessage;
+          default:
+            return `Invalid ${this.label.toLowerCase()}.`;
+        }
+      });
     }
-    return '';
+    return [];
   }
 }

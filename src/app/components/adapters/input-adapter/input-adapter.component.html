@@ -1,0 +1,11 @@
+<app-input-field
+  [label]="contentConfig.label"
+  [type]="contentConfig.type"
+  [control]="parentGroup?.controls[contentConfig.controlName]"
+  [placeholder]="contentConfig.placeholder || ''"
+  [required]="contentConfig.required || false"
+  [customErrorMessage]="contentConfig.customErrorMessage || ''"
+  [rows]="contentConfig.rows || 4"
+  [parentGroup]="parentGroup"
+>
+</app-input-field>
