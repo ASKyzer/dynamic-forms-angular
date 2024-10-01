@@ -29,6 +29,7 @@ export class HomeComponent {
   onSubmit() {
     this.formSubmitted = true;
     this.form.markAllAsTouched();
+
     if (this.form.valid) {
       console.log('Form is valid:', this.form.value);
       // Handle form submission logic here
