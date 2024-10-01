@@ -1,0 +1,97 @@
+<form
+  [formGroup]="form"
+  (ngSubmit)="onSubmit()"
+  class="max-w-md mx-auto border p-4 rounded-md shadow-md"
+>
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+    <app-input-field
+      label="First Name"
+      type="text"
+      [control]="form.controls['firstName']"
+      placeholder="Enter your first name"
+      [required]="true"
+    >
+    </app-input-field>
+
+    <app-input-field
+      label="Last Name"
+      type="text"
+      [control]="form.controls['lastName']"
+      placeholder="Enter your last name"
+      [required]="true"
+    >
+    </app-input-field>
+  </div>
+
+  <app-input-field
+    label="Email"
+    type="email"
+    [control]="form.controls['email']"
+    placeholder="Enter your email"
+    [required]="true"
+  >
+  </app-input-field>
+
+  <app-input-field
+    label="Phone"
+    type="tel"
+    [control]="form.controls['phone']"
+    placeholder="Enter your phone number"
+    [required]="true"
+  >
+  </app-input-field>
+
+  <app-input-field
+    label="Age"
+    type="number"
+    [control]="form.controls['age']"
+    placeholder="Enter your age"
+    [required]="true"
+  >
+  </app-input-field>
+
+  <app-input-field
+    label="Password"
+    type="password"
+    [control]="form.controls['password']"
+    placeholder="Enter your password"
+    [required]="true"
+  >
+  </app-input-field>
+
+  <app-input-field
+    label="Date of Birth"
+    type="date"
+    [control]="form.controls['dateOfBirth']"
+    [required]="true"
+  >
+  </app-input-field>
+
+  <app-input-field
+    label="Website"
+    type="url"
+    [control]="form.controls['website']"
+    placeholder="Enter your website URL"
+  >
+  </app-input-field>
+
+  <app-input-field
+    label="Message"
+    type="textarea"
+    [control]="form.controls['message']"
+    placeholder="Enter your message"
+    [required]="true"
+  >
+  </app-input-field>
+
+  <button
+    type="submit"
+    class="w-full bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600 mt-4"
+  >
+    Submit
+  </button>
+
+  <div *ngIf="formSubmitted && form.valid" class="mt-4 text-green-500">
+    Form submitted successfully!
+  </div>
+</form>

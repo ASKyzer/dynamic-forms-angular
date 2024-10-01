@@ -16,6 +16,7 @@ export class InputFieldComponent implements OnInit {
   @Input() placeholder: string = '';
   @Input() required: boolean = false;
   @Input() customErrorMessage: string = '';
+  @Input() rows: number = 4;
 
   ngOnInit() {
     if (!this.control) {
