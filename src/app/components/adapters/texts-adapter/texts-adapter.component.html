@@ -1,0 +1,45 @@
+<div class="mb-4" [ngClass]="getFontStyle()">
+  @switch (contentConfig.type) { @case ('p') {
+  <p>
+    {{ contentConfig.content }}
+  </p>
+  } @case ('h1') {
+  <h1 class="text-4xl">
+    {{ contentConfig.content }}
+  </h1>
+  } @case ('h2') {
+  <h2 class="text-2xl">
+    {{ contentConfig.content }}
+  </h2>
+  } @case ('h3') {
+  <h3 class="text-xl">
+    {{ contentConfig.content }}
+  </h3>
+  } @case ('ul') {
+  <ul class="list-disc list-inside">
+    {{
+      contentConfig.listTitle
+    }}
+    @for (item of contentConfig.listItems; track item) {
+    <li>
+      {{ item }}
+    </li>
+    }
+  </ul>
+  } @case ('ol') {
+  <ol class="list-decimal list-inside">
+    {{
+      contentConfig.listTitle
+    }}
+    @for (item of contentConfig.listItems; track item) {
+    <li>
+      {{ item }}
+    </li>
+    }
+  </ol>
+  } @case ('blockquote') {
+  <blockquote class="border-l-4 border-gray-300 pl-4 italic">
+    {{ contentConfig.content }}
+  </blockquote>
+  } }
+</div>
