@@ -135,7 +135,28 @@ export const FORM_CONFIG = [
       },
     ],
   },
-
+  {
+    row: [
+      {
+        contentConfig: {
+          label: 'Password',
+          type: 'password',
+          controlName: 'password',
+          required: true,
+          validation: [
+            {
+              type: 'required',
+            },
+            {
+              type: 'minlength',
+              value: 8,
+            },
+          ],
+        },
+        adapterType: 'input',
+      },
+    ],
+  },
   {
     row: [
       {
@@ -152,6 +173,24 @@ export const FORM_CONFIG = [
             {
               type: 'pattern',
               value: '^[0-9]{9}$',
+            },
+          ],
+        },
+        adapterType: 'input',
+      },
+    ],
+  },
+  {
+    row: [
+      {
+        contentConfig: {
+          label: 'Date of Birth',
+          type: 'date',
+          controlName: 'dateOfBirth',
+          required: true,
+          validation: [
+            {
+              type: 'required',
             },
           ],
         },
