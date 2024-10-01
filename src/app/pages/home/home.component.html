@@ -1,46 +1,8 @@
-<form [formGroup]="form" (ngSubmit)="onSubmit()">
-  @for (section of config; track section) {
-  <div class="border rounded-md shadow-md my-8 mx-16">
-    <div class="py-2">
-      <h2 class="text-2xl font-bold border-b py-2 px-4">
-        {{ section.sectionTitle }}
-      </h2>
-    </div>
-    <div class="p-4">
-      @if (section.sectionContent.length > 0) { @for (adapter of
-      section.sectionContent; track adapter) {
-      <div
-        [class]="
-          adapter.row.length > 1
-            ? adapter.row.length === 3
-              ? 'grid grid-cols-1 md:grid-cols-3 gap-0 md:gap-4'
-              : 'grid grid-cols-1 md:grid-cols-2 gap-0 md:gap-4'
-            : ''
-        "
-      >
-        @for (row of adapter.row; track row) {
-        <div class="flex flex-col">
-          <app-adapter-selection
-            [adapterType]="row.adapterType"
-            [contentConfig]="row.contentConfig"
-            [parentGroup]="form"
-          ></app-adapter-selection>
-        </div>
-        }
-      </div>
-      } }
-    </div>
-  </div>
-  }
-
-  <button
-    type="submit"
-    class="w-full bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600 mt-4"
-  >
-    Submit
-  </button>
-
-  @if (formSubmitted && form.valid) {
-  <div class="mt-4 text-green-500">Form submitted successfully!</div>
-  }
-</form>
+<div class="py-8 px-16 mx-auto max-w-[1200px]">
+  <h1 class="text-4xl font-bold mb-4">Form Builder</h1>
+  <p class="mb-4">
+    This is a simple form builder that allows you to create forms with different
+    types of input fields.
+  </p>
+  <app-form [config]="FORM_CONFIG"></app-form>
+</div>

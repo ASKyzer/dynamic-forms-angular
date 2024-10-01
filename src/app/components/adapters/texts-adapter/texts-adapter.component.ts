@@ -1,5 +1,5 @@
-import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Component, Input } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
 export interface TextsAdapterConfig {
@@ -9,7 +9,7 @@ export interface TextsAdapterConfig {
   isBold?: boolean;
   isItalic?: boolean;
   isUnderline?: boolean;
-  type: 'h1' | 'h2' | 'h3' | 'p' | 'ul' | 'ol' | 'blockquote';
+  type: 'h1' | 'h2' | 'h3' | 'p' | 'ul' | 'ol' | 'blockquote' | 'line';
 }
 
 @Component({

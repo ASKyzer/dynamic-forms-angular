@@ -65,6 +65,16 @@ export const FORM_CONFIG = [
         row: [
           {
             contentConfig: {
+              type: 'line',
+            },
+            adapterType: 'texts',
+          },
+        ],
+      },
+      {
+        row: [
+          {
+            contentConfig: {
               listItems: ['Item 1', 'Item 2', 'Item 3'],
               type: 'ol',
               isItalic: true,
