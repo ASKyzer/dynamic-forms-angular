@@ -1,5 +1,5 @@
 import { Component, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import { FormBuilder, Validators, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { InputFieldComponent } from '../../components/input-field/input-field.component';
 import { CommonModule } from '@angular/common';
 import { InputAdapterComponent } from '../../components/adapters/input-adapter/input-adapter.component';
@@ -22,90 +22,168 @@ export class HomeComponent {
     {
       row: [
         {
-          label: 'First Name',
-          type: 'text',
-          controlName: 'firstName',
-          placeholder: 'Enter your first name',
-          required: true,
+          contentConfig: {
+            label: 'First Name',
+            type: 'text',
+            controlName: 'firstName',
+            required: true,
+            validation: [
+              {
+                type: 'required',
+              },
+            ],
+          },
           adapterType: 'input',
-          columnSpan: '',
         },
         {
-          label: 'Last Name',
-          type: 'text',
-          controlName: 'lastName',
-          placeholder: 'Enter your last name',
-          required: true,
+          contentConfig: {
+            label: 'Last Name',
+            type: 'text',
+            controlName: 'lastName',
+            required: true,
+            validation: [
+              {
+                type: 'required',
+              },
+            ],
+          },
           adapterType: 'input',
-          columnSpan: '',
-        },
-        {
-          label: 'Age',
-          type: 'number',
-          controlName: 'age',
-          placeholder: 'Enter your age',
-          required: true,
-          adapterType: 'input',
-          columnSpan: '',
-        },
-      ],
-    },
-    {
-      row: [
-        {
-          label: 'Email',
-          type: 'email',
-          controlName: 'email',
-          placeholder: 'Enter your email',
-          required: true,
-          adapterType: 'input',
-          columnSpan: 'col-span-12, md:col-span-6',
-        },
-        {
-          label: 'Password',
-          type: 'password',
-          controlName: 'password',
-          placeholder: 'Enter your password',
-          required: true,
-          adapterType: 'input',
-          columnSpan: 'col-span-12, md:col-span-4',
         },
       ],
     },
     {
       row: [
         {
-          label: 'Phone',
-          type: 'text',
-          controlName: 'phone',
-          placeholder: 'Enter your phone number',
-          required: true,
+          contentConfig: {
+            label: 'Email',
+            type: 'email',
+            controlName: 'email',
+            required: true,
+            validation: [
+              {
+                type: 'required',
+              },
+              {
+                type: 'email',
+              },
+            ],
+          },
           adapterType: 'input',
-          columnSpan: '',
         },
+      ],
+    },
+    {
+      row: [
         {
-          label: 'Date of Birth',
-          type: 'date',
-          controlName: 'dateOfBirth',
-          required: true,
+          contentConfig: {
+            label: 'Password',
+            type: 'password',
+            controlName: 'password',
+            required: true,
+            validation: [
+              {
+                type: 'required',
+              },
+              {
+                type: 'minlength',
+                value: 8,
+              },
+            ],
+          },
           adapterType: 'input',
-          columnSpan: '',
+        },
+      ],
+    },
+    {
+      row: [
+        {
+          contentConfig: {
+            label: 'Phone',
+            type: 'text',
+            controlName: 'phone',
+            placeholder: '123456789',
+            required: true,
+            validation: [
+              {
+                type: 'required',
+              },
+              {
+                type: 'pattern',
+                value: '^[0-9]{9}$',
+              },
+            ],
+          },
+          adapterType: 'input',
+        },
+      ],
+    },
+    {
+      row: [
+        {
+          contentConfig: {
+            label: 'Date of Birth',
+            type: 'date',
+            controlName: 'dateOfBirth',
+            required: true,
+            validation: [
+              {
+                type: 'required',
+              },
+            ],
+          },
+          adapterType: 'input',
+        },
+      ],
+    },
+    {
+      row: [
+        {
+          contentConfig: {
+            label: 'Website',
+            type: 'url',
+            controlName: 'website',
+            placeholder: 'https://example.com',
+            required: true,
+            validation: [
+              {
+                type: 'required',
+              },
+              {
+                type: 'pattern',
+                value: '^https?://.+\\..+$',
+              },
+            ],
+          },
+          adapterType: 'input',
+        },
+      ],
+    },
+    {
+      row: [
+        {
+          contentConfig: {
+            label: 'Message',
+            type: 'textarea',
+            controlName: 'message',
+            placeholder: 'Enter your message',
+            required: true,
+            validation: [
+              {
+                type: 'required',
+              },
+              {
+                type: 'minlength',
+                value: 10,
+              },
+            ],
+          },
+          adapterType: 'input',
         },
       ],
     },
   ];
 
-  form = this.fb.group({
-    firstName: ['', [Validators.required]],
-    lastName: ['', [Validators.required]],
-    email: ['', [Validators.required, Validators.email]],
-    phone: ['', [Validators.required, Validators.pattern(/^\d{9}$/)]],
-    age: ['', [Validators.required, Validators.min(18), Validators.max(120)]],
-    password: ['', [Validators.required, Validators.minLength(8)]],
-    dateOfBirth: ['', [Validators.required]],
-    website: ['', [Validators.pattern(/^https?:\/\/.+\..+$/)]],
-    message: ['', [Validators.required, Validators.minLength(10)]],
-  });
+  form = this.fb.group({});
 
   formSubmitted = false;
 
