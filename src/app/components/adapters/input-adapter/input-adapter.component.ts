@@ -1,7 +1,8 @@
+import { CommonModule } from '@angular/common';
 import {
   Component,
-  Input,
   CUSTOM_ELEMENTS_SCHEMA,
+  Input,
   NO_ERRORS_SCHEMA,
 } from '@angular/core';
 import {
@@ -12,7 +13,6 @@ import {
   Validators,
 } from '@angular/forms';
 import { InputFieldComponent } from '../../input-field/input-field.component';
-import { CommonModule } from '@angular/common';
 
 export interface InputAdapterContentConfig {
   label: string;
@@ -62,15 +62,15 @@ const defaultContentConfig: InputAdapterContentConfig = {
 })
 export class InputAdapterComponent {
   @Input() contentConfig: any;
-  @Input() parentGroup: FormGroup | any;
+  @Input() parentForm: FormGroup | any;
 
   ngOnInit() {
-    if (!this.parentGroup) {
+    if (!this.parentForm) {
       console.error('FormGroup is required for InputAdapterComponent');
     }
     this.contentConfig = { ...defaultContentConfig, ...this.contentConfig };
 
-    this.parentGroup?.addControl(
+    this.parentForm?.addControl(
       this.contentConfig.controlName,
       new FormControl(this.contentConfig.value, this.getValidators())
     );

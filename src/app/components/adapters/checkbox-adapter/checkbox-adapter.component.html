@@ -1,0 +1,13 @@
+<app-checkbox
+  [label]="contentConfig.label"
+  [options]="contentConfig.options"
+  [option]="contentConfig.option"
+  [isRequired]="contentConfig.required"
+  [isGroup]="contentConfig.isGroup"
+  [errorMessage]="contentConfig.errorMessage"
+  [parentForm]="parentForm"
+  [control]="parentForm?.controls[contentConfig.controlName]"
+  [controlName]="contentConfig.controlName"
+  [isDisabled]="contentConfig.isDisabled"
+  [margin]="contentConfig.margin"
+></app-checkbox>

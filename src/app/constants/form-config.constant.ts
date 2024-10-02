@@ -1,5 +1,132 @@
 export const FORM_CONFIG = [
   {
+    sectionTitle: 'Checkbox Adapters',
+    sectionContent: [
+      {
+        row: [
+          {
+            contentConfig: {
+              label: 'Single checkbox',
+              type: 'checkbox',
+              controlName: 'terms',
+              required: true,
+              option: {
+                label:
+                  'I agree to the terms and conditions and I certify that I have read and understood the terms and conditions.',
+                value: 'option1',
+              },
+            },
+            adapterType: 'checkbox',
+          },
+        ],
+      },
+      {
+        row: [
+          {
+            contentConfig: {
+              label: 'Group of checkboxes',
+              type: 'checkbox',
+              controlName: 'options',
+              errorMessage: 'Please select at least one option',
+              isGroup: true,
+              required: true,
+              options: [
+                {
+                  label: 'Option 1',
+                  value: 'option1',
+                },
+                {
+                  label: 'Option 2',
+                  value: 'option2',
+                },
+                {
+                  label: 'Option 3',
+                  value: 'option3',
+                },
+              ],
+            },
+            adapterType: 'checkbox',
+          },
+        ],
+      },
+      {
+        row: [
+          {
+            contentConfig: {
+              content:
+                'Multiple single checkboxes (with the first 3 with the property margin: "0")',
+              type: 'p',
+            },
+            adapterType: 'texts',
+          },
+        ],
+      },
+      {
+        row: [
+          {
+            contentConfig: {
+              type: 'checkbox',
+              controlName: 'single1',
+              option: {
+                label: 'Single checkbox 1',
+                value: 'option1',
+              },
+              margin: '0',
+            },
+            adapterType: 'checkbox',
+          },
+        ],
+      },
+      {
+        row: [
+          {
+            contentConfig: {
+              type: 'checkbox',
+              controlName: 'single2',
+              option: {
+                label: 'Single checkbox 2',
+                value: 'option2',
+              },
+              margin: '0',
+            },
+            adapterType: 'checkbox',
+          },
+        ],
+      },
+      {
+        row: [
+          {
+            contentConfig: {
+              type: 'checkbox',
+              controlName: 'single3',
+              option: {
+                label: 'Single checkbox 3',
+                value: 'option3',
+              },
+              margin: '0',
+            },
+            adapterType: 'checkbox',
+          },
+        ],
+      },
+      {
+        row: [
+          {
+            contentConfig: {
+              type: 'checkbox',
+              controlName: 'single4',
+              option: {
+                label: 'Single checkbox 4',
+                value: 'option4',
+              },
+            },
+            adapterType: 'checkbox',
+          },
+        ],
+      },
+    ],
+  },
+  {
     sectionTitle: 'Texts Adapters',
     sectionContent: [
       {

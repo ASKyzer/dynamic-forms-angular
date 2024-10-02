@@ -30,10 +30,10 @@ export class FormComponent {
     this.form.markAllAsTouched();
 
     if (this.form.valid) {
-      console.log('Form is valid:', this.form.value);
+      console.log('Form is valid:', this.form.getRawValue());
       // Handle form submission logic here
     } else {
-      console.log('Form is invalid');
+      console.log('Form is invalid', this.form.getRawValue());
     }
   }
 }

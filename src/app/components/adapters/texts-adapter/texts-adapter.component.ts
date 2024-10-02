@@ -10,6 +10,7 @@ export interface TextsAdapterConfig {
   isItalic?: boolean;
   isUnderline?: boolean;
   type: 'h1' | 'h2' | 'h3' | 'p' | 'ul' | 'ol' | 'blockquote' | 'line';
+  margin?: string;
 }
 
 @Component({
@@ -20,7 +21,7 @@ export interface TextsAdapterConfig {
 })
 export class TextsAdapterComponent {
   @Input() contentConfig!: TextsAdapterConfig;
-  @Input() parentGroup: any;
+  @Input() parentForm: any;
 
   getFontStyle() {
     return {

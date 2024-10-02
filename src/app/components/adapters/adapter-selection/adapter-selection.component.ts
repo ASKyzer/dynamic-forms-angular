@@ -1,6 +1,7 @@
+import { CommonModule } from '@angular/common';
 import { Component, Input, Type } from '@angular/core';
 import { FormGroup, ReactiveFormsModule } from '@angular/forms';
-import { CommonModule } from '@angular/common';
+import { CheckboxAdapterComponent } from '../checkbox-adapter/checkbox-adapter.component';
 import { InputAdapterComponent } from '../input-adapter/input-adapter.component';
 import { TextsAdapterComponent } from '../texts-adapter/texts-adapter.component';
 
@@ -14,12 +15,12 @@ import { TextsAdapterComponent } from '../texts-adapter/texts-adapter.component'
 export class AdapterSelectionComponent {
   @Input() adapterType: string;
   @Input() contentConfig: any;
-  @Input() parentGroup: FormGroup;
+  @Input() parentForm: FormGroup;
 
   constructor() {
     this.adapterType = '';
     this.contentConfig = {};
-    this.parentGroup = new FormGroup({});
+    this.parentForm = new FormGroup({});
   }
 
   getAdapterComponent(): Type<any> {
@@ -28,6 +29,8 @@ export class AdapterSelectionComponent {
         return InputAdapterComponent;
       case 'texts':
         return TextsAdapterComponent;
+      case 'checkbox':
+        return CheckboxAdapterComponent;
       // Add cases for other adapter types
       default:
         throw new Error(`Unsupported adapter type: ${this.adapterType}`);
@@ -37,7 +40,7 @@ export class AdapterSelectionComponent {
   getAdapterInputs(): Record<string, any> {
     return {
       contentConfig: this.contentConfig,
-      parentGroup: this.parentGroup,
+      parentForm: this.parentForm,
     };
   }
 }
