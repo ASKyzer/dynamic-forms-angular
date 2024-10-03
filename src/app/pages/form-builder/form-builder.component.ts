@@ -2,18 +2,31 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
+import { InputAdapterComponent } from '../../components/adapters/input-adapter/input-adapter.component';
+import { CheckboxComponent } from '../../components/checkbox/checkbox.component';
+import { AdapterSelectorComponent } from '../../components/form-building/adapter-selector/adapter-selector.component';
+import { InputFieldComponent } from '../../components/input-field/input-field.component';
 import { FormBuilderService } from '../../services/form-builder.service';
 
 @Component({
   selector: 'app-form-builder',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [
+    CommonModule,
+    ReactiveFormsModule,
+    AdapterSelectorComponent,
+    InputFieldComponent,
+    CheckboxComponent,
+    InputAdapterComponent,
+  ],
   templateUrl: './form-builder.component.html',
 })
 export class FormBuilderComponent implements OnInit {
   formConfig: any = { sections: [] };
   currentSection: any = null;
+  currentAdapter: any = null;
   currentRow: any = null;
+  currentField: any = null;
   showForm = false;
   builderForm: FormGroup = new FormGroup({});
   showFieldAddedPrompt: boolean = false;
@@ -43,14 +56,39 @@ export class FormBuilderComponent implements OnInit {
     this.showForm = true;
   }
 
+  addAdapter(adapterType: string) {
+    console.log(
+      '🚀 ~ FormBuilderComponent ~ addAdapter ~ adapterType:',
+      adapterType
+    );
+    this.currentAdapter = this.builderForm.get('adapterType')?.value;
+    console.log(
+      '🚀 ~ FormBuilderComponent ~ addAdapter ~  this.currentAdapter:',
+      this.currentAdapter
+    );
+  }
+
   addSection() {
     this.currentSection = { title: '', rows: [] };
     // Show section title input
   }
 
+  addNewSection() {
+    this.resetFieldForm();
+    this.showFieldAddedPrompt = false;
+    this.currentSection = null;
+    this.currentRow = null;
+    this.currentField = null;
+    this.currentAdapter = null;
+    this.addSection();
+  }
+
   saveSectionTitle() {
     this.currentSection.title = this.builderForm.get('sectionTitle')?.value;
     this.formConfig.sections.push(this.currentSection);
+    if (this.currentSection.title) {
+      this.addRow();
+    }
     // Clear section title input and move to adding rows
   }
 
@@ -67,25 +105,27 @@ export class FormBuilderComponent implements OnInit {
   }
 
   addField() {
-    // Collect field data from form inputs
-    const fieldData = {
-      type: this.builderForm.get('fieldType')?.value,
-      label: this.builderForm.get('fieldLabel')?.value,
-      controlName: this.builderForm.get('fieldControlName')?.value,
-      isRequired: this.builderForm.get('fieldRequired')?.value || false,
-      placeholder: this.builderForm.get('fieldPlaceholder')?.value,
-      errorMessage: this.builderForm.get('fieldErrorMessage')?.value,
-      initialValue: this.builderForm.get('fieldInitialValue')?.value,
-      // Add more properties as needed
+    this.currentField = {
+      adapterType: this.builderForm.get('adapterType')?.value,
+      config: {
+        type: this.builderForm.get('fieldType')?.value,
+        label: this.builderForm.get('fieldLabel')?.value,
+        controlName: this.builderForm.get('fieldControlName')?.value,
+        isRequired: this.builderForm.get('fieldRequired')?.value || false,
+        placeholder: this.builderForm.get('fieldPlaceholder')?.value,
+        errorMessage: this.builderForm.get('fieldErrorMessage')?.value,
+        initialValue: this.builderForm.get('fieldInitialValue')?.value,
+        // Add more properties as needed
+      },
     };
 
-    console.log('🚀 ~ FormBuilderComponent ~ addField ~ fieldData:', fieldData);
-    this.currentRow.fields.push({
-      config: fieldData,
-      adapterType: this.builderForm.get('adapterType')?.value,
-    });
+    console.log(
+      '🚀 ~ FormBuilderComponent ~ addField ~ this.currentField:',
+      this.currentField
+    );
+    this.currentRow.fields.push(this.currentField);
     this.showFieldAddedPrompt = true;
-    this.resetFieldForm();
+    this.changeAdapter();
   }
 
   addAnotherField() {
@@ -95,11 +135,19 @@ export class FormBuilderComponent implements OnInit {
 
   addNewRow() {
     this.showFieldAddedPrompt = false;
-    this.addRow(); // Assuming you have an addRow method
+    this.currentRow = null;
+    this.addRow();
+    // Assuming you have an addRow method
+  }
+
+  changeAdapter() {
+    this.currentAdapter = null;
+    this.resetFieldForm();
   }
 
   resetFieldForm() {
     this.builderForm.patchValue({
+      adapterType: '',
       fieldType: '',
       fieldLabel: '',
       fieldControlName: '',
