@@ -1,0 +1,40 @@
+<div class="{{ 'mb-' + margin }}">
+  <label class="input-label"
+    >{{ label }}
+    @if (isRequired) {
+    <span class="text-grey-500">*</span>
+    }
+  </label>
+  <div
+    [ngClass]="{
+      'flex flex-row flex-wrap gap-6': orientation === 'horizontal'
+    }"
+  >
+    <div *ngFor="let option of options; let i = index">
+      <label
+        [for]="option.value"
+        class="flex gap-3 cursor-pointer justify-start align-top content-start mb-1"
+      >
+        <input
+          type="radio"
+          [id]="option.value"
+          [value]="option.value"
+          [name]="controlName"
+          [checked]="value === option.value"
+          (change)="onRadioChange(option.value)"
+          [required]="isRequired"
+          [formControl]="control"
+          class="self-start mt-1 w-4 h-4"
+        />
+        <span>{{ option.label }}</span>
+      </label>
+    </div>
+  </div>
+  @if (control.invalid && (control.dirty || control.touched)) {
+  <div class="error-message">
+    @if (parentForm.get(controlName)?.errors?.['required']) {
+    <span>{{ errorMessage ? errorMessage : "Please select an option" }}</span
+    >}
+  </div>
+  }
+</div>

@@ -3,6 +3,7 @@ import { Component, Input, Type } from '@angular/core';
 import { FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { CheckboxAdapterComponent } from '../checkbox-adapter/checkbox-adapter.component';
 import { InputAdapterComponent } from '../input-adapter/input-adapter.component';
+import { RadioAdapterComponent } from '../radio-adapter/radio-adapter.component';
 import { TextsAdapterComponent } from '../texts-adapter/texts-adapter.component';
 
 @Component({
@@ -27,6 +28,8 @@ export class AdapterSelectionComponent {
     switch (this.adapterType) {
       case 'input':
         return InputAdapterComponent;
+      case 'radio':
+        return RadioAdapterComponent;
       case 'texts':
         return TextsAdapterComponent;
       case 'checkbox':
