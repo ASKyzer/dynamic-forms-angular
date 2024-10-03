@@ -9,7 +9,6 @@ export const FORM_CONFIG = [
             contentConfig: {
               controlName: 'gender',
               label: 'Gender',
-              isRequired: true,
               options: [
                 {
                   label: 'Male',
@@ -22,6 +21,53 @@ export const FORM_CONFIG = [
                 {
                   label: 'Other',
                   value: 'other',
+                },
+                {
+                  label: 'Prefer not to say',
+                  value: 'preferNotToSay',
+                },
+              ],
+            },
+            adapterType: 'dropdown',
+          },
+        ],
+      },
+      {
+        row: [
+          {
+            contentConfig: {
+              controlName: 'pets',
+              label: 'Pets',
+              isRequired: true,
+              errorMessage: 'Please select at least one pet',
+              options: [
+                {
+                  label: 'Dog',
+                  value: 'dog',
+                },
+                {
+                  label: 'Cat',
+                  value: 'cat',
+                },
+                {
+                  label: 'Bird',
+                  value: 'bird',
+                },
+                {
+                  label: 'Fish',
+                  value: 'fish',
+                },
+                {
+                  label: 'Rabbit',
+                  value: 'rabbit',
+                },
+                {
+                  label: 'Parrot',
+                  value: 'parrot',
+                },
+                {
+                  label: 'Hamster',
+                  value: 'hamster',
                 },
               ],
             },

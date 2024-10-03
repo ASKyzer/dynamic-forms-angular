@@ -20,14 +20,23 @@ export class DropdownAdapterComponent {
   constructor(private fb: FormBuilder) {}
 
   ngOnInit() {
-    this.initializeForm();
+    if (this.parentForm && this.contentConfig) {
+      this.initializeForm();
+    } else {
+      console.error('parentForm or contentConfig is not properly initialized');
+    }
   }
 
   initializeForm() {
-    this.parentForm.addControl(
-      this.contentConfig.controlName,
-      this.fb.control(''),
-      this.contentConfig.isRequired ? Validators.required : null
-    );
+    if (this.parentForm && this.contentConfig?.controlName) {
+      const control = this.fb.control(
+        '',
+        this.contentConfig.isRequired ? Validators.required : null
+      );
+
+      this.parentForm.addControl(this.contentConfig.controlName, control);
+    } else {
+      console.error('Unable to initialize form control');
+    }
   }
 }
