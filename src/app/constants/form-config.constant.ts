@@ -1,6 +1,78 @@
 export const FORM_CONFIG = [
   {
     hasRequiredFields: true,
+    sectionTitle: 'Radio Adapters',
+    sectionContent: [
+      {
+        row: [
+          {
+            contentConfig: {
+              controlName: 'timeOfTheDay',
+              label: 'Time of the day',
+              isRequired: true,
+              errorMessage: 'Please select a time of the day',
+              orientation: 'horizontal',
+              options: [
+                {
+                  label: 'Morning',
+                  value: 'morning',
+                  checked: false,
+                },
+                {
+                  label: 'Afternoon',
+                  value: 'afternoon',
+                  checked: false,
+                },
+                {
+                  label: 'Evening',
+                  value: 'evening',
+                  checked: false,
+                },
+              ],
+            },
+            adapterType: 'radio',
+          },
+        ],
+      },
+      {
+        row: [
+          {
+            contentConfig: {
+              controlName: 'season',
+              label: 'Season',
+              isRequired: true,
+              options: [
+                {
+                  label: 'Spring',
+                  value: 'spring',
+                  checked: false,
+                },
+                {
+                  label: 'Summer',
+                  value: 'summer',
+                  checked: false,
+                },
+                {
+                  label: 'Autumn',
+                  value: 'autumn',
+                  checked: false,
+                },
+                {
+                  label: 'Winter',
+                  value: 'winter',
+                  checked: false,
+                },
+              ],
+              errorMessage: 'Please select a season',
+            },
+            adapterType: 'radio',
+          },
+        ],
+      },
+    ],
+  },
+  {
+    hasRequiredFields: true,
     sectionTitle: 'Checkbox Adapters',
     sectionContent: [
       {
@@ -8,9 +80,10 @@ export const FORM_CONFIG = [
           {
             contentConfig: {
               label: 'Single checkbox',
-              type: 'checkbox',
               controlName: 'terms',
               isRequired: true,
+              errorMessage:
+                'You must agree to the terms and conditions before submitting.',
               option: {
                 label:
                   'I agree to the terms and conditions and I certify that I have read and understood the terms and conditions.',
