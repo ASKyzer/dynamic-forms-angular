@@ -34,6 +34,7 @@ export class FormComponent {
       // Handle form submission logic here
     } else {
       console.log('Form is invalid', this.form.getRawValue());
+      console.log('Form controls', this.form.controls);
     }
   }
 }

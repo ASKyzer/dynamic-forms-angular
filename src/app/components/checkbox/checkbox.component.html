@@ -1,9 +1,12 @@
 <div class="{{ 'mb-' + (margin ? margin : '4') }}" [formGroup]="parentForm">
   <p class="input-label">
     {{ label }}
-    @if (isRequired) {
-    <span class="text-grey-500">*</span>
-    }
+
+    <span
+      *ngIf="isRequired"
+      [class]="control.errors?.['required'] && (control.touched || control.dirty) ? 'text-red-500' : 'text-gray-500'"
+      >*</span
+    >
   </p>
   @if (isGroup) {
   <div [formArrayName]="controlName" class="flex flex-col gap-1 w-fit">

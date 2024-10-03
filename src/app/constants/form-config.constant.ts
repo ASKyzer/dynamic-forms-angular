@@ -1,6 +1,38 @@
 export const FORM_CONFIG = [
   {
     hasRequiredFields: true,
+    sectionTitle: 'Dropdown Adapters',
+    sectionContent: [
+      {
+        row: [
+          {
+            contentConfig: {
+              controlName: 'gender',
+              label: 'Gender',
+              isRequired: true,
+              options: [
+                {
+                  label: 'Male',
+                  value: 'male',
+                },
+                {
+                  label: 'Female',
+                  value: 'female',
+                },
+                {
+                  label: 'Other',
+                  value: 'other',
+                },
+              ],
+            },
+            adapterType: 'dropdown',
+          },
+        ],
+      },
+    ],
+  },
+  {
+    hasRequiredFields: true,
     sectionTitle: 'Radio Adapters',
     sectionContent: [
       {
@@ -9,7 +41,6 @@ export const FORM_CONFIG = [
             contentConfig: {
               controlName: 'timeOfTheDay',
               label: 'Time of the day',
-              isRequired: true,
               errorMessage: 'Please select a time of the day',
               orientation: 'horizontal',
               options: [
@@ -392,11 +423,7 @@ export const FORM_CONFIG = [
               type: 'text',
               controlName: 'phone',
               placeholder: '123456789',
-              isRequired: true,
               validation: [
-                {
-                  type: 'required',
-                },
                 {
                   type: 'pattern',
                   value: '^[0-9]{9}$',
@@ -434,9 +461,6 @@ export const FORM_CONFIG = [
               controlName: 'website',
               placeholder: 'https://example.com',
               validation: [
-                {
-                  type: 'required',
-                },
                 {
                   type: 'pattern',
                   value: '^https?://.+\\..+$',

@@ -1,0 +1,7 @@
+<app-dropdown
+  [label]="contentConfig.label"
+  [isRequired]="contentConfig.isRequired"
+  [options]="contentConfig.options"
+  [errorMessage]="contentConfig.errorMessage"
+  [control]="parentForm.get(contentConfig.controlName)"
+></app-dropdown>

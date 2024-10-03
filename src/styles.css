@@ -20,5 +20,13 @@ body {
 }
 
 .input-field {
-  @apply block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500;
+  @apply block w-full p-2 rounded-md shadow-sm focus:outline-none min-h-[42px];
+}
+
+.input-border {
+  @apply border border-gray-300 focus:ring-indigo-500 focus:border-indigo-500;
+}
+
+.input-border-error {
+  @apply border border-red-500 focus:ring-red-500 focus:border-red-500;
 }

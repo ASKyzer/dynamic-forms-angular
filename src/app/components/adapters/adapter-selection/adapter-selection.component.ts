@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, Input, Type } from '@angular/core';
 import { FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { CheckboxAdapterComponent } from '../checkbox-adapter/checkbox-adapter.component';
+import { DropdownAdapterComponent } from '../dropdown-adapter/dropdown-adapter.component';
 import { InputAdapterComponent } from '../input-adapter/input-adapter.component';
 import { RadioAdapterComponent } from '../radio-adapter/radio-adapter.component';
 import { TextsAdapterComponent } from '../texts-adapter/texts-adapter.component';
@@ -34,7 +35,8 @@ export class AdapterSelectionComponent {
         return TextsAdapterComponent;
       case 'checkbox':
         return CheckboxAdapterComponent;
-      // Add cases for other adapter types
+      case 'dropdown':
+        return DropdownAdapterComponent;
       default:
         throw new Error(`Unsupported adapter type: ${this.adapterType}`);
     }

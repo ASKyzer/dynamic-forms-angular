@@ -7,14 +7,13 @@ import { FormControl, ReactiveFormsModule } from '@angular/forms';
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule],
   templateUrl: './input-field.component.html',
-  styleUrls: ['./input-field.component.css'],
 })
 export class InputFieldComponent implements OnInit {
   @Input() control: FormControl = new FormControl();
   @Input() customErrorMessage: string = '';
   @Input() label: string = '';
   @Input() placeholder: string = '';
-  @Input() required: boolean = false;
+  @Input() isRequired: boolean = false;
   @Input() rows: number = 4;
   @Input() type: string = 'text';
 
