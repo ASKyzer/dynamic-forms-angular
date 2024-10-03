@@ -1,4 +1,7 @@
-<div class="mb-4" [ngClass]="getFontStyle()">
+<div
+  class="{{ 'mb-' + (contentConfig.margin ? contentConfig.margin : '4') }}"
+  [ngClass]="getFontStyle()"
+>
   @switch (contentConfig.type) { @case ('p') {
   <p>
     {{ contentConfig.content }}
