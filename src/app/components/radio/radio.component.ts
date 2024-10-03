@@ -22,15 +22,15 @@ export interface RadioOption {
 })
 export class RadioComponent implements ControlValueAccessor {
   @Input() control: FormControl = new FormControl();
+  @Input() controlName: string = '';
   @Input() errorMessage: string = '';
+  @Input() isDisabled: boolean = false;
   @Input() isRequired: boolean = false;
   @Input() label: string = '';
   @Input() margin: string = '';
-  @Input() orientation: string = '';
   @Input() options: RadioOption[] = [];
+  @Input() orientation: string = '';
   @Input() parentForm: FormGroup = new FormGroup({});
-  @Input() controlName: string = '';
-  @Input() isDisabled: boolean = false;
 
   value: any;
   onChange: (value: any) => void = () => {};
