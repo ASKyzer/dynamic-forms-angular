@@ -38,7 +38,7 @@
 
   <div
     *ngIf="control.invalid && (control.dirty || control.touched)"
-    class="text-red-500 text-sm mt-1 italic"
+    class="error-message"
   >
     <p *ngFor="let error of getErrors()">{{ error }}</p>
   </div>

@@ -9,3 +9,8 @@ body {
   font-family: "Raleway", sans-serif;
   background-color: #f0f0f0;
 }
+
+/* Custom Tailwind */
+.error-message {
+  @apply text-red-500 text-sm mt-1 italic;
+}

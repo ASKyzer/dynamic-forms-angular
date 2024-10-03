@@ -10,13 +10,13 @@ import { FormControl, ReactiveFormsModule } from '@angular/forms';
   styleUrls: ['./input-field.component.css'],
 })
 export class InputFieldComponent implements OnInit {
-  @Input() label: string = '';
-  @Input() type: string = 'text';
   @Input() control: FormControl = new FormControl();
+  @Input() customErrorMessage: string = '';
+  @Input() label: string = '';
   @Input() placeholder: string = '';
   @Input() required: boolean = false;
-  @Input() customErrorMessage: string = '';
   @Input() rows: number = 4;
+  @Input() type: string = 'text';
 
   ngOnInit() {
     if (!this.control) {
