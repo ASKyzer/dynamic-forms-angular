@@ -63,7 +63,6 @@ export const FORM_CONFIG = [
                   checked: false,
                 },
               ],
-              errorMessage: 'Please select a season',
             },
             adapterType: 'radio',
           },

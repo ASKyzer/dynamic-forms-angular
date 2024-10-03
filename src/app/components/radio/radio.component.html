@@ -33,10 +33,8 @@
   @if (control.invalid && (control.dirty || control.touched)) {
   <div class="error-message">
     @if (parentForm.get(controlName)?.errors?.['required']) {
-    <span>Required field.</span>
-    } @else if (errorMessage) {
-    <span>{{ errorMessage }}</span>
-    }
+    <span>{{ errorMessage ? errorMessage : "Please select an option" }}</span
+    >}
   </div>
   }
 </div>
