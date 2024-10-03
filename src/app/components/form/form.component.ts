@@ -31,9 +31,19 @@ export class FormComponent {
 
     if (this.form.valid) {
       console.log('Form is valid:', this.form.getRawValue());
-      // Handle form submission logic here
     } else {
+      const form = document.querySelector('form');
+      const firstInvalidElement = form?.querySelector(':invalid');
+
+      if (firstInvalidElement) {
+        firstInvalidElement.scrollIntoView({
+          behavior: 'smooth',
+          block: 'center',
+        });
+        (firstInvalidElement as HTMLElement)?.focus();
+      }
       console.log('Form is invalid', this.form.getRawValue());
+      console.log('Form controls', this.form.controls);
     }
   }
 }

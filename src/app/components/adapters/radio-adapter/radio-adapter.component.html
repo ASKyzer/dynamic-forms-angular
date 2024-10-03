@@ -2,10 +2,11 @@
   [control]="parentForm?.controls[contentConfig.controlName]"
   [controlName]="contentConfig.controlName"
   [errorMessage]="contentConfig.errorMessage"
-  [isRequired]="contentConfig.isRequired"
+  [isRequired]="contentConfig.isRequired || false"
   [label]="contentConfig.label"
   [margin]="contentConfig.margin || '4'"
   [options]="contentConfig.options"
   [orientation]="contentConfig.orientation || 'vertical'"
   [parentForm]="parentForm"
-></app-radio>
+>
+</app-radio>

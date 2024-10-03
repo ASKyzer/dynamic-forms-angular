@@ -1,11 +1,11 @@
 <app-input-field
-  [label]="contentConfig.label"
-  [type]="contentConfig.type"
   [control]="parentForm?.controls[contentConfig.controlName]"
-  [placeholder]="contentConfig.placeholder || ''"
-  [isRequired]="contentConfig.isRequired || false"
   [customErrorMessage]="contentConfig.customErrorMessage || ''"
-  [rows]="contentConfig.rows || 4"
+  [isRequired]="contentConfig.isRequired || false"
+  [label]="contentConfig.label"
   [parentForm]="parentForm"
+  [placeholder]="contentConfig.placeholder || ''"
+  [rows]="contentConfig.rows || 4"
+  [type]="contentConfig.type"
 >
 </app-input-field>

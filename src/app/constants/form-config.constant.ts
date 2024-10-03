@@ -1,6 +1,84 @@
 export const FORM_CONFIG = [
   {
     hasRequiredFields: true,
+    sectionTitle: 'Dropdown Adapters',
+    sectionContent: [
+      {
+        row: [
+          {
+            contentConfig: {
+              controlName: 'gender',
+              label: 'Gender',
+              options: [
+                {
+                  label: 'Male',
+                  value: 'male',
+                },
+                {
+                  label: 'Female',
+                  value: 'female',
+                },
+                {
+                  label: 'Other',
+                  value: 'other',
+                },
+                {
+                  label: 'Prefer not to say',
+                  value: 'preferNotToSay',
+                },
+              ],
+            },
+            adapterType: 'dropdown',
+          },
+        ],
+      },
+      {
+        row: [
+          {
+            contentConfig: {
+              controlName: 'pets',
+              label: 'Pets',
+              isRequired: true,
+              errorMessage: 'Please select at least one pet',
+              options: [
+                {
+                  label: 'Dog',
+                  value: 'dog',
+                },
+                {
+                  label: 'Cat',
+                  value: 'cat',
+                },
+                {
+                  label: 'Bird',
+                  value: 'bird',
+                },
+                {
+                  label: 'Fish',
+                  value: 'fish',
+                },
+                {
+                  label: 'Rabbit',
+                  value: 'rabbit',
+                },
+                {
+                  label: 'Parrot',
+                  value: 'parrot',
+                },
+                {
+                  label: 'Hamster',
+                  value: 'hamster',
+                },
+              ],
+            },
+            adapterType: 'dropdown',
+          },
+        ],
+      },
+    ],
+  },
+  {
+    hasRequiredFields: true,
     sectionTitle: 'Radio Adapters',
     sectionContent: [
       {
@@ -9,7 +87,6 @@ export const FORM_CONFIG = [
             contentConfig: {
               controlName: 'timeOfTheDay',
               label: 'Time of the day',
-              isRequired: true,
               errorMessage: 'Please select a time of the day',
               orientation: 'horizontal',
               options: [
@@ -392,11 +469,7 @@ export const FORM_CONFIG = [
               type: 'text',
               controlName: 'phone',
               placeholder: '123456789',
-              isRequired: true,
               validation: [
-                {
-                  type: 'required',
-                },
                 {
                   type: 'pattern',
                   value: '^[0-9]{9}$',
@@ -434,9 +507,6 @@ export const FORM_CONFIG = [
               controlName: 'website',
               placeholder: 'https://example.com',
               validation: [
-                {
-                  type: 'required',
-                },
                 {
                   type: 'pattern',
                   value: '^https?://.+\\..+$',

@@ -1,9 +1,11 @@
 <div class="{{ 'mb-' + margin }}">
   <label class="input-label"
     >{{ label }}
-    @if (isRequired) {
-    <span class="text-grey-500">*</span>
-    }
+    <span
+      *ngIf="isRequired"
+      [class]="control.errors?.['required'] && (control.touched || control.dirty) ? 'text-red-500' : 'text-gray-500'"
+      >*</span
+    >
   </label>
   <div
     [ngClass]="{

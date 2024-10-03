@@ -57,7 +57,6 @@ const defaultContentConfig: InputAdapterContentConfig = {
     InputAdapterComponent,
   ],
   templateUrl: './input-adapter.component.html',
-  styleUrl: './input-adapter.component.css',
   schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
 })
 export class InputAdapterComponent {
