@@ -1,7 +1,6 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import {
-  AbstractControl,
   FormArray,
   FormControl,
   FormGroup,
@@ -20,25 +19,27 @@ export interface CheckboxOption {
   imports: [CommonModule, ReactiveFormsModule],
   templateUrl: './checkbox.component.html',
 })
-export class CheckboxComponent implements OnInit {
-  @Input() parentForm!: FormGroup;
-  @Input() controlName!: string;
-  @Input() label!: string;
+export class CheckboxComponent {
   @Input() control: FormControl = new FormControl();
-  @Input() groupName!: string;
-  @Input() groupLabel!: string;
-  @Input() options!: CheckboxOption[];
-  @Input() option!: CheckboxOption;
-  @Input() isRequired = false;
-  @Input() isGroup = false;
-  @Input() isDisabled = false;
+  @Input() controlName!: string;
   @Input() errorMessage = 'Please select at least one option';
-  @Input() removeBottomMargin = false;
+  @Input() groupLabel!: string;
+  @Input() groupName!: string;
+  @Input() isDisabled = false;
+  @Input() isGroup = false;
+  @Input() isRequired = false;
+  @Input() label!: string;
   @Input() margin = '4';
+  @Input() option!: CheckboxOption;
+  @Input() options!: CheckboxOption[];
+  @Input() parentForm!: FormGroup;
 
   ngOnInit() {
     if (!this.control) {
       console.error('FormControl is required for InputFieldComponent');
+    }
+    if (!this.parentForm.get(this.controlName)) {
+      this.parentForm.setControl(this.controlName, new FormArray([]));
     }
   }
 
@@ -46,18 +47,24 @@ export class CheckboxComponent implements OnInit {
     const checkArray: FormArray = this.parentForm.get(
       this.controlName
     ) as FormArray;
+    const value = e.target.value;
 
     if (e.target.checked) {
-      checkArray.push(new FormControl(e.target.value));
+      // Add a new FormControl if it's not already in the array
+      if (!checkArray.controls.some((control) => control.value === value)) {
+        checkArray.push(new FormControl(value));
+      }
     } else {
-      let i: number = 0;
-      checkArray.controls.forEach((item: AbstractControl) => {
-        if (item.value === e.target.value) {
-          checkArray.removeAt(i);
-          return;
-        }
-        i++;
-      });
+      // Remove the FormControl from the array
+      const index = checkArray.controls.findIndex(
+        (control) => control.value === value
+      );
+      if (index !== -1) {
+        checkArray.removeAt(index);
+      }
     }
+
+    // Trigger change detection
+    this.parentForm.updateValueAndValidity();
   }
 }

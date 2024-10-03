@@ -9,11 +9,12 @@ export const FORM_CONFIG = [
               label: 'Single checkbox',
               type: 'checkbox',
               controlName: 'terms',
-              required: true,
+              isRequired: true,
               option: {
                 label:
                   'I agree to the terms and conditions and I certify that I have read and understood the terms and conditions.',
-                value: 'option1',
+                value: 'agreement',
+                checked: false,
               },
             },
             adapterType: 'checkbox',
@@ -29,19 +30,22 @@ export const FORM_CONFIG = [
               controlName: 'options',
               errorMessage: 'Please select at least one option',
               isGroup: true,
-              required: true,
+              isRequired: true,
               options: [
                 {
                   label: 'Option 1',
                   value: 'option1',
+                  checked: false,
                 },
                 {
                   label: 'Option 2',
                   value: 'option2',
+                  checked: false,
                 },
                 {
                   label: 'Option 3',
                   value: 'option3',
+                  checked: false,
                 },
               ],
             },
@@ -70,6 +74,7 @@ export const FORM_CONFIG = [
               option: {
                 label: 'Single checkbox 1',
                 value: 'option1',
+                checked: false,
               },
               margin: '0',
             },
@@ -86,6 +91,7 @@ export const FORM_CONFIG = [
               option: {
                 label: 'Single checkbox 2',
                 value: 'option2',
+                checked: false,
               },
               margin: '0',
             },
@@ -102,6 +108,7 @@ export const FORM_CONFIG = [
               option: {
                 label: 'Single checkbox 3',
                 value: 'option3',
+                checked: false,
               },
               margin: '0',
             },
@@ -118,6 +125,7 @@ export const FORM_CONFIG = [
               option: {
                 label: 'Single checkbox 4',
                 value: 'option4',
+                checked: false,
               },
             },
             adapterType: 'checkbox',
@@ -234,7 +242,7 @@ export const FORM_CONFIG = [
               label: 'First Name',
               type: 'text',
               controlName: 'firstName',
-              required: true,
+              isRequired: true,
               validation: [
                 {
                   type: 'required',
@@ -248,7 +256,7 @@ export const FORM_CONFIG = [
               label: 'Last Name',
               type: 'text',
               controlName: 'lastName',
-              required: true,
+              isRequired: true,
               validation: [
                 {
                   type: 'required',
@@ -266,7 +274,7 @@ export const FORM_CONFIG = [
               label: 'Email',
               type: 'email',
               controlName: 'email',
-              required: true,
+              isRequired: true,
               validation: [
                 {
                   type: 'required',
@@ -287,7 +295,7 @@ export const FORM_CONFIG = [
               label: 'Password',
               type: 'password',
               controlName: 'password',
-              required: true,
+              isRequired: true,
               validation: [
                 {
                   type: 'required',
@@ -310,7 +318,7 @@ export const FORM_CONFIG = [
               type: 'text',
               controlName: 'phone',
               placeholder: '123456789',
-              required: true,
+              isRequired: true,
               validation: [
                 {
                   type: 'required',
@@ -332,7 +340,7 @@ export const FORM_CONFIG = [
               label: 'Date of Birth',
               type: 'date',
               controlName: 'dateOfBirth',
-              required: true,
+              isRequired: true,
               validation: [
                 {
                   type: 'required',
@@ -373,7 +381,7 @@ export const FORM_CONFIG = [
               type: 'textarea',
               controlName: 'message',
               placeholder: 'Enter your message',
-              required: true,
+              isRequired: true,
               validation: [
                 {
                   type: 'required',

@@ -3,7 +3,7 @@
   [type]="contentConfig.type"
   [control]="parentForm?.controls[contentConfig.controlName]"
   [placeholder]="contentConfig.placeholder || ''"
-  [required]="contentConfig.required || false"
+  [isRequired]="contentConfig.isRequired || false"
   [customErrorMessage]="contentConfig.customErrorMessage || ''"
   [rows]="contentConfig.rows || 4"
   [parentForm]="parentForm"

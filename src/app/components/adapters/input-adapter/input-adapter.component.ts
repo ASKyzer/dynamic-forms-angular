@@ -29,7 +29,7 @@ export interface InputAdapterContentConfig {
   value: any;
   validation: any[];
   placeholder?: string;
-  required?: boolean;
+  isRequired?: boolean;
   customErrorMessage?: string;
   rows?: number;
 }
@@ -41,7 +41,7 @@ const defaultContentConfig: InputAdapterContentConfig = {
   value: '',
   validation: [],
   placeholder: '',
-  required: false,
+  isRequired: false,
   customErrorMessage: '',
   rows: 4,
 };

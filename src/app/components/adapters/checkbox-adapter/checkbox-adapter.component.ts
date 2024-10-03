@@ -18,6 +18,20 @@ import {
   CheckboxOption,
 } from '../../checkbox/checkbox.component';
 
+export interface CheckboxAdapterConfig {
+  controlName: string;
+  parentForm: FormGroup;
+  contentConfig: any;
+  errorMessage?: string;
+  isRequired?: boolean;
+  isGroup?: boolean;
+  options?: CheckboxOption[];
+  option?: CheckboxOption;
+  margin?: string;
+  label?: string;
+  type?: string;
+}
+
 @Component({
   selector: 'app-checkbox-adapter',
   standalone: true,
@@ -44,7 +58,7 @@ export class CheckboxAdapterComponent implements OnInit {
 
       return checked
         ? null
-        : this.contentConfig.required
+        : this.contentConfig.isRequired
         ? { requireCheckbox: true }
         : null;
     };
@@ -70,8 +84,8 @@ export class CheckboxAdapterComponent implements OnInit {
       this.parentForm?.addControl(
         this.contentConfig.controlName,
         new FormControl(
-          this.contentConfig.checked || false,
-          this.contentConfig.required ? Validators.requiredTrue : null
+          this.contentConfig.option.checked || false,
+          this.contentConfig.isRequired ? Validators.requiredTrue : null
         )
       );
     }

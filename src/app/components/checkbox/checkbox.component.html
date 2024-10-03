@@ -12,6 +12,7 @@
       <div class="pt-1">
         <input
           (change)="onCheckboxChange($event)"
+          [id]="controlName + '-checkbox-' + i"
           type="checkbox"
           [formControlName]="i"
           [value]="option.value"
