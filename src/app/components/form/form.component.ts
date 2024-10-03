@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, CUSTOM_ELEMENTS_SCHEMA, Input } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilderService } from '../../services/form-builder.service';
 import { AdapterSelectionComponent } from '../adapters/adapter-selection/adapter-selection.component';
 import { InputAdapterComponent } from '../adapters/input-adapter/input-adapter.component';
 import { InputFieldComponent } from '../input-field/input-field.component';
@@ -19,11 +20,14 @@ import { InputFieldComponent } from '../input-field/input-field.component';
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class FormComponent {
-  @Input() config: any;
+  @Input() config: any = this.formBuilderService.getFormConfig();
   form = this.fb.group({});
   formSubmitted = false;
 
-  constructor(private fb: FormBuilder) {}
+  constructor(
+    private fb: FormBuilder,
+    private formBuilderService: FormBuilderService
+  ) {}
 
   onSubmit() {
     this.formSubmitted = true;

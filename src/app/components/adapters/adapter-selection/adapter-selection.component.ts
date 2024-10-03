@@ -10,7 +10,6 @@ import { TextsAdapterComponent } from '../texts-adapter/texts-adapter.component'
 @Component({
   selector: 'app-adapter-selection',
   templateUrl: './adapter-selection.component.html',
-  styleUrls: ['./adapter-selection.component.css'],
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule],
 })
