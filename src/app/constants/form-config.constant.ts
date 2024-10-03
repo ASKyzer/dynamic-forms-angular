@@ -1,5 +1,6 @@
 export const FORM_CONFIG = [
   {
+    hasRequiredFields: true,
     sectionTitle: 'Checkbox Adapters',
     sectionContent: [
       {
@@ -233,6 +234,7 @@ export const FORM_CONFIG = [
     ],
   },
   {
+    hasRequiredFields: true,
     sectionTitle: 'Input Adapters',
     sectionContent: [
       {
