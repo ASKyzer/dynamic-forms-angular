@@ -24,6 +24,7 @@ export class AdapterSelectorComponent {
         { label: 'Checkbox', value: 'checkbox' },
         { label: 'Radio', value: 'radio' },
         { label: 'Dropdown', value: 'dropdown' },
+        { label: 'Toggle', value: 'toggle' },
       ],
     },
   };

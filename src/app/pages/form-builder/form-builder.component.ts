@@ -46,14 +46,6 @@ export class FormBuilderComponent implements OnInit {
     this.builderForm = this.fb.group({
       adapterType: [''],
       sectionTitle: [''],
-      fieldType: [''],
-      fieldLabel: [''],
-      fieldControlName: [''],
-      fieldRequired: [false],
-      fieldPlaceholder: [''],
-      fieldErrorMessage: [''],
-      fieldInitialValue: [''],
-      // Add more form controls as needed
     });
   }
 
@@ -75,7 +67,6 @@ export class FormBuilderComponent implements OnInit {
 
   addSection() {
     this.currentSection = { title: '', rows: [] };
-    // Show section title input
   }
 
   addNewSection() {
@@ -94,7 +85,6 @@ export class FormBuilderComponent implements OnInit {
     if (this.currentSection.title) {
       this.addRow();
     }
-    // Clear section title input and move to adding rows
   }
 
   addRow() {
@@ -109,26 +99,12 @@ export class FormBuilderComponent implements OnInit {
     // Show options for number of fields (1, 2, or 3)
   }
 
-  addField() {
-    console.log('form values', this.inputBuildComponent?.getFormValues());
+  addField(formData: any) {
     this.currentField = {
       adapterType: this.builderForm.get('adapterType')?.value,
-      config: {
-        type: this.builderForm.get('fieldType')?.value,
-        label: this.builderForm.get('fieldLabel')?.value,
-        controlName: this.builderForm.get('fieldControlName')?.value,
-        isRequired: this.builderForm.get('fieldRequired')?.value || false,
-        placeholder: this.builderForm.get('fieldPlaceholder')?.value,
-        errorMessage: this.builderForm.get('fieldErrorMessage')?.value,
-        initialValue: this.builderForm.get('fieldInitialValue')?.value,
-        // Add more properties as needed
-      },
+      config: formData,
     };
 
-    console.log(
-      '🚀 ~ FormBuilderComponent ~ addField ~ this.currentField:',
-      this.currentField
-    );
     this.currentRow.fields.push(this.currentField);
     this.showFieldAddedPrompt = true;
     this.changeAdapter();
@@ -154,13 +130,6 @@ export class FormBuilderComponent implements OnInit {
   resetFieldForm() {
     this.builderForm.patchValue({
       adapterType: '',
-      fieldType: '',
-      fieldLabel: '',
-      fieldControlName: '',
-      fieldRequired: false,
-      fieldPlaceholder: '',
-      fieldErrorMessage: '',
-      fieldInitialValue: '',
     });
   }
 
