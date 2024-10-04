@@ -133,6 +133,8 @@
         <h4 class="text-lg font-semibold mb-2">Add Field</h4>
         @switch (currentAdapter) { @case ('texts') {
         <app-text-builder (addField)="addField($event)"></app-text-builder>
+        } @case ('toggle') {
+        <app-toggle-builder (addField)="addField($event)"></app-toggle-builder>
         } @default {
         <app-input-builder
           (addField)="addField($event)"

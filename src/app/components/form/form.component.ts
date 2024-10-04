@@ -45,7 +45,9 @@ export class FormComponent {
     this.form.markAllAsTouched();
 
     if (this.form.valid) {
+      console.log('Form is valid', this.form.getRawValue());
     } else {
+      console.log('Form is invalid', this.form.getRawValue());
       const form = document.querySelector('form');
       const firstInvalidElement = form?.querySelector(':invalid');
 
@@ -57,5 +59,8 @@ export class FormComponent {
         (firstInvalidElement as HTMLElement)?.focus();
       }
     }
+    setTimeout(() => {
+      this.formSubmitted = false;
+    }, 1000);
   }
 }

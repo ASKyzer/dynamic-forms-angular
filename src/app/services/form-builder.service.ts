@@ -23,4 +23,8 @@ export class FormBuilderService {
     );
     return this.formConfigSubject.value;
   }
+
+  removeAllWhitespace(value: string): string {
+    return value.trim().replace(/\s+/g, '');
+  }
 }

@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { INPUT_BUILDER_CONFIG } from '../../../../constants/input-builder.constant';
+import { FormBuilderService } from '../../../../services/form-builder.service';
 import { FormVisibilityService } from '../../../../services/form-visibility.service';
 import { AdapterSelectionComponent } from '../../../adapters/adapter-selection/adapter-selection.component';
 @Component({
@@ -16,7 +17,10 @@ export class InputBuilderComponent {
 
   inputBuildForm: FormGroup = new FormGroup({});
 
-  constructor(public formVisibilityService: FormVisibilityService) {
+  constructor(
+    public formVisibilityService: FormVisibilityService,
+    private formBuilderService: FormBuilderService
+  ) {
     this.inputBuildForm.valueChanges.subscribe(() => {
       this.formVisibilityService.updateVisibility(
         this.config,
@@ -47,7 +51,9 @@ export class InputBuilderComponent {
 
   formatConfig(config: any) {
     return {
-      controlName: config.controlName,
+      controlName: this.formBuilderService.removeAllWhitespace(
+        config.controlName
+      ),
       label: config.label,
       type: config.fieldType,
       isRequired: config.requiredCheckbox,
