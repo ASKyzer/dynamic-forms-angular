@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { FormGroup } from '@angular/forms';
 
 @Injectable({
   providedIn: 'root',
@@ -26,7 +27,30 @@ export class FormVisibilityService {
   }
 
   isFieldVisible(field: any, form: any): boolean {
+    if (!field.conditions) {
+      return true;
+    }
+
+    if (field.conditions.or) {
+      return this.checkOrConditions(field.conditions.or, form);
+    }
+
     return this.evaluateConditions(field.conditions, form);
+  }
+
+  private checkOrConditions(conditions: any[], form: FormGroup): boolean {
+    return conditions.some((condition) => {
+      const fieldValue = form.get(condition.field)?.value;
+      switch (condition.operator) {
+        case '==':
+          return fieldValue === condition.value;
+        case '!=':
+          return fieldValue !== condition.value;
+        // ... add other operators as needed ...
+        default:
+          return false;
+      }
+    });
   }
 
   evaluateConditions(conditions: any, form: any): boolean {
