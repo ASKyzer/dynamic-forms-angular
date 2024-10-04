@@ -20,11 +20,13 @@ export class TextBuilderComponent {
   }
 
   private configureField(field: any) {
-    const fontStyle = {
-      isBold: field.fontStyle.includes('bold'),
-      isItalic: field.fontStyle.includes('italic'),
-      isUnderline: field.fontStyle.includes('underline'),
-    };
+    const fontStyle = field.fontStyle?.length
+      ? {
+          isBold: field.fontStyle.includes('bold'),
+          isItalic: field.fontStyle.includes('italic'),
+          isUnderline: field.fontStyle.includes('underline'),
+        }
+      : {};
 
     switch (field.textType) {
       case 'line':
