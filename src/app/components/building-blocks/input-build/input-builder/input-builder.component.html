@@ -1,0 +1,22 @@
+@if (config.sections[0].rows.length > 0) { @for (row of config.sections[0].rows;
+track row) {
+<div
+  [class]="
+    row.fields.length > 1
+      ? row.fields.length === 3
+        ? 'grid grid-cols-1 md:grid-cols-3 gap-0 md:gap-4'
+        : 'grid grid-cols-1 md:grid-cols-2 gap-0 md:gap-4'
+      : ''
+  "
+>
+  @for (field of row.fields; track field) {
+  <div class="flex flex-col">
+    <app-adapter-selection
+      [adapterType]="field.adapterType"
+      [contentConfig]="field.config"
+      [parentForm]="inputBuildForm"
+    ></app-adapter-selection>
+  </div>
+  }
+</div>
+} }

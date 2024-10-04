@@ -1,10 +1,11 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { InputAdapterComponent } from '../../components/adapters/input-adapter/input-adapter.component';
+import { AdapterSelectorComponent } from '../../components/building-blocks/adapter-selector/adapter-selector.component';
+import { InputBuilderComponent } from '../../components/building-blocks/input-build/input-builder/input-builder.component';
 import { CheckboxComponent } from '../../components/checkbox/checkbox.component';
-import { AdapterSelectorComponent } from '../../components/form-building/adapter-selector/adapter-selector.component';
 import { InputFieldComponent } from '../../components/input-field/input-field.component';
 import { FormBuilderService } from '../../services/form-builder.service';
 
@@ -18,10 +19,14 @@ import { FormBuilderService } from '../../services/form-builder.service';
     InputFieldComponent,
     CheckboxComponent,
     InputAdapterComponent,
+    InputBuilderComponent,
   ],
   templateUrl: './form-builder.component.html',
 })
 export class FormBuilderComponent implements OnInit {
+  @ViewChild(InputBuilderComponent) public inputBuildComponent:
+    | InputBuilderComponent
+    | undefined;
   formConfig: any = { sections: [] };
   currentSection: any = null;
   currentAdapter: any = null;
@@ -105,6 +110,7 @@ export class FormBuilderComponent implements OnInit {
   }
 
   addField() {
+    console.log('form values', this.inputBuildComponent?.getFormValues());
     this.currentField = {
       adapterType: this.builderForm.get('adapterType')?.value,
       config: {

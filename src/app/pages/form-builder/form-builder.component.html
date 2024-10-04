@@ -11,9 +11,63 @@
   </div>
 
   <div *ngIf="showForm" class="space-y-6">
-    <h2 class="text-2xl font-bold mb-4">Form Builder</h2>
+    <div class="flex justify-between items-center">
+      <h2 class="text-2xl font-bold mb-4">Form Builder</h2>
+      <div class="flex gap-2">
+        <div *ngIf="currentSection">
+          <button
+            (click)="saveForm()"
+            class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded"
+          >
+            Save Form
+          </button>
+          <button
+            (click)="viewForm()"
+            class="ml-4 bg-purple-500 hover:bg-purple-600 text-white font-bold py-2 px-4 rounded"
+          >
+            View Form
+          </button>
+        </div>
+      </div>
+    </div>
 
-    <div *ngIf="!currentSection" class="text-center">
+    <div *ngIf="!currentSection" class="">
+      <h3 class="text-xl font-semibold mb-4">Creating Your Form</h3>
+      <p class="mb-4">Follow these steps to build your form:</p>
+      <ol class="list-decimal list-inside space-y-2 mb-4">
+        <li>Click the "Add Section" button below to start a new section.</li>
+        <li>Enter a title for your section.</li>
+        <li>
+          Choose an adapter type for your first field (input, checkbox, radio,
+          dropdown, etc.) for the first row.
+        </li>
+        <li>
+          Fill in the details for your chosen adapter (e.g., label, placeholder,
+          required status).
+        </li>
+        <li>Add the field to your form.</li>
+        <li>
+          Repeat steps 3-5 to add more fields to the current row (up to 3 fields
+          per row).
+        </li>
+        <li>To start a new row, choose "Add New Row" after adding a field.</li>
+        <li>
+          To start a new section, choose "Add New Section" after adding a field.
+        </li>
+        <li>
+          Once you've added all desired sections and fields, click "Save Form".
+        </li>
+        <li>
+          After saving, you can click "View Form" to see and interact with your
+          created form.
+        </li>
+      </ol>
+      <p class="mb-4">
+        Remember, you can add multiple sections, each with multiple rows, and
+        each row can contain up to three fields. The fields will be
+        automatically arranged in columns based on the number of fields in each
+        row.
+      </p>
       <button
         (click)="addSection()"
         class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded"
@@ -77,58 +131,14 @@
 
       <div *ngIf="currentRow && currentAdapter" class="bg-white p-4 rounded">
         <h4 class="text-lg font-semibold mb-2">Add Field</h4>
-        <div class="space-y-2">
-          <select formControlName="fieldType" class="w-full p-2 border rounded">
-            <option value="text">Text</option>
-            <option value="email">Email</option>
-            <option value="number">Number</option>
-            <option value="tel">Tel</option>
-            <option value="textarea">Textarea</option>
-            <option value="date">Date</option>
-            <option value="password">Password</option>
-            <option value="url">URL</option>
-          </select>
-          <input
-            formControlName="fieldLabel"
-            placeholder="Label"
-            class="w-full p-2 border rounded"
-          />
-          <input
-            formControlName="fieldControlName"
-            placeholder="Control Name"
-            class="w-full p-2 border rounded"
-          />
-          <label class="flex items-center space-x-2">
-            <input
-              type="checkbox"
-              formControlName="fieldRequired"
-              class="form-checkbox"
-            />
-            <span>Required</span>
-          </label>
-          <input
-            formControlName="fieldPlaceholder"
-            placeholder="Placeholder"
-            class="w-full p-2 border rounded"
-          />
-          <input
-            formControlName="fieldErrorMessage"
-            placeholder="Error Message"
-            class="w-full p-2 border rounded"
-          />
-          <input
-            formControlName="fieldInitialValue"
-            placeholder="Initial Value"
-            class="w-full p-2 border rounded"
-          />
-          <button
-            *ngIf="!showFieldAddedPrompt"
-            (click)="addField()"
-            class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded"
-          >
-            Add Field
-          </button>
-        </div>
+        <app-input-builder></app-input-builder>
+        <button
+          *ngIf="!showFieldAddedPrompt"
+          (click)="addField()"
+          class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded"
+        >
+          Add Field
+        </button>
       </div>
 
       <!-- Add this new section after adding a field -->
@@ -156,21 +166,6 @@
             Add New Section
           </button>
         </div>
-      </div>
-
-      <div *ngIf="currentSection">
-        <button
-          (click)="saveForm()"
-          class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded"
-        >
-          Save Form
-        </button>
-        <button
-          (click)="viewForm()"
-          class="ml-4 bg-purple-500 hover:bg-purple-600 text-white font-bold py-2 px-4 rounded"
-        >
-          View Form
-        </button>
       </div>
     </form>
   </div>
