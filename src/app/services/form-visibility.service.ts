@@ -17,36 +17,43 @@ export class FormVisibilityService {
       });
     });
   }
-
   isSectionVisible(section: any, form: any): boolean {
-    if (section.conditions) {
-      return section.conditions.every((condition: any) =>
-        this.evaluateCondition(condition, form)
-      );
-    }
-    return section.condition
-      ? this.evaluateCondition(section.condition, form)
-      : true;
+    return this.evaluateConditions(section.conditions, form);
   }
 
   isRowVisible(row: any, form: any): boolean {
-    if (row.conditions) {
-      return row.conditions.every((condition: any) =>
-        this.evaluateCondition(condition, form)
-      );
-    }
-    return row.condition ? this.evaluateCondition(row.condition, form) : true;
+    return this.evaluateConditions(row.conditions, form);
   }
 
   isFieldVisible(field: any, form: any): boolean {
-    if (field.conditions) {
-      return field.conditions.every((condition: any) =>
+    return this.evaluateConditions(field.conditions, form);
+  }
+
+  evaluateConditions(conditions: any, form: any): boolean {
+    if (!conditions) return true;
+
+    if (conditions.operator && conditions.conditions) {
+      // Handle complex conditions with 'and' or 'or' operators
+      if (conditions.operator.toUpperCase() === 'AND') {
+        return conditions.conditions.every((condition: any) =>
+          this.evaluateCondition(condition, form)
+        );
+      } else if (conditions.operator.toUpperCase() === 'OR') {
+        return conditions.conditions.some((condition: any) =>
+          this.evaluateCondition(condition, form)
+        );
+      }
+    } else if (Array.isArray(conditions)) {
+      // Treat array of conditions as 'AND' for backwards compatibility
+      return conditions.every((condition) =>
         this.evaluateCondition(condition, form)
       );
+    } else {
+      // Single condition object
+      return this.evaluateCondition(conditions, form);
     }
-    return field.condition
-      ? this.evaluateCondition(field.condition, form)
-      : true;
+
+    return true; // Default to true if no valid condition structure is found
   }
 
   evaluateCondition(condition: any, form: any): boolean {

@@ -36,7 +36,7 @@ export const FORM_CONFIG = {
         {
           fields: [
             {
-              conditions: [{ field: 'gender', operator: '!=', value: 'other' }],
+              conditions: { field: 'gender', operator: '!=', value: 'other' },
               config: {
                 controlName: 'pets',
                 label: 'Pets',
@@ -150,9 +150,35 @@ export const FORM_CONFIG = {
       ],
     },
     {
+      // conditions: {
+      //   operator: 'or',
+      //   conditions: [
+      //     {
+      //       operator: 'and',
+      //       conditions: [
+      //         { field: 'timeOfTheDay', operator: '==', value: 'morning' },
+      //         { field: 'gender', operator: '==', value: 'male' },
+      //       ],
+      //     },
+      //     {
+      //       operator: 'and',
+      //       conditions: [
+      //         { field: 'season', operator: '==', value: 'spring' },
+      //         { field: 'gender', operator: '==', value: 'male' },
+      //       ],
+      //     },
+      //   ],
+      // },
+      // conditions: {
+      //   operator: 'or',
+      //   conditions: [
+      //     { field: 'timeOfTheDay', operator: '!=', value: 'morning' },
+      //     { field: 'season', operator: '!=', value: 'spring' },
+      //   ],
+      // },
       conditions: [
-        { field: 'timeOfTheDay', operator: '==', value: 'morning' },
-        { field: 'season', operator: '==', value: 'spring' },
+        { field: 'timeOfTheDay', operator: '!=', value: 'morning' },
+        { field: 'season', operator: '!=', value: 'spring' },
       ],
       hasRequiredFields: true,
       title: 'Checkbox Adapters',
@@ -409,7 +435,7 @@ export const FORM_CONFIG = {
               adapterType: 'input',
             },
             {
-              conditions: [{ field: 'gender', operator: '!=', value: 'other' }],
+              conditions: { field: 'gender', operator: '!=', value: 'other' },
               config: {
                 label: 'Last Name',
                 type: 'text',
