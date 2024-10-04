@@ -136,38 +136,131 @@ export const INPUT_BUILDER_CONFIG = {
         {
           fields: [
             {
+              adapterType: 'toggle',
+              config: {
+                label: 'Would you like to add validation?',
+                controlName: 'validation',
+                value: false,
+              },
+            },
+          ],
+        },
+        {
+          conditions: {
+            field: 'validation',
+            operator: '==',
+            value: true,
+          },
+          fields: [
+            {
               adapterType: 'texts',
               config: {
-                content: 'Add validation',
-                isBold: true,
+                content: 'Check all that apply',
                 type: 'p',
               },
             },
           ],
         },
         {
+          conditions: {
+            field: 'validation',
+            operator: '==',
+            value: true,
+          },
           fields: [
             {
               adapterType: 'checkbox',
               config: {
-                controlName: 'checkbox',
+                controlName: 'requiredCheckbox',
                 option: {
-                  label: 'This field required',
-                  value: 'true',
+                  label: 'Required',
+                  value: 'required',
+                  checked: false,
+                },
+              },
+            },
+            {
+              adapterType: 'checkbox',
+              config: {
+                controlName: 'emailCheckbox',
+                option: {
+                  label: 'Email Pattern',
+                  value: 'email',
+                  checked: false,
+                },
+              },
+            },
+            {
+              adapterType: 'checkbox',
+              config: {
+                controlName: 'patternCheckbox',
+                option: {
+                  label: 'Custom Pattern',
+                  value: 'pattern',
+                  checked: false,
+                },
+              },
+            },
+          ],
+        },
+
+        {
+          conditions: {
+            field: 'validation',
+            operator: '==',
+            value: true,
+          },
+          fields: [
+            {
+              adapterType: 'checkbox',
+              config: {
+                controlName: 'minLengthCheckbox',
+                option: {
+                  label: 'Min Length',
+                  value: 'minLength',
+                  checked: false,
+                },
+              },
+            },
+            {
+              adapterType: 'checkbox',
+              config: {
+                controlName: 'maxLengthCheckbox',
+                option: {
+                  label: 'Max Length',
+                  value: 'maxLength',
+                  checked: false,
+                },
+              },
+            },
+            {
+              adapterType: 'checkbox',
+              config: {
+                controlName: 'minCheckbox',
+                option: {
+                  label: 'Min',
+                  value: 'min',
+                  checked: false,
                 },
               },
             },
           ],
         },
         {
+          conditions: {
+            field: 'validation',
+            operator: '==',
+            value: true,
+          },
           fields: [
             {
               adapterType: 'checkbox',
               config: {
-                controlName: 'emailValidation',
+                controlName: 'maxCheckbox',
                 option: {
-                  label: 'This field need to be a valid email',
-                  value: 'true',
+                  label: 'Max',
+                  value: 'max',
+                  checked: false,
                 },
               },
             },
@@ -177,20 +270,42 @@ export const INPUT_BUILDER_CONFIG = {
           fields: [
             {
               adapterType: 'input',
+              conditions: {
+                field: 'minLengthCheckbox',
+                operator: '==',
+                value: true,
+              },
               config: {
                 controlName: 'minLength',
                 type: 'number',
                 label: 'Min Length',
                 placeholder: 'Enter min length (optional)',
+                isRequired: true,
+                validation: [
+                  {
+                    type: 'required',
+                  },
+                ],
               },
             },
             {
               adapterType: 'input',
+              conditions: {
+                field: 'maxLengthCheckbox',
+                operator: '==',
+                value: true,
+              },
               config: {
                 controlName: 'maxLength',
                 type: 'number',
                 label: 'Max Length',
                 placeholder: 'Enter max length (optional)',
+                isRequired: true,
+                validation: [
+                  {
+                    type: 'required',
+                  },
+                ],
               },
             },
           ],
@@ -199,20 +314,42 @@ export const INPUT_BUILDER_CONFIG = {
           fields: [
             {
               adapterType: 'input',
+              conditions: {
+                field: 'minCheckbox',
+                operator: '==',
+                value: true,
+              },
               config: {
                 controlName: 'min',
                 type: 'number',
                 label: 'Min',
                 placeholder: 'Enter min (optional)',
+                isRequired: true,
+                validation: [
+                  {
+                    type: 'required',
+                  },
+                ],
               },
             },
             {
               adapterType: 'input',
+              conditions: {
+                field: 'maxCheckbox',
+                operator: '==',
+                value: true,
+              },
               config: {
                 controlName: 'max',
                 type: 'number',
                 label: 'Max',
                 placeholder: 'Enter max (optional)',
+                isRequired: true,
+                validation: [
+                  {
+                    type: 'required',
+                  },
+                ],
               },
             },
           ],
@@ -221,11 +358,22 @@ export const INPUT_BUILDER_CONFIG = {
           fields: [
             {
               adapterType: 'input',
+              conditions: {
+                field: 'patternCheckbox',
+                operator: '==',
+                value: true,
+              },
               config: {
                 controlName: 'pattern',
                 type: 'text',
                 label: 'Pattern',
                 placeholder: 'Enter pattern regex (optional)',
+                isRequired: true,
+                validation: [
+                  {
+                    type: 'required',
+                  },
+                ],
               },
             },
           ],
