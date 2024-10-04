@@ -36,6 +36,7 @@ export const FORM_CONFIG = {
         {
           fields: [
             {
+              condition: { field: 'gender', operator: '!=', value: 'other' },
               config: {
                 controlName: 'pets',
                 label: 'Pets',
@@ -81,6 +82,7 @@ export const FORM_CONFIG = {
     {
       hasRequiredFields: true,
       title: 'Radio Adapters',
+      condition: { field: 'gender', operator: '!=', value: 'other' },
       rows: [
         {
           fields: [
@@ -404,6 +406,7 @@ export const FORM_CONFIG = {
               adapterType: 'input',
             },
             {
+              condition: { field: 'gender', operator: '!=', value: 'other' },
               config: {
                 label: 'Last Name',
                 type: 'text',

@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, CUSTOM_ELEMENTS_SCHEMA, Input } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { FormBuilderService } from '../../services/form-builder.service';
+import { FormVisibilityService } from '../../services/form-visibility.service';
 import { AdapterSelectionComponent } from '../adapters/adapter-selection/adapter-selection.component';
 import { InputAdapterComponent } from '../adapters/input-adapter/input-adapter.component';
 import { InputFieldComponent } from '../input-field/input-field.component';
@@ -26,8 +27,18 @@ export class FormComponent {
 
   constructor(
     private fb: FormBuilder,
-    private formBuilderService: FormBuilderService
+    private formBuilderService: FormBuilderService,
+    public formVisibilityService: FormVisibilityService
   ) {}
+
+  ngOnInit() {
+    this.form.valueChanges.subscribe(() => {
+      this.formVisibilityService.updateVisibility(this.config, this.form);
+    });
+
+    // Initial update
+    this.formVisibilityService.updateVisibility(this.config, this.form);
+  }
 
   onSubmit() {
     this.formSubmitted = true;

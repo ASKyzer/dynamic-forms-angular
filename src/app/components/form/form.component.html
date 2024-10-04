@@ -1,6 +1,9 @@
 <form [formGroup]="form" (ngSubmit)="onSubmit()">
   @for (section of config.sections; track section) {
-  <div class="border rounded-md shadow-md my-8 bg-white">
+  <div
+    class="border rounded-md shadow-md my-8 bg-white"
+    *ngIf="formVisibilityService.isSectionVisible(section, form)"
+  >
     <div class="py-2">
       <h2 class="text-xl font-bold border-b py-2 px-4 flex justify-between">
         {{ section.title }}
@@ -12,6 +15,7 @@
     <div class="p-4">
       @if (section.rows.length > 0) { @for (row of section.rows; track row) {
       <div
+        *ngIf="formVisibilityService.isRowVisible(row, form)"
         [class]="
           row.fields.length > 1
             ? row.fields.length === 3
@@ -21,7 +25,10 @@
         "
       >
         @for (field of row.fields; track field) {
-        <div class="flex flex-col">
+        <div
+          class="flex flex-col"
+          *ngIf="formVisibilityService.isFieldVisible(field, form)"
+        >
           <app-adapter-selection
             [adapterType]="field.adapterType"
             [contentConfig]="field.config"
