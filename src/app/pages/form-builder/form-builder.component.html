@@ -131,7 +131,14 @@
 
       <div *ngIf="currentRow && currentAdapter" class="bg-white p-4 rounded">
         <h4 class="text-lg font-semibold mb-2">Add Field</h4>
-        <app-input-builder (addField)="addField($event)"></app-input-builder>
+        @switch (currentAdapter) { @case ('texts') {
+        <app-text-builder (addField)="addField($event)"></app-text-builder>
+        } @default {
+        <app-input-builder
+          (addField)="addField($event)"
+          [isInput]="true"
+        ></app-input-builder>
+        } }
       </div>
 
       <!-- Add this new section after adding a field -->

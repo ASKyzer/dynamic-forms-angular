@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { INPUT_BUILDER_CONFIG } from '../../../../constants/input-builder.constant';
 import { FormVisibilityService } from '../../../../services/form-visibility.service';
@@ -10,9 +10,11 @@ import { AdapterSelectionComponent } from '../../../adapters/adapter-selection/a
   templateUrl: './input-builder.component.html',
 })
 export class InputBuilderComponent {
+  @Input() config: any = INPUT_BUILDER_CONFIG;
+  @Input() isInput: boolean = false;
   @Output() addField: EventEmitter<any> = new EventEmitter<any>();
+
   inputBuildForm: FormGroup = new FormGroup({});
-  config: any = INPUT_BUILDER_CONFIG;
 
   constructor(public formVisibilityService: FormVisibilityService) {
     this.inputBuildForm.valueChanges.subscribe(() => {
@@ -35,7 +37,11 @@ export class InputBuilderComponent {
   onClick() {
     this.inputBuildForm.markAllAsTouched();
     if (this.inputBuildForm.valid) {
-      this.addField.emit(this.formatConfig(this.getFormValues()));
+      this.addField.emit(
+        this.isInput
+          ? this.formatConfig(this.getFormValues())
+          : this.getFormValues()
+      );
     }
   }
 
