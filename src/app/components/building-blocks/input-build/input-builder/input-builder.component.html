@@ -1,5 +1,7 @@
 @if (config.sections[0].rows.length > 0) { @for (row of config.sections[0].rows;
 track row) {
+<!-- Add visibility check for the row -->
+@if (formVisibilityService.isRowVisible(row, inputBuildForm)) {
 <div
   [class]="
     row.fields.length > 1
@@ -10,6 +12,8 @@ track row) {
   "
 >
   @for (field of row.fields; track field) {
+  <!-- Add visibility check for the field -->
+  @if (formVisibilityService.isFieldVisible(field, inputBuildForm)) {
   <div class="flex flex-col">
     <app-adapter-selection
       [adapterType]="field.adapterType"
@@ -17,6 +21,6 @@ track row) {
       [parentForm]="inputBuildForm"
     ></app-adapter-selection>
   </div>
-  }
+  } }
 </div>
-} }
+} } }
