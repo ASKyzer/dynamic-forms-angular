@@ -1,6 +1,59 @@
 export const FORM_CONFIG = {
   sections: [
     {
+      title: 'Toggle Adapters',
+      rows: [
+        {
+          fields: [
+            {
+              config: {
+                controlName: 'additionalCoverages',
+                label:
+                  'Would you like to add additional coverates for family members?',
+              },
+              adapterType: 'toggle',
+            },
+          ],
+        },
+        {
+          fields: [
+            {
+              conditions: {
+                field: 'additionalCoverages',
+                operator: '==',
+                value: true,
+              },
+              config: {
+                controlName: 'familyMembers',
+                label: 'Choose your family members',
+                isRequired: true,
+                isGroup: true,
+                options: [
+                  {
+                    label: 'Parents',
+                    value: 'parents',
+                  },
+                  {
+                    label: 'Spouse',
+                    value: 'spouse',
+                  },
+                  {
+                    label: 'Children',
+                    value: 'children',
+                  },
+                  {
+                    label: 'Other',
+                    value: 'other',
+                  },
+                ],
+              },
+              adapterType: 'checkbox',
+            },
+          ],
+        },
+      ],
+    },
+    {
       hasRequiredFields: true,
       title: 'Dropdown Adapters',
       rows: [

@@ -6,7 +6,7 @@ import { DropdownAdapterComponent } from '../dropdown-adapter/dropdown-adapter.c
 import { InputAdapterComponent } from '../input-adapter/input-adapter.component';
 import { RadioAdapterComponent } from '../radio-adapter/radio-adapter.component';
 import { TextsAdapterComponent } from '../texts-adapter/texts-adapter.component';
-
+import { ToggleAdapterComponent } from '../toggle-adapter/toggle-adapter.component';
 @Component({
   selector: 'app-adapter-selection',
   templateUrl: './adapter-selection.component.html',
@@ -36,6 +36,8 @@ export class AdapterSelectionComponent {
         return CheckboxAdapterComponent;
       case 'dropdown':
         return DropdownAdapterComponent;
+      case 'toggle':
+        return ToggleAdapterComponent;
       default:
         throw new Error(`Unsupported adapter type: ${this.adapterType}`);
     }
