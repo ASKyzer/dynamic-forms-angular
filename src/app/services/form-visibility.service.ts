@@ -9,9 +9,7 @@ export class FormVisibilityService {
 
   updateVisibility(config: any, form: any) {
     config.sections.forEach((section: any) => {
-      section.isVisible = this.isSectionVisible(section, form);
       section.rows.forEach((row: any) => {
-        row.isVisible = this.isRowVisible(row, form);
         row.fields.forEach((field: any) => {
           field.isVisible = this.isFieldVisible(field, form);
         });
@@ -35,14 +33,6 @@ export class FormVisibilityService {
 
       return acc;
     }, []);
-  }
-
-  isSectionVisible(section: any, form: any): boolean {
-    return this.evaluateConditions(section.conditions, form);
-  }
-
-  isRowVisible(row: any, form: any): boolean {
-    return this.evaluateConditions(row.conditions, form);
   }
 
   isFieldVisible(field: any, form: any): boolean {

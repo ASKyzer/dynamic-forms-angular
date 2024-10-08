@@ -264,10 +264,6 @@ export const FORM_CONFIG = {
       ],
     },
     {
-      conditions: [
-        { field: 'timeOfTheDay', operator: '!=', value: 'morning' },
-        { field: 'season', operator: '!=', value: 'spring' },
-      ],
       hasRequiredFields: true,
       title: 'Checkbox Adapters',
       rows: [
