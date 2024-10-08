@@ -18,6 +18,25 @@ export class FormVisibilityService {
       });
     });
   }
+
+  findFieldsWithConditions(config: any[]): any[] {
+    return config.reduce((acc: any[], item: any) => {
+      if (item.conditions && Object.keys(item.conditions).length > 0) {
+        acc.push(item);
+      }
+
+      if (item.rows && Array.isArray(item.rows)) {
+        acc.push(...this.findFieldsWithConditions(item.rows));
+      }
+
+      if (item.fields && Array.isArray(item.fields)) {
+        acc.push(...this.findFieldsWithConditions(item.fields));
+      }
+
+      return acc;
+    }, []);
+  }
+
   isSectionVisible(section: any, form: any): boolean {
     return this.evaluateConditions(section.conditions, form);
   }

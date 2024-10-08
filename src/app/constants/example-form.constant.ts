@@ -23,29 +23,90 @@ export const FORM_CONFIG = {
                 operator: '==',
                 value: true,
               },
+              adapterType: 'texts',
               config: {
-                controlName: 'familyMembers',
-                label: 'Choose your family members',
-                isRequired: true,
-                isGroup: true,
-                options: [
-                  {
-                    label: 'Parents',
-                    value: 'parents',
-                  },
-                  {
-                    label: 'Spouse',
-                    value: 'spouse',
-                  },
-                  {
-                    label: 'Children',
-                    value: 'children',
-                  },
-                  {
-                    label: 'Other',
-                    value: 'other',
-                  },
-                ],
+                content: 'Choose at least one family members',
+                type: 'p',
+                margin: '0',
+              },
+            },
+          ],
+        },
+        {
+          fields: [
+            {
+              conditions: {
+                field: 'additionalCoverages',
+                operator: '==',
+                value: true,
+              },
+              config: {
+                controlName: 'familyMemberParents',
+                option: {
+                  label: 'Parents',
+                  value: 'parents',
+                },
+                margin: '0',
+              },
+              adapterType: 'checkbox',
+            },
+          ],
+        },
+        {
+          fields: [
+            {
+              conditions: {
+                field: 'additionalCoverages',
+                operator: '==',
+                value: true,
+              },
+              config: {
+                controlName: 'familyMembersSpouse',
+                option: {
+                  label: 'Spouse',
+                  value: 'spouse',
+                },
+                margin: '0',
+              },
+              adapterType: 'checkbox',
+            },
+          ],
+        },
+        {
+          fields: [
+            {
+              conditions: {
+                field: 'additionalCoverages',
+                operator: '==',
+                value: true,
+              },
+              config: {
+                controlName: 'familyMembersChildren',
+                option: {
+                  label: 'Children',
+                  value: 'children',
+                },
+                margin: '0',
+              },
+              adapterType: 'checkbox',
+            },
+          ],
+        },
+        {
+          fields: [
+            {
+              conditions: {
+                field: 'additionalCoverages',
+                operator: '==',
+                value: true,
+              },
+              config: {
+                controlName: 'familyMembersPets',
+                option: {
+                  label: 'Pets',
+                  value: 'pets',
+                },
+                margin: '0',
               },
               adapterType: 'checkbox',
             },
@@ -203,32 +264,6 @@ export const FORM_CONFIG = {
       ],
     },
     {
-      // conditions: {
-      //   operator: 'or',
-      //   conditions: [
-      //     {
-      //       operator: 'and',
-      //       conditions: [
-      //         { field: 'timeOfTheDay', operator: '==', value: 'morning' },
-      //         { field: 'gender', operator: '==', value: 'male' },
-      //       ],
-      //     },
-      //     {
-      //       operator: 'and',
-      //       conditions: [
-      //         { field: 'season', operator: '==', value: 'spring' },
-      //         { field: 'gender', operator: '==', value: 'male' },
-      //       ],
-      //     },
-      //   ],
-      // },
-      // conditions: {
-      //   operator: 'or',
-      //   conditions: [
-      //     { field: 'timeOfTheDay', operator: '!=', value: 'morning' },
-      //     { field: 'season', operator: '!=', value: 'spring' },
-      //   ],
-      // },
       conditions: [
         { field: 'timeOfTheDay', operator: '!=', value: 'morning' },
         { field: 'season', operator: '!=', value: 'spring' },
@@ -260,41 +295,10 @@ export const FORM_CONFIG = {
           fields: [
             {
               config: {
-                label: 'Group of checkboxes',
-                type: 'checkbox',
-                controlName: 'options',
-                errorMessage: 'Please select at least one option',
-                isGroup: true,
-                isRequired: true,
-                options: [
-                  {
-                    label: 'Option 1',
-                    value: 'option1',
-                    checked: false,
-                  },
-                  {
-                    label: 'Option 2',
-                    value: 'option2',
-                    checked: false,
-                  },
-                  {
-                    label: 'Option 3',
-                    value: 'option3',
-                    checked: false,
-                  },
-                ],
-              },
-              adapterType: 'checkbox',
-            },
-          ],
-        },
-        {
-          fields: [
-            {
-              config: {
                 content:
                   'Multiple single checkboxes (with the first 3 with the property margin: "0")',
                 type: 'p',
+                margin: '0',
               },
               adapterType: 'texts',
             },

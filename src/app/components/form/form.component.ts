@@ -25,6 +25,7 @@ export class FormComponent {
   form = this.fb.group({});
   formSubmitted = false;
   validForm = false;
+  fieldsWithConditions: any[] = [];
 
   constructor(
     private fb: FormBuilder,
@@ -38,6 +39,55 @@ export class FormComponent {
     });
 
     this.formVisibilityService.updateVisibility(this.config, this.form);
+    this.fieldsWithConditions =
+      this.formVisibilityService.findFieldsWithConditions(this.config.sections);
+
+    setTimeout(() => {
+      this.monitorConditionsChanges();
+    }, 0);
+  }
+
+  monitorConditionsChanges() {
+    this.fieldsWithConditions.forEach((field) => {
+      this.form.get(field.conditions.field)?.valueChanges.subscribe((value) => {
+        if (
+          !this.evaluateCondition(
+            value,
+            field.conditions.operator,
+            field.conditions.value
+          )
+        ) {
+          this.form.get(field.config.controlName)?.setValue(null);
+        }
+      });
+    });
+  }
+
+  private evaluateCondition(
+    value: any,
+    operator: string,
+    comparisonValue: any
+  ): boolean {
+    switch (operator) {
+      case '==':
+        return value == comparisonValue;
+      case '===':
+        return value === comparisonValue;
+      case '!=':
+        return value != comparisonValue;
+      case '!==':
+        return value !== comparisonValue;
+      case '>':
+        return value > comparisonValue;
+      case '>=':
+        return value >= comparisonValue;
+      case '<':
+        return value < comparisonValue;
+      case '<=':
+        return value <= comparisonValue;
+      default:
+        return false;
+    }
   }
 
   findAllControlNames(config: any): string[] {
