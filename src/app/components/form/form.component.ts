@@ -24,6 +24,7 @@ export class FormComponent {
   @Input() config: any = this.formBuilderService.getFormConfig();
   form = this.fb.group({});
   formSubmitted = false;
+  validForm = false;
 
   constructor(
     private fb: FormBuilder,
@@ -36,16 +37,34 @@ export class FormComponent {
       this.formVisibilityService.updateVisibility(this.config, this.form);
     });
 
-    // Initial update
     this.formVisibilityService.updateVisibility(this.config, this.form);
+  }
+
+  findAllControlNames(config: any): string[] {
+    const controlNames: string[] = [];
+
+    const traverse = (obj: any) => {
+      if (Array.isArray(obj)) {
+        obj.forEach((item) => traverse(item));
+      } else if (typeof obj === 'object' && obj !== null) {
+        if (obj.controlName) {
+          controlNames.push(obj.controlName);
+        }
+        Object.values(obj).forEach((value) => traverse(value));
+      }
+    };
+
+    traverse(config);
+    return controlNames;
   }
 
   onSubmit() {
     this.formSubmitted = true;
     this.form.markAllAsTouched();
 
-    if (this.form.valid) {
+    if (this.checkFormValidity()) {
       console.log('Form is valid', this.form.getRawValue());
+      this.validForm = true;
     } else {
       console.log('Form is invalid', this.form.getRawValue());
       const form = document.querySelector('form');
@@ -58,9 +77,26 @@ export class FormComponent {
         });
         (firstInvalidElement as HTMLElement)?.focus();
       }
+      this.validForm = false;
     }
+
     setTimeout(() => {
       this.formSubmitted = false;
+      this.validForm = false;
     }, 1000);
+  }
+
+  checkFormValidity() {
+    const visibleControls = this.findAllControlNames(this.config).filter(
+      (controlName) => {
+        const visible = document.getElementById(controlName);
+        return visible;
+      }
+    );
+
+    return visibleControls.every((controlName) => {
+      const control = this.form.get(controlName);
+      return control?.valid;
+    });
   }
 }

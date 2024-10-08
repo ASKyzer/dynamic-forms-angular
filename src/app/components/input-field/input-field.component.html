@@ -12,7 +12,7 @@
     <textarea
       *ngSwitchCase="'textarea'"
       [formControl]="control"
-      [id]="label"
+      [id]="controlName"
       [placeholder]="placeholder"
       [rows]="rows"
       class="input-field"
@@ -29,7 +29,7 @@
       *ngSwitchDefault
       [type]="type"
       [formControl]="control"
-      [id]="label"
+      [id]="controlName"
       [placeholder]="placeholder"
       class="input-field"
       [class.input-border]="

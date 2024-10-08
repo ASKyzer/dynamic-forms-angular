@@ -10,6 +10,7 @@ import { FormControl, ReactiveFormsModule } from '@angular/forms';
 })
 export class InputFieldComponent implements OnInit {
   @Input() control: FormControl = new FormControl();
+  @Input() controlName!: string;
   @Input() customErrorMessage: string = '';
   @Input() label: string = '';
   @Input() placeholder: string = '';

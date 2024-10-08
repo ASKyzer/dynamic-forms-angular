@@ -11,6 +11,7 @@
     [ngClass]="{
       'flex flex-row flex-wrap gap-6': orientation === 'horizontal'
     }"
+    [id]="controlName"
   >
     <div *ngFor="let option of options; let i = index">
       <label
