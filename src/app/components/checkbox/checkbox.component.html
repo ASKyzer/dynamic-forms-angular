@@ -8,36 +8,8 @@
       >*</span
     >
   </p>
-  @if (isGroup) {
-  <div
-    [formArrayName]="controlName"
-    [id]="controlName"
-    class="flex flex-col gap-1 w-fit"
-  >
-    @for (option of options; track option.value; let i = $index) {
-    <label class="flex items-center gap-3 justify-start cursor-pointer">
-      <div class="pt-1">
-        <input
-          (change)="onCheckboxChange($event, i)"
-          [id]="controlName + '-checkbox-' + i"
-          type="checkbox"
-          [formControlName]="i"
-          [value]="option.value"
-          class="w-4 h-4 border border-gray-300 rounded-md cursor-pointer"
-        />
-      </div>
-      {{ option.label }}
-    </label>
-    }
-  </div>
 
-  @if ( parentForm.get(controlName)?.hasError('requireCheckbox') &&
-  parentForm.get(controlName)?.touched) {
-  <div class="error-message">
-    {{ errorMessage ? errorMessage : "At least one option must be selected." }}
-  </div>
-  } } @else {
-  <div class="flex flex-col gap-2 w-fit">
+  <div class="flex flex-col gap-2 w-fit cursor-pointer">
     <label class="flex gap-3 cursor-pointer">
       <div class="pt-1">
         <input
@@ -53,7 +25,7 @@
       {{ option.label }}
     </label>
   </div>
-  } @if (control.invalid && (control.dirty || control.touched)) {
+  @if (control.invalid && (control.dirty || control.touched)) {
   <div class="error-message">
     {{ control.errors?.['required'] ? (errorMessage ? errorMessage : 'Required field') : '' }}
   </div>
