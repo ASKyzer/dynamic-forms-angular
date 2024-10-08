@@ -53,14 +53,17 @@ export class CheckboxAdapterComponent implements OnInit {
 
   atLeastOneCheckboxCheckedValidator(): ValidatorFn {
     return (control: AbstractControl): { [key: string]: any } | null => {
-      const checkboxes = control as FormArray;
-      const checked = checkboxes.controls.some((checkbox) => checkbox.value);
+      if (control instanceof FormArray) {
+        const checked = control.controls.some(
+          (checkbox) => checkbox.value === true
+        );
 
-      return checked
-        ? null
-        : this.contentConfig.isRequired
-        ? { requireCheckbox: true }
-        : null;
+        return checked || !this.contentConfig.isRequired
+          ? null
+          : { required: true };
+      }
+      // If it's not a FormArray, return null (no error)
+      return null;
     };
   }
 
@@ -78,10 +81,11 @@ export class CheckboxAdapterComponent implements OnInit {
   initializeFormControl() {
     if (this.contentConfig.isGroup) {
       const formArray = this.getFormArray(this.contentConfig.options);
-      this.parentForm?.addControl(this.contentConfig.controlName, formArray);
+      this.parentForm.addControl(this.contentConfig.controlName, formArray);
       formArray.setValidators(this.atLeastOneCheckboxCheckedValidator());
+      formArray.updateValueAndValidity();
     } else {
-      this.parentForm?.addControl(
+      this.parentForm.addControl(
         this.contentConfig.controlName,
         new FormControl(
           this.contentConfig.option.checked || false,
@@ -92,7 +96,7 @@ export class CheckboxAdapterComponent implements OnInit {
   }
 
   getFormArray(options: CheckboxOption[]) {
-    return new FormArray<FormControl>(
+    return new FormArray(
       options.map(
         (option: CheckboxOption) => new FormControl(option.checked || false)
       )

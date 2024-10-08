@@ -43,28 +43,9 @@ export class CheckboxComponent {
     }
   }
 
-  onCheckboxChange(e: any) {
-    const checkArray: FormArray = this.parentForm.get(
-      this.controlName
-    ) as FormArray;
-    const value = e.target.value;
-
-    if (e.target.checked) {
-      // Add a new FormControl if it's not already in the array
-      if (!checkArray.controls.some((control) => control.value === value)) {
-        checkArray.push(new FormControl(value));
-      }
-    } else {
-      // Remove the FormControl from the array
-      const index = checkArray.controls.findIndex(
-        (control) => control.value === value
-      );
-      if (index !== -1) {
-        checkArray.removeAt(index);
-      }
-    }
-
-    // Trigger change detection
-    this.parentForm.updateValueAndValidity();
+  onCheckboxChange(event: any, index: number) {
+    const formArray = this.parentForm.get(this.controlName) as FormArray;
+    formArray.at(index).setValue(event?.target?.checked);
+    formArray.updateValueAndValidity();
   }
 }
