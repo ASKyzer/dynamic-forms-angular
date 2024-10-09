@@ -1,3 +1,5 @@
+import { CONDITIONS_BUILDER_FIELDS_CONFIG } from './conditions-builder.constant';
+
 export const TEXT_BUILDER_CONFIG = {
   sections: [
     {
@@ -185,11 +187,11 @@ export const TEXT_BUILDER_CONFIG = {
               config: {
                 controlName: 'fontStyleUnderline',
                 option: { label: 'Underline', value: 'underline' },
-                margin: '0',
               },
             },
           ],
         },
+        ...CONDITIONS_BUILDER_FIELDS_CONFIG,
       ],
     },
   ],

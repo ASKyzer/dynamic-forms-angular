@@ -26,6 +26,7 @@ export class ToggleBuilderComponent {
         ),
         label: field.label,
       },
+      conditions: this.formBuilderService.getConditions(field),
     };
 
     this.addField.emit(data);

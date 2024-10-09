@@ -1,3 +1,5 @@
+import { CONDITIONS_BUILDER_FIELDS_CONFIG } from './conditions-builder.constant';
+
 export const TOGGLE_BUILDER_CONFIG = {
   sections: [
     {
@@ -38,6 +40,7 @@ export const TOGGLE_BUILDER_CONFIG = {
             },
           ],
         },
+        ...CONDITIONS_BUILDER_FIELDS_CONFIG,
       ],
     },
   ],

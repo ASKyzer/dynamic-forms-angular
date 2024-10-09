@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Output } from '@angular/core';
 import { FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { TEXT_BUILDER_CONFIG } from '../../../constants/text-builder.constant';
+import { FormBuilderService } from '../../../services/form-builder.service';
 import { InputBuilderComponent } from '../input-build/input-builder/input-builder.component';
 
 @Component({
@@ -15,8 +16,13 @@ export class TextBuilderComponent {
   textBuildForm: FormGroup = new FormGroup({});
   config: any = TEXT_BUILDER_CONFIG;
 
+  constructor(private formBuilderService: FormBuilderService) {}
+
   public emitField(field: any) {
-    this.addField.emit({ config: this.configureField(field) });
+    this.addField.emit({
+      config: this.configureField(field),
+      conditions: this.formBuilderService.getConditions(field),
+    });
   }
 
   private configureField(field: any) {

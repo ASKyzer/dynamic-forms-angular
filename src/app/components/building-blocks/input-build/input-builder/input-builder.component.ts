@@ -55,62 +55,6 @@ export class InputBuilderComponent {
     }
   }
 
-  convertToBoolean(value: any) {
-    if (!value) {
-      return;
-    }
-
-    if (value === 'true') {
-      return true;
-    } else if (value === 'false') {
-      return false;
-    } else {
-      return value;
-    }
-  }
-
-  getConditions(config: any) {
-    console.log(
-      '🚀 ~ InputBuilderComponent ~ GET CONDITIONAAS ~ config:',
-      config
-    );
-    const conditions =
-      config.fieldControlName0 && config.operator0 && config.value0
-        ? [
-            {
-              field: config.fieldControlName0,
-              operator: config.operator0,
-              value: this.convertToBoolean(config.value0),
-            },
-          ]
-        : [];
-
-    if (config.fieldControlName1 && config.operator1 && config.value1) {
-      conditions.push({
-        field: config.fieldControlName1,
-        operator: config.operator1,
-        value: this.convertToBoolean(config.value1),
-      });
-    }
-
-    if (
-      config.fieldControlName2 &&
-      config.operator2 &&
-      this.convertToBoolean(config.value2)
-    ) {
-      conditions.push({
-        field: config.fieldControlName2,
-        operator: config.operator2,
-        value: this.convertToBoolean(config.value2),
-      });
-    }
-
-    console.log(
-      '🚀 ~ InputBuilderComponent ~ CONDITIONS IN GET CONDITIONS ~ conditions:',
-      conditions
-    );
-    return conditions;
-  }
   formatConfig(config: any) {
     return {
       config: {
@@ -126,7 +70,7 @@ export class InputBuilderComponent {
         validation: this.configureValidation(config),
         ...(config.fieldType === 'textarea' ? { rows: config.rows || 4 } : {}),
       },
-      conditions: this.getConditions(config),
+      conditions: this.formBuilderService.getConditions(config),
     };
   }
 

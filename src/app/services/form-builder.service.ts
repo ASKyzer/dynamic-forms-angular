@@ -25,6 +25,30 @@ export class FormBuilderService {
     return this.formConfigSubject.value;
   }
 
+  getConditions(config: any) {
+    const conditions = {
+      field: config.fieldControlName0,
+      operator: config.operator0,
+      value: this.convertToBoolean(config.value0), // Maybe other types of values as well like date, number, etc.
+    };
+
+    return conditions;
+  }
+
+  convertToBoolean(value: any) {
+    if (!value) {
+      return;
+    }
+
+    if (value === 'true') {
+      return true;
+    } else if (value === 'false') {
+      return false;
+    } else {
+      return value;
+    }
+  }
+
   removeAllWhitespace(value: string): string {
     return value.trim().replace(/\s+/g, '');
   }
