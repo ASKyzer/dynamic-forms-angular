@@ -101,7 +101,7 @@
       class="bg-white p-4 rounded"
     >
       <h3 class="text-xl font-semibold mb-2">
-        Section Title: {{ currentSection.title }}
+        {{ currentSection.title }}
       </h3>
     </div>
 
@@ -119,13 +119,13 @@
 
       <div *ngIf="currentRow && currentAdapter" class="bg-white p-4 rounded">
         <h3 class="text-xl font-semibold mb-2">
-          Element Type: {{ currentAdapter }}
+          Input Type: {{ currentAdapter }}
         </h3>
         <button
           (click)="changeAdapter()"
           class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded"
         >
-          Change Element
+          Change Input Type
         </button>
       </div>
 

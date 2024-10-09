@@ -115,13 +115,13 @@ export const INPUT_BUILDER_CONFIG = {
           ],
         },
         {
-          conditions: {
-            field: 'fieldType',
-            operator: '==',
-            value: 'textarea',
-          },
           fields: [
             {
+              conditions: {
+                field: 'fieldType',
+                operator: '==',
+                value: 'textarea',
+              },
               adapterType: 'input',
               config: {
                 controlName: 'rows',
@@ -146,13 +146,13 @@ export const INPUT_BUILDER_CONFIG = {
           ],
         },
         {
-          conditions: {
-            field: 'validation',
-            operator: '==',
-            value: true,
-          },
           fields: [
             {
+              conditions: {
+                field: 'validation',
+                operator: '==',
+                value: true,
+              },
               adapterType: 'texts',
               config: {
                 content: 'Check all that apply',
@@ -162,13 +162,13 @@ export const INPUT_BUILDER_CONFIG = {
           ],
         },
         {
-          conditions: {
-            field: 'validation',
-            operator: '==',
-            value: true,
-          },
           fields: [
             {
+              conditions: {
+                field: 'validation',
+                operator: '==',
+                value: true,
+              },
               adapterType: 'checkbox',
               config: {
                 controlName: 'requiredCheckbox',
@@ -180,6 +180,11 @@ export const INPUT_BUILDER_CONFIG = {
               },
             },
             {
+              conditions: {
+                field: 'validation',
+                operator: '==',
+                value: true,
+              },
               adapterType: 'checkbox',
               config: {
                 controlName: 'emailCheckbox',
@@ -191,6 +196,11 @@ export const INPUT_BUILDER_CONFIG = {
               },
             },
             {
+              conditions: {
+                field: 'validation',
+                operator: '==',
+                value: true,
+              },
               adapterType: 'checkbox',
               config: {
                 controlName: 'patternCheckbox',
@@ -205,13 +215,13 @@ export const INPUT_BUILDER_CONFIG = {
         },
 
         {
-          conditions: {
-            field: 'validation',
-            operator: '==',
-            value: true,
-          },
           fields: [
             {
+              conditions: {
+                field: 'validation',
+                operator: '==',
+                value: true,
+              },
               adapterType: 'checkbox',
               config: {
                 controlName: 'minLengthCheckbox',
@@ -223,6 +233,11 @@ export const INPUT_BUILDER_CONFIG = {
               },
             },
             {
+              conditions: {
+                field: 'validation',
+                operator: '==',
+                value: true,
+              },
               adapterType: 'checkbox',
               config: {
                 controlName: 'maxLengthCheckbox',
@@ -234,6 +249,11 @@ export const INPUT_BUILDER_CONFIG = {
               },
             },
             {
+              conditions: {
+                field: 'validation',
+                operator: '==',
+                value: true,
+              },
               adapterType: 'checkbox',
               config: {
                 controlName: 'minCheckbox',
@@ -247,13 +267,13 @@ export const INPUT_BUILDER_CONFIG = {
           ],
         },
         {
-          conditions: {
-            field: 'validation',
-            operator: '==',
-            value: true,
-          },
           fields: [
             {
+              conditions: {
+                field: 'validation',
+                operator: '==',
+                value: true,
+              },
               adapterType: 'checkbox',
               config: {
                 controlName: 'maxCheckbox',
