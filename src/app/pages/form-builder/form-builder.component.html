@@ -81,7 +81,7 @@
       class="bg-white p-4 rounded"
     >
       <h3 class="text-xl font-semibold mb-2">Add Section Title</h3>
-      <form [formGroup]="builderForm" class="space-y-2">
+      <form [formGroup]="builderForm" class="space-y-4">
         <input
           formControlName="sectionTitle"
           placeholder="Section Title"
@@ -146,7 +146,12 @@
           (addConditions)="addConditions($event)"
           (addField)="addField($event)"
         ></app-checkbox-builder>
-        } @default {
+        } @case ('radio') {
+        <app-radio-builder
+          (addConditions)="addConditions($event)"
+          (addField)="addField($event)"
+        ></app-radio-builder>
+        } @case ('input') {
         <app-input-builder
           (addConditions)="addConditions($event)"
           (addField)="addField($event)"

@@ -307,7 +307,6 @@ export const FORM_CONFIG = {
                 controlName: 'single1',
                 option: {
                   label: 'Single checkbox 1',
-                  value: 'option1',
                   checked: false,
                 },
                 margin: '0',
@@ -324,7 +323,6 @@ export const FORM_CONFIG = {
                 controlName: 'single2',
                 option: {
                   label: 'Single checkbox 2',
-                  value: 'option2',
                   checked: false,
                 },
                 margin: '0',
@@ -341,7 +339,6 @@ export const FORM_CONFIG = {
                 controlName: 'single3',
                 option: {
                   label: 'Single checkbox 3',
-                  value: 'option3',
                   checked: false,
                 },
                 margin: '0',
@@ -358,7 +355,6 @@ export const FORM_CONFIG = {
                 controlName: 'single4',
                 option: {
                   label: 'Single checkbox 4',
-                  value: 'option4',
                   checked: false,
                 },
               },
