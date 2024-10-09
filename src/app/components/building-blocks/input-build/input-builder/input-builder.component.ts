@@ -40,7 +40,12 @@ export class InputBuilderComponent {
 
   onClick() {
     this.inputBuildForm.markAllAsTouched();
-    if (this.inputBuildForm.valid) {
+    if (
+      this.formBuilderService.checkFormValidity(
+        this.config,
+        this.inputBuildForm
+      )
+    ) {
       this.addField.emit(
         this.isInput
           ? this.formatConfig(this.getFormValues())

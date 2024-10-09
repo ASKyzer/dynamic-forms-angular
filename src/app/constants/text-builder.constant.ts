@@ -101,6 +101,29 @@ export const TEXT_BUILDER_CONFIG = {
         {
           fields: [
             {
+              adapterType: 'texts',
+              conditions: {
+                or: [
+                  { field: 'textType', operator: '==', value: 'h1' },
+                  { field: 'textType', operator: '==', value: 'h2' },
+                  { field: 'textType', operator: '==', value: 'h3' },
+                  { field: 'textType', operator: '==', value: 'p' },
+                  { field: 'textType', operator: '==', value: 'blockquote' },
+                  { field: 'textType', operator: '==', value: 'ul' },
+                  { field: 'textType', operator: '==', value: 'ol' },
+                ],
+              },
+              config: {
+                content: 'Choose Font Style',
+                type: 'p',
+                margin: '0',
+              },
+            },
+          ],
+        },
+        {
+          fields: [
+            {
               adapterType: 'checkbox',
               conditions: {
                 or: [
@@ -114,14 +137,55 @@ export const TEXT_BUILDER_CONFIG = {
                 ],
               },
               config: {
-                label: 'Choose Font Style',
-                controlName: 'fontStyle',
-                isGroup: true,
-                options: [
-                  { label: 'Bold', value: 'bold' },
-                  { label: 'Italic', value: 'italic' },
-                  { label: 'Underline', value: 'underline' },
+                controlName: 'fontStyleBold',
+                option: { label: 'Bold', value: 'bold' },
+                margin: '0',
+              },
+            },
+          ],
+        },
+        {
+          fields: [
+            {
+              adapterType: 'checkbox',
+              conditions: {
+                or: [
+                  { field: 'textType', operator: '==', value: 'h1' },
+                  { field: 'textType', operator: '==', value: 'h2' },
+                  { field: 'textType', operator: '==', value: 'h3' },
+                  { field: 'textType', operator: '==', value: 'p' },
+                  { field: 'textType', operator: '==', value: 'blockquote' },
+                  { field: 'textType', operator: '==', value: 'ul' },
+                  { field: 'textType', operator: '==', value: 'ol' },
                 ],
+              },
+              config: {
+                controlName: 'fontStyleItalic',
+                option: { label: 'Italic', value: 'italic' },
+                margin: '0',
+              },
+            },
+          ],
+        },
+        {
+          fields: [
+            {
+              adapterType: 'checkbox',
+              conditions: {
+                or: [
+                  { field: 'textType', operator: '==', value: 'h1' },
+                  { field: 'textType', operator: '==', value: 'h2' },
+                  { field: 'textType', operator: '==', value: 'h3' },
+                  { field: 'textType', operator: '==', value: 'p' },
+                  { field: 'textType', operator: '==', value: 'blockquote' },
+                  { field: 'textType', operator: '==', value: 'ul' },
+                  { field: 'textType', operator: '==', value: 'ol' },
+                ],
+              },
+              config: {
+                controlName: 'fontStyleUnderline',
+                option: { label: 'Underline', value: 'underline' },
+                margin: '0',
               },
             },
           ],

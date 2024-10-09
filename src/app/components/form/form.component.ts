@@ -90,29 +90,11 @@ export class FormComponent {
     }
   }
 
-  findAllControlNames(config: any): string[] {
-    const controlNames: string[] = [];
-
-    const traverse = (obj: any) => {
-      if (Array.isArray(obj)) {
-        obj.forEach((item) => traverse(item));
-      } else if (typeof obj === 'object' && obj !== null) {
-        if (obj.controlName) {
-          controlNames.push(obj.controlName);
-        }
-        Object.values(obj).forEach((value) => traverse(value));
-      }
-    };
-
-    traverse(config);
-    return controlNames;
-  }
-
   onSubmit() {
     this.formSubmitted = true;
     this.form.markAllAsTouched();
 
-    if (this.checkFormValidity()) {
+    if (this.formBuilderService.checkFormValidity(this.config, this.form)) {
       console.log('Form is valid', this.form.getRawValue());
       this.validForm = true;
     } else {
@@ -134,19 +116,5 @@ export class FormComponent {
       this.formSubmitted = false;
       this.validForm = false;
     }, 1000);
-  }
-
-  checkFormValidity() {
-    const visibleControls = this.findAllControlNames(this.config).filter(
-      (controlName) => {
-        const visible = document.getElementById(controlName);
-        return visible;
-      }
-    );
-
-    return visibleControls.every((controlName) => {
-      const control = this.form.get(controlName);
-      return control?.valid;
-    });
   }
 }
