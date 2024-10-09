@@ -1,4 +1,4 @@
-<div class="container mx-auto p-4 max-w-3xl">
+<div class="container mx-auto p-4 max-w-5xl relative">
   <div *ngIf="!showForm" class="text-center">
     <h2 class="text-2xl font-bold mb-4">Welcome to the Form Builder</h2>
     <p class="mb-4">Click the button below to start creating your form.</p>
@@ -22,10 +22,10 @@
             Save Form
           </button>
           <button
-            (click)="viewForm()"
+            (click)="previewForm()"
             class="ml-4 bg-purple-500 hover:bg-purple-600 text-white font-bold py-2 px-4 rounded"
           >
-            View Form
+            Preview Form
           </button>
         </div>
       </div>
@@ -119,7 +119,7 @@
 
       <div *ngIf="currentRow && currentAdapter" class="bg-white p-4 rounded">
         <h3 class="text-xl font-semibold mb-2">
-          Input Type: {{ currentAdapter }}
+          {{ capitalizeFirstLetter(currentAdapter) }}
         </h3>
         <button
           (click)="changeAdapter()"
@@ -166,9 +166,11 @@
       </div>
 
       <!-- Add this new section after adding a field -->
-      <div *ngIf="showFieldAddedPrompt" class="mt-4 p-4 bg-yellow-100 rounded">
-        <p class="font-semibold mb-2">
-          Field added successfully! What would you like to do next?
+      <div *ngIf="showFieldAddedPrompt" class="mt-4 p-4 bg-orange-100 rounded">
+        <p class="font-semibold mb-4">
+          Field added successfully! What would you like to do next? Adding
+          another field will add it to the same row. You can add up to three
+          fields per row.
         </p>
         <div class="flex space-x-2">
           <button
@@ -194,3 +196,30 @@
     </form>
   </div>
 </div>
+
+@if (showFormPreview) {
+<div class="mx-auto p-4 max-w-3xl">
+  <div
+    class="mx-auto py-4 px-8 max-w-5xl absolute top-0 left-0 right-0 bottom-0 bg-gray-100 z-50 border border-gray-400"
+  >
+    <div class="flex justify-between items-center border-b border-gray-400">
+      <h2 class="text-2xl font-bold mb-4">Form Preview</h2>
+      <button
+        type="button"
+        (click)="closePreview()"
+        class="text-2xl font-bold mb-4"
+      >
+        X
+      </button>
+    </div>
+
+    @if (formConfig.sections.length > 0) {
+    <div class="overflow-y-auto h-[calc(100vh-10rem)]">
+      <app-form-preview [FORM_CONFIG]="formConfig"></app-form-preview>
+    </div>
+    } @else {
+    <p class="pt-4">No form data available. Please start building your form.</p>
+    }
+  </div>
+</div>
+}

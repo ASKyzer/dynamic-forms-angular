@@ -11,6 +11,7 @@ import { RadioBuilderComponent } from '../../components/building-blocks/radio-bu
 import { TextBuilderComponent } from '../../components/building-blocks/text-builder/text-builder.component';
 import { ToggleBuilderComponent } from '../../components/building-blocks/toggle-builder/toggle-builder.component';
 import { CheckboxComponent } from '../../components/checkbox/checkbox.component';
+import { FormPreviewComponent } from '../../components/form-preview/form-preview.component';
 import { InputFieldComponent } from '../../components/input-field/input-field.component';
 import { FormBuilderService } from '../../services/form-builder.service';
 
@@ -30,6 +31,7 @@ import { FormBuilderService } from '../../services/form-builder.service';
     CheckboxBuilderComponent,
     RadioBuilderComponent,
     DropdownBuilderComponent,
+    FormPreviewComponent,
   ],
   templateUrl: './form-builder.component.html',
 })
@@ -45,6 +47,7 @@ export class FormBuilderComponent implements OnInit {
   showForm = false;
   builderForm: FormGroup = new FormGroup({});
   showFieldAddedPrompt: boolean = false;
+  showFormPreview: boolean = false;
 
   constructor(
     private fb: FormBuilder,
@@ -57,6 +60,10 @@ export class FormBuilderComponent implements OnInit {
       adapterType: [''],
       sectionTitle: [''],
     });
+  }
+
+  capitalizeFirstLetter(string: string) {
+    return string.charAt(0).toUpperCase() + string.slice(1);
   }
 
   startForm() {
@@ -82,6 +89,7 @@ export class FormBuilderComponent implements OnInit {
     this.currentRow = null;
     this.currentField = null;
     this.currentAdapter = null;
+    this.builderForm.get('sectionTitle')?.setValue('');
     this.addSection();
   }
 
@@ -138,14 +146,15 @@ export class FormBuilderComponent implements OnInit {
 
   saveForm() {
     this.formBuilderService.saveFormConfig(this.formConfig);
+    // Open a dialog to confirm saving
     // Navigate to form preview or edit page
   }
 
-  viewForm() {
-    // Save the current form configuration
-    const formConfig = this.formBuilderService.getFormConfig();
+  previewForm() {
+    this.showFormPreview = true;
+  }
 
-    // Navigate to the form-example page
-    this.router.navigate(['/form-example'], { state: { formConfig } });
+  closePreview() {
+    this.showFormPreview = false;
   }
 }
