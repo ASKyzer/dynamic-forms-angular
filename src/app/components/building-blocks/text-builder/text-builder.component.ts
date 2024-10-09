@@ -16,7 +16,7 @@ export class TextBuilderComponent {
   config: any = TEXT_BUILDER_CONFIG;
 
   public emitField(field: any) {
-    this.addField.emit(this.configureField(field));
+    this.addField.emit({ config: this.configureField(field) });
   }
 
   private configureField(field: any) {

@@ -20,10 +20,12 @@ export class ToggleBuilderComponent {
 
   public emitField(field: any) {
     const data = {
-      controlName: this.formBuilderService.removeAllWhitespace(
-        field.controlName
-      ),
-      label: field.label,
+      config: {
+        controlName: this.formBuilderService.removeAllWhitespace(
+          field.controlName
+        ),
+        label: field.label,
+      },
     };
 
     this.addField.emit(data);

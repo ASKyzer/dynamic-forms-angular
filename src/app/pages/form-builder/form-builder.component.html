@@ -137,6 +137,7 @@
         <app-toggle-builder (addField)="addField($event)"></app-toggle-builder>
         } @default {
         <app-input-builder
+          (addConditions)="addConditions($event)"
           (addField)="addField($event)"
           [isInput]="true"
         ></app-input-builder>

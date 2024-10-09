@@ -398,6 +398,107 @@ export const INPUT_BUILDER_CONFIG = {
             },
           ],
         },
+        {
+          fields: [
+            {
+              adapterType: 'texts',
+              config: {
+                type: 'line',
+              },
+            },
+          ],
+        },
+        {
+          fields: [
+            {
+              adapterType: 'toggle',
+              config: {
+                label:
+                  'Does the visibility of this field depend on another field?',
+                controlName: 'visibility',
+                value: false,
+              },
+            },
+          ],
+        },
+        {
+          fields: [
+            {
+              conditions: {
+                field: 'visibility',
+                operator: '==',
+                value: true,
+              },
+              adapterType: 'texts',
+              config: {
+                type: 'p',
+                content:
+                  'Enter the field control name, operator and value to compare against. The operator must be a valid comparison operator i.e. ==, !=, >, <, >=, <=',
+              },
+            },
+          ],
+        },
+        {
+          fields: [
+            {
+              conditions: {
+                field: 'visibility',
+                operator: '==',
+                value: true,
+              },
+              adapterType: 'input',
+              config: {
+                type: 'text',
+                controlName: 'fieldControlName0',
+                label: 'Field Control Name',
+                isRequired: true,
+                validation: [
+                  {
+                    type: 'required',
+                  },
+                ],
+              },
+            },
+            {
+              conditions: {
+                field: 'visibility',
+                operator: '==',
+                value: true,
+              },
+              adapterType: 'input',
+              config: {
+                type: 'text',
+                controlName: 'operator0',
+                label: 'Operator',
+                isRequired: true,
+                validation: [
+                  {
+                    type: 'required',
+                  },
+                ],
+              },
+            },
+            {
+              conditions: {
+                field: 'visibility',
+                operator: '==',
+                value: true,
+              },
+              adapterType: 'input',
+              config: {
+                type: 'text',
+                controlName: 'value0',
+                label: 'Value',
+                isRequired: true,
+                validation: [
+                  {
+                    type: 'required',
+                  },
+                ],
+              },
+            },
+          ],
+        },
       ],
     },
   ],

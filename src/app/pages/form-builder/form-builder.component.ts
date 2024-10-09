@@ -69,6 +69,10 @@ export class FormBuilderComponent implements OnInit {
     );
   }
 
+  addConditions(conditions: any) {
+    this.currentField.conditions = conditions;
+  }
+
   addSection() {
     this.currentSection = { title: '', rows: [] };
   }
@@ -104,10 +108,10 @@ export class FormBuilderComponent implements OnInit {
   }
 
   addField(formData: any) {
-    console.log('🚀 ~ FormBuilderComponent ~ addField ~ formData:', formData);
     this.currentField = {
       adapterType: this.builderForm.get('adapterType')?.value,
-      config: formData,
+      config: formData.config,
+      conditions: formData.conditions,
     };
 
     this.currentRow.fields.push(this.currentField);
