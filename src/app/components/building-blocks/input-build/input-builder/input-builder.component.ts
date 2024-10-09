@@ -35,7 +35,10 @@ export class InputBuilderComponent {
   }
 
   public getFormValues() {
-    console.log(this.inputBuildForm.value);
+    console.log(
+      '🚀 ~ InputBuilderComponent ~ getFormValues ~ this.inputBuildForm.value:',
+      this.inputBuildForm.value
+    );
     return this.inputBuildForm.getRawValue();
   }
 

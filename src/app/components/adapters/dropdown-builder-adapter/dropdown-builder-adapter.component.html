@@ -1,0 +1,73 @@
+<div [formGroup]="parentForm">
+  <p class="mb-4 text-sm text-gray-600">
+    Add options for your dropdown menu. Each option should have a label (which
+    will be displayed to the user) and a value (which will be used internally).
+  </p>
+  <div [formArrayName]="contentConfig.controlName">
+    @for (option of options.controls; track option; let i = $index) {
+    <div
+      [formGroupName]="i"
+      class="flex gap-4 items-baseline mb-4 {{ i < 2 ? 'mr-[24px]' : '' }}"
+    >
+      <div class="flex flex-col w-full h-[56px] relative">
+        <input
+          type="text"
+          formControlName="label"
+          placeholder="Option Label"
+          class="p-2 h-[42px] border rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-purple-500"
+          [class.input-border]="
+            !option.get('label')?.invalid ||
+            (!option.get('label')?.dirty && !option.get('label')?.touched)
+          "
+          [class.input-border-error]="
+            option.get('label')?.invalid &&
+            (option.get('label')?.dirty || option.get('label')?.touched)
+          "
+        />
+        @if (option.get('label')?.invalid && (option.get('label')?.dirty ||
+        option.get('label')?.touched)) {
+        <div class="absolute bottom-[-8px] left-0 error-message mt-1">
+          @if (option.get('label')?.errors?.['required']) {
+          <span>This field is required.</span>
+          }
+        </div>
+        }
+      </div>
+      <div class="flex flex-col w-full h-[56px] relative">
+        <input
+          type="text"
+          formControlName="value"
+          placeholder="Option Value"
+          class="p-2 h-[42px] border rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-purple-500"
+          [class.input-border]="
+            !option.get('value')?.invalid ||
+            (!option.get('value')?.dirty && !option.get('value')?.touched)
+          "
+          [class.input-border-error]="
+            option.get('value')?.invalid &&
+            (option.get('value')?.dirty || option.get('value')?.touched)
+          "
+        />
+        @if (option.get('value')?.invalid && (option.get('value')?.dirty ||
+        option.get('value')?.touched)) {
+        <div class="absolute bottom-[-8px] left-0 error-message mt-1">
+          @if (option.get('value')?.errors?.['required']) {
+          <span>This field is required.</span>
+          }
+        </div>
+        }
+      </div>
+      @if (i >= 2) {
+      <button type="button" (click)="removeOption(i)">X</button>
+      }
+    </div>
+    }
+  </div>
+  <button
+    type="button"
+    (click)="addOption()"
+    class="float-right mb-4 mr-[24px] px-4 py-2 bg-purple-500 text-white rounded hover:bg-purple-600 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-opacity-50"
+  >
+    Add Option
+  </button>
+</div>

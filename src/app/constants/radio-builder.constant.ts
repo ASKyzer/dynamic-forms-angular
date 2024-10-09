@@ -102,7 +102,7 @@ export const RADIO_BUILDER_CONFIG = {
                 label: 'Option One Value',
                 controlName: 'optionValueOne',
                 isRequired: true,
-                placeholder: 'Use camelCase',
+
                 validation: [
                   {
                     type: 'required',
@@ -132,7 +132,7 @@ export const RADIO_BUILDER_CONFIG = {
               config: {
                 label: 'Option Two Value',
                 controlName: 'optionValueTwo',
-                placeholder: 'Use camelCase',
+
                 isRequired: true,
                 validation: [
                   {
@@ -157,7 +157,6 @@ export const RADIO_BUILDER_CONFIG = {
               config: {
                 label: 'Option Three Value',
                 controlName: 'optionValueThree',
-                placeholder: 'Use camelCase',
               },
             },
           ],
@@ -176,7 +175,6 @@ export const RADIO_BUILDER_CONFIG = {
               config: {
                 label: 'Option Four Value',
                 controlName: 'optionValueFour',
-                placeholder: 'Use camelCase',
               },
             },
           ],
@@ -195,7 +193,6 @@ export const RADIO_BUILDER_CONFIG = {
               config: {
                 label: 'Option Five Value',
                 controlName: 'optionValueFive',
-                placeholder: 'Use camelCase',
               },
             },
           ],

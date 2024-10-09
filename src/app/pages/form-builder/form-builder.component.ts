@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { InputAdapterComponent } from '../../components/adapters/input-adapter/input-adapter.component';
 import { AdapterSelectorComponent } from '../../components/building-blocks/adapter-selector/adapter-selector.component';
 import { CheckboxBuilderComponent } from '../../components/building-blocks/checkbox-builder/checkbox-builder.component';
+import { DropdownBuilderComponent } from '../../components/building-blocks/dropdown-builder/dropdown-builder.component';
 import { InputBuilderComponent } from '../../components/building-blocks/input-build/input-builder/input-builder.component';
 import { RadioBuilderComponent } from '../../components/building-blocks/radio-builder/radio-builder.component';
 import { TextBuilderComponent } from '../../components/building-blocks/text-builder/text-builder.component';
@@ -28,6 +29,7 @@ import { FormBuilderService } from '../../services/form-builder.service';
     ToggleBuilderComponent,
     CheckboxBuilderComponent,
     RadioBuilderComponent,
+    DropdownBuilderComponent,
   ],
   templateUrl: './form-builder.component.html',
 })
@@ -62,15 +64,7 @@ export class FormBuilderComponent implements OnInit {
   }
 
   addAdapter(adapterType: string) {
-    console.log(
-      '🚀 ~ FormBuilderComponent ~ addAdapter ~ adapterType:',
-      adapterType
-    );
     this.currentAdapter = this.builderForm.get('adapterType')?.value;
-    console.log(
-      '🚀 ~ FormBuilderComponent ~ addAdapter ~  this.currentAdapter:',
-      this.currentAdapter
-    );
   }
 
   addConditions(conditions: any) {
@@ -103,12 +97,8 @@ export class FormBuilderComponent implements OnInit {
     this.currentRow = {
       fields: [],
     };
-    console.log(
-      '🚀 ~ FormBuilderComponent ~ addRow ~ this.currentRow:',
-      this.currentRow
-    );
+
     this.currentSection.rows.push(this.currentRow);
-    // Show options for number of fields (1, 2, or 3)
   }
 
   addField(formData: any) {

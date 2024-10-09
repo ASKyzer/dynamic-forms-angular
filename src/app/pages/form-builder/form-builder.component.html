@@ -136,6 +136,11 @@
           (addField)="addField($event)"
           (addConditions)="addConditions($event)"
         ></app-text-builder>
+        } @case ('dropdown') {
+        <app-dropdown-builder
+          (addField)="addField($event)"
+          (addConditions)="addConditions($event)"
+        ></app-dropdown-builder>
         } @case ('toggle') {
         <app-toggle-builder
           (addField)="addField($event)"
