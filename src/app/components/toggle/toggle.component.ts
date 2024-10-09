@@ -13,7 +13,7 @@ export class ToggleComponent {
   @Input() id: string = '';
   @Input() label: string = '';
   @Input() value: boolean = false;
-  @Input() control: FormControl = new FormControl();
+  @Input() control!: FormControl;
 
   ngOnInit() {
     if (!this.control) {

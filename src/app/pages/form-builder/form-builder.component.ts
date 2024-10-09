@@ -1,6 +1,11 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  ReactiveFormsModule,
+} from '@angular/forms';
 import { Router } from '@angular/router';
 import { InputAdapterComponent } from '../../components/adapters/input-adapter/input-adapter.component';
 import { AdapterSelectorComponent } from '../../components/building-blocks/adapter-selector/adapter-selector.component';
@@ -13,6 +18,8 @@ import { ToggleBuilderComponent } from '../../components/building-blocks/toggle-
 import { CheckboxComponent } from '../../components/checkbox/checkbox.component';
 import { FormPreviewComponent } from '../../components/form-preview/form-preview.component';
 import { InputFieldComponent } from '../../components/input-field/input-field.component';
+import { ToggleComponent } from '../../components/toggle/toggle.component';
+import { JsonHighlightPipe } from '../../pipes/json-highlight.pipe';
 import { FormBuilderService } from '../../services/form-builder.service';
 
 @Component({
@@ -32,6 +39,8 @@ import { FormBuilderService } from '../../services/form-builder.service';
     RadioBuilderComponent,
     DropdownBuilderComponent,
     FormPreviewComponent,
+    JsonHighlightPipe,
+    ToggleComponent,
   ],
   templateUrl: './form-builder.component.html',
 })
@@ -48,6 +57,7 @@ export class FormBuilderComponent implements OnInit {
   builderForm: FormGroup = new FormGroup({});
   showFieldAddedPrompt: boolean = false;
   showFormPreview: boolean = false;
+  toggleForm: FormGroup = new FormGroup({});
 
   constructor(
     private fb: FormBuilder,
@@ -60,6 +70,14 @@ export class FormBuilderComponent implements OnInit {
       adapterType: [''],
       sectionTitle: [''],
     });
+
+    this.toggleForm = this.fb.group({
+      showRawJson: [false],
+    });
+  }
+
+  get showRawJsonControl(): FormControl {
+    return this.toggleForm.get('showRawJson') as FormControl;
   }
 
   capitalizeFirstLetter(string: string) {

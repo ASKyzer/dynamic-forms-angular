@@ -215,7 +215,21 @@
 
     @if (formConfig.sections.length > 0) {
     <div class="overflow-y-auto h-[calc(100vh-10rem)]">
+      <div class="flex justify-end mt-4">
+        <app-toggle
+          [control]="showRawJsonControl"
+          [label]="'Show Raw JSON'"
+          [id]="'showRawJson'"
+        ></app-toggle>
+      </div>
+
+      @if (showRawJsonControl.value) {
+      <pre class="bg-[#f5f2f0] text-gray-800 p-4 rounded-lg overflow-auto">
+            <code [innerHTML]="formConfig | jsonHighlight"></code>
+        </pre>
+      } @else {
       <app-form-preview [FORM_CONFIG]="formConfig"></app-form-preview>
+      }
     </div>
     } @else {
     <p class="pt-4">No form data available. Please start building your form.</p>
