@@ -5,7 +5,6 @@ import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 export interface CheckboxOption {
   checked?: boolean;
   label: string;
-  value: string;
 }
 
 @Component({

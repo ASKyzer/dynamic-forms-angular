@@ -44,7 +44,7 @@ export const FORM_CONFIG = {
                 controlName: 'familyMemberParents',
                 option: {
                   label: 'Parents',
-                  value: 'parents',
+                  checked: false,
                 },
                 margin: '0',
               },
@@ -64,7 +64,7 @@ export const FORM_CONFIG = {
                 controlName: 'familyMembersSpouse',
                 option: {
                   label: 'Spouse',
-                  value: 'spouse',
+                  checked: false,
                 },
                 margin: '0',
               },
@@ -84,7 +84,7 @@ export const FORM_CONFIG = {
                 controlName: 'familyMembersChildren',
                 option: {
                   label: 'Children',
-                  value: 'children',
+                  checked: false,
                 },
                 margin: '0',
               },
@@ -104,7 +104,7 @@ export const FORM_CONFIG = {
                 controlName: 'familyMembersPets',
                 option: {
                   label: 'Pets',
-                  value: 'pets',
+                  checked: false,
                 },
                 margin: '0',
               },
@@ -279,7 +279,6 @@ export const FORM_CONFIG = {
                 option: {
                   label:
                     'I agree to the terms and conditions and I certify that I have read and understood the terms and conditions.',
-                  value: 'agreement',
                   checked: false,
                 },
               },

@@ -176,7 +176,6 @@ export const INPUT_BUILDER_CONFIG = {
                 controlName: 'requiredCheckbox',
                 option: {
                   label: 'Required',
-                  value: 'required',
                   checked: false,
                 },
               },
@@ -192,7 +191,6 @@ export const INPUT_BUILDER_CONFIG = {
                 controlName: 'emailCheckbox',
                 option: {
                   label: 'Email Pattern',
-                  value: 'email',
                   checked: false,
                 },
               },
@@ -208,7 +206,6 @@ export const INPUT_BUILDER_CONFIG = {
                 controlName: 'patternCheckbox',
                 option: {
                   label: 'Custom Pattern',
-                  value: 'pattern',
                   checked: false,
                 },
               },
@@ -229,7 +226,6 @@ export const INPUT_BUILDER_CONFIG = {
                 controlName: 'minLengthCheckbox',
                 option: {
                   label: 'Min Length',
-                  value: 'minLength',
                   checked: false,
                 },
               },
@@ -245,7 +241,6 @@ export const INPUT_BUILDER_CONFIG = {
                 controlName: 'maxLengthCheckbox',
                 option: {
                   label: 'Max Length',
-                  value: 'maxLength',
                   checked: false,
                 },
               },
@@ -261,7 +256,6 @@ export const INPUT_BUILDER_CONFIG = {
                 controlName: 'minCheckbox',
                 option: {
                   label: 'Min',
-                  value: 'min',
                   checked: false,
                 },
               },
@@ -281,7 +275,6 @@ export const INPUT_BUILDER_CONFIG = {
                 controlName: 'maxCheckbox',
                 option: {
                   label: 'Max',
-                  value: 'max',
                   checked: false,
                 },
               },

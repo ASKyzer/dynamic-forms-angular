@@ -132,9 +132,20 @@
       <div *ngIf="currentRow && currentAdapter" class="bg-white p-4 rounded">
         <h4 class="text-lg font-semibold mb-2">Add Field</h4>
         @switch (currentAdapter) { @case ('texts') {
-        <app-text-builder (addField)="addField($event)"></app-text-builder>
+        <app-text-builder
+          (addField)="addField($event)"
+          (addConditions)="addConditions($event)"
+        ></app-text-builder>
         } @case ('toggle') {
-        <app-toggle-builder (addField)="addField($event)"></app-toggle-builder>
+        <app-toggle-builder
+          (addField)="addField($event)"
+          (addConditions)="addConditions($event)"
+        ></app-toggle-builder>
+        } @case ('checkbox') {
+        <app-checkbox-builder
+          (addConditions)="addConditions($event)"
+          (addField)="addField($event)"
+        ></app-checkbox-builder>
         } @default {
         <app-input-builder
           (addConditions)="addConditions($event)"

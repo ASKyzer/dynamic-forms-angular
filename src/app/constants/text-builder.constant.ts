@@ -140,7 +140,7 @@ export const TEXT_BUILDER_CONFIG = {
               },
               config: {
                 controlName: 'fontStyleBold',
-                option: { label: 'Bold', value: 'bold' },
+                option: { label: 'Bold', checked: false },
                 margin: '0',
               },
             },
@@ -163,7 +163,7 @@ export const TEXT_BUILDER_CONFIG = {
               },
               config: {
                 controlName: 'fontStyleItalic',
-                option: { label: 'Italic', value: 'italic' },
+                option: { label: 'Italic', checked: false },
                 margin: '0',
               },
             },
@@ -186,7 +186,28 @@ export const TEXT_BUILDER_CONFIG = {
               },
               config: {
                 controlName: 'fontStyleUnderline',
-                option: { label: 'Underline', value: 'underline' },
+                option: { label: 'Underline', checked: false },
+              },
+            },
+          ],
+        },
+        {
+          fields: [
+            {
+              adapterType: 'texts',
+              config: {
+                type: 'line',
+              },
+            },
+          ],
+        },
+        {
+          fields: [
+            {
+              adapterType: 'toggle',
+              config: {
+                label: 'Do you want to remove the bottom margin?',
+                controlName: 'removeMargin',
               },
             },
           ],

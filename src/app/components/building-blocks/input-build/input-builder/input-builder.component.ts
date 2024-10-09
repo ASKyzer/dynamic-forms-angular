@@ -56,6 +56,10 @@ export class InputBuilderComponent {
   }
 
   formatConfig(config: any) {
+    const conditions = config.fieldControlName0
+      ? { conditions: this.formBuilderService.getConditions(config) }
+      : {};
+
     return {
       config: {
         controlName: this.formBuilderService.removeAllWhitespace(
@@ -70,7 +74,7 @@ export class InputBuilderComponent {
         validation: this.configureValidation(config),
         ...(config.fieldType === 'textarea' ? { rows: config.rows || 4 } : {}),
       },
-      conditions: this.formBuilderService.getConditions(config),
+      ...conditions,
     };
   }
 

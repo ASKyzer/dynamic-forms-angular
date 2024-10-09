@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { InputAdapterComponent } from '../../components/adapters/input-adapter/input-adapter.component';
 import { AdapterSelectorComponent } from '../../components/building-blocks/adapter-selector/adapter-selector.component';
+import { CheckboxBuilderComponent } from '../../components/building-blocks/checkbox-builder/checkbox-builder.component';
 import { InputBuilderComponent } from '../../components/building-blocks/input-build/input-builder/input-builder.component';
 import { TextBuilderComponent } from '../../components/building-blocks/text-builder/text-builder.component';
 import { ToggleBuilderComponent } from '../../components/building-blocks/toggle-builder/toggle-builder.component';
@@ -24,6 +25,7 @@ import { FormBuilderService } from '../../services/form-builder.service';
     InputBuilderComponent,
     TextBuilderComponent,
     ToggleBuilderComponent,
+    CheckboxBuilderComponent,
   ],
   templateUrl: './form-builder.component.html',
 })

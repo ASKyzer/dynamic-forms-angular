@@ -3,7 +3,7 @@
     {{ label }}
 
     <span
-      *ngIf="isRequired"
+      *ngIf="isRequired && label"
       [class]="control.errors?.['required'] && (control.touched || control.dirty) ? 'text-red-500' : 'text-gray-500'"
       >*</span
     >
@@ -16,7 +16,6 @@
           type="checkbox"
           [id]="controlName"
           [formControl]="control"
-          [value]="option.value"
           [checked]="option.checked"
           [required]="isRequired"
           class="w-4 h-4 border border-gray-300 rounded-md cursor-pointer"

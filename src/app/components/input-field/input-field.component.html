@@ -2,7 +2,7 @@
   <label [for]="label" class="input-label">
     {{ label }}
     <span
-      *ngIf="isRequired"
+      *ngIf="isRequired && label"
       [class]="control.errors?.['required'] && (control.touched || control.dirty) ? 'text-red-500' : 'text-gray-500'"
       >*</span
     >

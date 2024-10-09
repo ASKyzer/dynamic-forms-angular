@@ -19,9 +19,12 @@ export class TextBuilderComponent {
   constructor(private formBuilderService: FormBuilderService) {}
 
   public emitField(field: any) {
+    const conditions = field.fieldControlName0
+      ? { conditions: this.formBuilderService.getConditions(field) }
+      : {};
     this.addField.emit({
       config: this.configureField(field),
-      conditions: this.formBuilderService.getConditions(field),
+      ...conditions,
     });
   }
 
@@ -31,11 +34,13 @@ export class TextBuilderComponent {
       isItalic: field.fontStyleItalic,
       isUnderline: field.fontStyleUnderline,
     };
+    const removeMargin = field.removeMargin ? { margin: '0' } : {};
 
     switch (field.textType) {
       case 'line':
         return {
           type: field.textType,
+          ...removeMargin,
         };
       case 'ul':
       case 'ol':
@@ -44,12 +49,14 @@ export class TextBuilderComponent {
           listItems: field.listItems.split(','),
           type: field.textType,
           ...fontStyle,
+          ...removeMargin,
         };
       default:
         return {
           content: field.content,
           type: field.textType,
           ...fontStyle,
+          ...removeMargin,
         };
     }
   }
