@@ -1,0 +1,27 @@
+<nav class="fixed top-0 left-0 right-0 bg-gray-800 shadow-md z-50">
+  <div class="mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex items-center h-16">
+      <div class="flex space-x-4">
+        <a
+          routerLink="/"
+          routerLinkActive="bg-gray-900 text-tertiary hover:text-tertiary-lighter"
+          [routerLinkActiveOptions]="{ exact: true }"
+          class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
+          >Home</a
+        >
+        <a
+          routerLink="/form-builder"
+          routerLinkActive="bg-gray-900 text-tertiary hover:text-tertiary-lighter"
+          class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
+          >Form Builder</a
+        >
+        <a
+          routerLink="/form-example"
+          routerLinkActive="bg-gray-900 text-tertiary hover:text-tertiary-lighter"
+          class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
+          >Example Form</a
+        >
+      </div>
+    </div>
+  </div>
+</nav>
