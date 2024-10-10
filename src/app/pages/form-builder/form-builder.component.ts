@@ -5,6 +5,7 @@ import {
   FormControl,
   FormGroup,
   ReactiveFormsModule,
+  Validators,
 } from '@angular/forms';
 import { Router } from '@angular/router';
 import { InputAdapterComponent } from '../../components/adapters/input-adapter/input-adapter.component';
@@ -15,6 +16,7 @@ import { InputBuilderComponent } from '../../components/building-blocks/input-bu
 import { RadioBuilderComponent } from '../../components/building-blocks/radio-builder/radio-builder.component';
 import { TextBuilderComponent } from '../../components/building-blocks/text-builder/text-builder.component';
 import { ToggleBuilderComponent } from '../../components/building-blocks/toggle-builder/toggle-builder.component';
+import { ButtonComponent } from '../../components/button/button.component';
 import { CheckboxComponent } from '../../components/checkbox/checkbox.component';
 import { FormPreviewComponent } from '../../components/form-preview/form-preview.component';
 import { InputFieldComponent } from '../../components/input-field/input-field.component';
@@ -43,6 +45,7 @@ import { ModalService } from '../../services/modal.service';
     FormPreviewComponent,
     JsonHighlightPipe,
     ToggleComponent,
+    ButtonComponent,
   ],
   templateUrl: './form-builder.component.html',
 })
@@ -71,8 +74,8 @@ export class FormBuilderComponent implements OnInit {
   ngOnInit() {
     this.formConfig = { sections: [] };
     this.builderForm = this.fb.group({
-      adapterType: [''],
-      sectionTitle: [''],
+      adapterType: ['', Validators.required],
+      sectionTitle: ['', Validators.required],
     });
 
     this.toggleForm = this.fb.group({
@@ -90,6 +93,7 @@ export class FormBuilderComponent implements OnInit {
 
   startForm() {
     this.showForm = true;
+    this.addSection();
   }
 
   addAdapter(adapterType: string) {
@@ -105,21 +109,33 @@ export class FormBuilderComponent implements OnInit {
   }
 
   addNewSection() {
-    this.resetFieldForm();
     this.showFieldAddedPrompt = false;
     this.currentSection = null;
     this.currentRow = null;
     this.currentField = null;
     this.currentAdapter = null;
-    this.builderForm.get('sectionTitle')?.setValue('');
+    this.builderForm.reset();
+    this.resetFieldForm();
     this.addSection();
   }
 
   saveSectionTitle() {
-    this.currentSection.title = this.builderForm.get('sectionTitle')?.value;
-    this.formConfig.sections.push(this.currentSection);
-    if (this.currentSection.title) {
-      this.addRow();
+    const sectionTitleControl = this.builderForm.get('sectionTitle');
+
+    sectionTitleControl?.markAsDirty();
+    sectionTitleControl?.markAsTouched();
+
+    if (!sectionTitleControl?.value) {
+      sectionTitleControl?.setErrors({ required: true });
+      return;
+    }
+
+    if (sectionTitleControl?.valid) {
+      this.currentSection.title = sectionTitleControl?.value;
+      this.formConfig.sections.push(this.currentSection);
+      if (this.currentSection.title) {
+        this.addRow();
+      }
     }
   }
 
@@ -127,7 +143,6 @@ export class FormBuilderComponent implements OnInit {
     this.currentRow = {
       fields: [],
     };
-
     this.currentSection.rows.push(this.currentRow);
   }
 
@@ -145,12 +160,13 @@ export class FormBuilderComponent implements OnInit {
 
   addAnotherField() {
     this.showFieldAddedPrompt = false;
-    // The form is already reset, so we're ready for a new field
+    this.resetFieldForm();
   }
 
   addNewRow() {
     this.showFieldAddedPrompt = false;
     this.currentRow = null;
+    this.resetFieldForm();
     this.addRow();
     // Assuming you have an addRow method
   }
@@ -161,9 +177,8 @@ export class FormBuilderComponent implements OnInit {
   }
 
   resetFieldForm() {
-    this.builderForm.patchValue({
-      adapterType: '',
-    });
+    this.builderForm.reset();
+    this.builderForm.markAsPristine();
   }
 
   saveForm() {

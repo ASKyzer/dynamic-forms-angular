@@ -47,27 +47,22 @@
           'flex-row': config?.size === 'md' || config?.size === 'lg'
         }"
       >
-        <button
+        <app-button
+          [text]="config?.primaryButtonText ?? ''"
           (click)="onPrimaryAction()"
-          class="px-4 py-2 bg-blue-500 text-white text-base font-medium rounded-md w-full shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-300"
-          [ngClass]="{
-            'max-w-[50%]':
-              config?.size && (config?.size === 'md' || config?.size === 'lg')
-          }"
-        >
-          {{ config?.primaryButtonText }}
-        </button>
+          theme="primary"
+          [disabled]="inputBuildForm.invalid"
+          [fullWidth]="true"
+          class="w-full"
+        ></app-button>
         @if (config?.secondaryButtonText) {
-        <button
+        <app-button
+          [text]="config?.secondaryButtonText ?? ''"
           (click)="onSecondaryAction()"
-          class="px-4 py-2 bg-gray-300 text-gray-800 text-base font-medium rounded-md w-full shadow-sm hover:bg-gray-400 focus:outline-none focus:ring-2 focus:ring-gray-300"
-          [ngClass]="{
-            'max-w-[50%]':
-              config?.size && (config?.size === 'md' || config?.size === 'lg')
-          }"
-        >
-          {{ config?.secondaryButtonText }}
-        </button>
+          theme="secondary"
+          [fullWidth]="true"
+          class="w-full"
+        ></app-button>
         }
       </div>
     </div>

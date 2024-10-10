@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
 import { RouterModule } from '@angular/router';
-
+import { ButtonComponent } from '../../components/button/button.component';
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [RouterModule],
+  imports: [RouterModule, ButtonComponent],
   template: `
     <div class="container mx-auto px-4 py-8">
       <h1 class="text-3xl font-bold mb-4">Welcome to Dynamic Form Builder</h1>
@@ -23,17 +23,11 @@ import { RouterModule } from '@angular/router';
       </ol>
 
       <div class="flex space-x-4 mb-4">
-        <a
-          routerLink="/form-builder"
-          class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-        >
-          Try the Form Builder
+        <a routerLink="/form-builder">
+          <app-button text="Try the Form Builder" />
         </a>
-        <a
-          routerLink="/form-example"
-          class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded"
-        >
-          See an Example Form
+        <a routerLink="/form-example">
+          <app-button text="See an Example Form" theme="secondary" />
         </a>
       </div>
 

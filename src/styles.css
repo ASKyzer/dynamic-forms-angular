@@ -5,13 +5,107 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  /* Primary Color  */
+  --color-primary-lightest: #d4f0ed;
+  --color-primary-lighter: #a3ddd8;
+  --color-primary-light: #72cac4;
+  --color-primary: #4db6ac;
+  --color-primary-dark: #3c9588;
+  --color-primary-darker: #2d6e64;
+  --color-primary-darkest: #1e4841;
+
+  /* Secondary Color  */
+  --color-secondary-lightest: #fceccc;
+  --color-secondary-lighter: #fae0a1;
+  --color-secondary-light: #f8d075;
+  --color-secondary: #f6c24d;
+  --color-secondary-dark: #c49a3e;
+  --color-secondary-darker: #9a7a31;
+  --color-secondary-darkest: #705725;
+
+  /* Tertiary Color  */
+  --color-tertiary-lightest: #fbc9cc;
+  --color-tertiary-lighter: #f9989d;
+  --color-tertiary-light: #f76775;
+  --color-tertiary: #f6666e;
+  --color-tertiary-dark: #c45056;
+  --color-tertiary-darker: #933d41;
+  --color-tertiary-darkest: #62292c;
+
+  /* Neutral Color  */
+  --color-neutral-lightest: #f9f9f9;
+  --color-neutral-lighter: #f4f4f4;
+  --color-neutral-light: #e0e0e0;
+  --color-neutral: #bdbdbd;
+  --color-neutral-dark: #8d8d8d;
+  --color-neutral-darker: #6b6b6b;
+  --color-neutral-darkest: #4a4a4a;
+
+  /* Quaternary Color  */
+  --color-quaternary-lightest: #d1c2e8;
+  --color-quaternary-lighter: #a995d4;
+  --color-quaternary-light: #846bc0;
+  --color-quaternary: #583b8b; /* Original color */
+  --color-quaternary-dark: #462f6f;
+  --color-quaternary-darker: #352354;
+  --color-quaternary-darkest: #231738;
+}
+
 body {
   font-family: "Raleway", sans-serif;
-  background-color: #f0f0f0;
+  background-color: var(--color-secondary-lightest);
+}
+
+input[type="checkbox"] {
+  appearance: none;
+  -webkit-appearance: none;
+  height: 20px;
+  width: 20px;
+  border: 1px solid var(--color-neutral-darkest);
+  border-radius: 4px;
+  background-color: #fff;
+}
+
+input[type="checkbox"]:checked {
+  background-color: var(--color-primary);
+  border-color: var(--color-primary);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='white' width='24px' height='24px'%3E%3Cpath d='M0 0h24v24H0V0z' fill='none'/%3E%3Cpath d='M9 16.2l-3.5-3.5 1.4-1.4L9 13.4l7.1-7.1 1.4 1.4-8.5 8.5z'/%3E%3C/svg%3E");
+  background-size: 24px 24px;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+input[type="radio"] {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 20px;
+  height: 20px;
+  border: 1px solid var(--color-neutral-darkest);
+  border-radius: 50%;
+  background-color: #fff;
+  position: relative;
+}
+
+input[type="radio"]:checked {
+  background-color: var(--color-primary);
+  border-color: var(--color-primary);
+}
+
+input[type="radio"]:checked::after {
+  content: "";
+  width: 10px;
+  height: 10px;
+  background-color: #fff;
+  border-radius: 50%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
 pre {
-  background-color: #f4f4f4;
+  background-color: var(--color-neutral-lightest);
   padding: 5px;
   border-radius: 5px;
   white-space: pre-wrap;
@@ -19,23 +113,23 @@ pre {
 }
 
 .key {
-  color: #c92c2c;
+  color: var(--color-tertiary-dark);
 }
 
 .string {
-  color: #0b7500;
+  color: var(--color-primary-dark);
 }
 
 .number {
-  color: #1a01cc;
+  color: var(--color-quaternary-light);
 }
 
 .boolean {
-  color: #1a01cc;
+  color: var(--color-quaternary-light);
 }
 
 .null {
-  color: #1a01cc;
+  color: var(--color-quaternary-light);
 }
 
 /* Custom Tailwind */

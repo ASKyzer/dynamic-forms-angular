@@ -7,6 +7,7 @@ import { FormVisibilityService } from '../../services/form-visibility.service';
 import { ModalService } from '../../services/modal.service';
 import { AdapterSelectionComponent } from '../adapters/adapter-selection/adapter-selection.component';
 import { InputAdapterComponent } from '../adapters/input-adapter/input-adapter.component';
+import { ButtonComponent } from '../button/button.component';
 import { InputFieldComponent } from '../input-field/input-field.component';
 
 @Component({
@@ -18,6 +19,7 @@ import { InputFieldComponent } from '../input-field/input-field.component';
     CommonModule,
     InputAdapterComponent,
     AdapterSelectionComponent,
+    ButtonComponent,
   ],
   templateUrl: './form.component.html',
   schemas: [CUSTOM_ELEMENTS_SCHEMA],

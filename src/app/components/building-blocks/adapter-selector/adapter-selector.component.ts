@@ -1,11 +1,12 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { AdapterSelectionComponent } from '../../adapters/adapter-selection/adapter-selection.component';
+import { ButtonComponent } from '../../button/button.component';
 
 @Component({
   selector: 'app-adapter-selector',
   standalone: true,
-  imports: [AdapterSelectionComponent],
+  imports: [AdapterSelectionComponent, ButtonComponent],
   templateUrl: './adapter-selector.component.html',
 })
 export class AdapterSelectorComponent {
@@ -30,8 +31,15 @@ export class AdapterSelectorComponent {
   };
 
   chooseAdapter() {
-    this.buttonAction.emit(
-      this.parentForm.get(this.field.config.controlName)?.value
-    );
+    const adapterControl = this.parentForm.get(this.field.config.controlName);
+
+    adapterControl?.markAsDirty();
+    adapterControl?.markAsTouched();
+
+    if (adapterControl?.valid) {
+      this.buttonAction.emit(
+        this.parentForm.get(this.field.config.controlName)?.value
+      );
+    }
   }
 }

@@ -1,79 +1,65 @@
 <div class="container mx-auto p-4 max-w-5xl relative">
-  <div *ngIf="!showForm" class="text-center">
+  <div *ngIf="!showForm">
     <h2 class="text-2xl font-bold mb-4">Welcome to the Form Builder</h2>
-    <p class="mb-4">Click the button below to start creating your form.</p>
-    <button
-      (click)="startForm()"
-      class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded"
-    >
-      Let's Get Started
-    </button>
+    <p class="mb-4 text-lg text-semibold">
+      Follow these steps to build your form:
+    </p>
+    <ol class="list-decimal list-inside space-y-2 mb-4">
+      <li>Click the "Add Section" button below to start a new section.</li>
+      <li>Enter a title for your section.</li>
+      <li>
+        Choose an adapter type for your first field (input, checkbox, radio,
+        dropdown, etc.) for the first row.
+      </li>
+      <li>
+        Fill in the details for your chosen adapter (e.g., label, placeholder,
+        required status).
+      </li>
+      <li>Add the field to your form.</li>
+      <li>
+        Repeat steps 3-5 to add more fields to the current row (up to 3 fields
+        per row).
+      </li>
+      <li>To start a new row, choose "Add New Row" after adding a field.</li>
+      <li>
+        To start a new section, choose "Add New Section" after adding a field.
+      </li>
+      <li>
+        Once you've added all desired sections and fields, click "Save Form".
+      </li>
+      <li>
+        After saving, you can click "View Form" to see and interact with your
+        created form.
+      </li>
+    </ol>
+    <p class="mb-4">
+      Remember, you can add multiple sections, each with multiple rows, and each
+      row can contain up to three fields. The fields will be automatically
+      arranged in columns based on the number of fields in each row.
+    </p>
+    <app-button (click)="startForm()" text="Let's Get Started"></app-button>
   </div>
 
   <div *ngIf="showForm" class="space-y-6">
     <div class="flex justify-between items-center">
       <h2 class="text-2xl font-bold mb-4">Form Builder</h2>
       <div class="flex gap-2">
-        <div *ngIf="currentSection">
-          <button
+        <div
+          *ngIf="currentSection && formConfig.sections.length > 0"
+          class="flex gap-2"
+        >
+          <app-button
+            text="Save Form"
             (click)="saveForm()"
-            class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded"
-          >
-            Save Form
-          </button>
-          <button
+            theme="tertiary"
+          ></app-button>
+          <app-button
+            text="Preview Form"
             (click)="previewForm()"
-            class="ml-4 bg-purple-500 hover:bg-purple-600 text-white font-bold py-2 px-4 rounded"
-          >
-            Preview Form
-          </button>
+            theme="secondary"
+          ></app-button>
         </div>
       </div>
-    </div>
-
-    <div *ngIf="!currentSection" class="">
-      <h3 class="text-xl font-semibold mb-4">Creating Your Form</h3>
-      <p class="mb-4">Follow these steps to build your form:</p>
-      <ol class="list-decimal list-inside space-y-2 mb-4">
-        <li>Click the "Add Section" button below to start a new section.</li>
-        <li>Enter a title for your section.</li>
-        <li>
-          Choose an adapter type for your first field (input, checkbox, radio,
-          dropdown, etc.) for the first row.
-        </li>
-        <li>
-          Fill in the details for your chosen adapter (e.g., label, placeholder,
-          required status).
-        </li>
-        <li>Add the field to your form.</li>
-        <li>
-          Repeat steps 3-5 to add more fields to the current row (up to 3 fields
-          per row).
-        </li>
-        <li>To start a new row, choose "Add New Row" after adding a field.</li>
-        <li>
-          To start a new section, choose "Add New Section" after adding a field.
-        </li>
-        <li>
-          Once you've added all desired sections and fields, click "Save Form".
-        </li>
-        <li>
-          After saving, you can click "View Form" to see and interact with your
-          created form.
-        </li>
-      </ol>
-      <p class="mb-4">
-        Remember, you can add multiple sections, each with multiple rows, and
-        each row can contain up to three fields. The fields will be
-        automatically arranged in columns based on the number of fields in each
-        row.
-      </p>
-      <button
-        (click)="addSection()"
-        class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded"
-      >
-        Add Section
-      </button>
     </div>
 
     <div
@@ -82,17 +68,34 @@
     >
       <h3 class="text-xl font-semibold mb-2">Add Section Title</h3>
       <form [formGroup]="builderForm" class="space-y-4">
-        <input
-          formControlName="sectionTitle"
-          placeholder="Section Title"
-          class="w-full p-2 border rounded"
-        />
-        <button
+        <div class="relative mb-4">
+          <input
+            formControlName="sectionTitle"
+            placeholder="Section Title"
+            class="field-input w-full p-2 border rounded"
+            [class.input-border]="
+              !builderForm.get('sectionTitle')?.invalid ||
+              (!builderForm.get('sectionTitle')?.dirty &&
+                !builderForm.get('sectionTitle')?.touched)
+            "
+            [class.input-border-error]="
+              builderForm.get('sectionTitle')?.invalid &&
+              (builderForm.get('sectionTitle')?.dirty ||
+                builderForm.get('sectionTitle')?.touched)
+            "
+          />
+          @if (builderForm.get('sectionTitle')?.invalid && (
+          builderForm.get('sectionTitle')?.touched ||
+          builderForm.get('sectionTitle')?.dirty)) {
+          <div class="error-message">
+            {{ "Required field" }}
+          </div>
+          }
+        </div>
+        <app-button
+          text="Save Section Title"
           (click)="saveSectionTitle()"
-          class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded"
-        >
-          Save Section Title
-        </button>
+        ></app-button>
       </form>
     </div>
 
@@ -105,7 +108,6 @@
       </h3>
     </div>
 
-    <!-- Wrap the entire form in a formGroup -->
     <form [formGroup]="builderForm" class="space-y-6">
       <div
         *ngIf="currentRow && !currentAdapter && !showFieldAddedPrompt"
@@ -121,12 +123,10 @@
         <h3 class="text-xl font-semibold mb-2">
           {{ capitalizeFirstLetter(currentAdapter) }}
         </h3>
-        <button
+        <app-button
+          text="Change Input Type"
           (click)="changeAdapter()"
-          class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded"
-        >
-          Change Input Type
-        </button>
+        ></app-button>
       </div>
 
       <div *ngIf="currentRow && currentAdapter" class="bg-white p-4 rounded">
@@ -165,32 +165,27 @@
         } }
       </div>
 
-      <!-- Add this new section after adding a field -->
-      <div *ngIf="showFieldAddedPrompt" class="mt-4 p-4 bg-orange-100 rounded">
+      <div *ngIf="showFieldAddedPrompt" class="mt-4 p-4 bg-white rounded">
         <p class="font-semibold mb-4">
           Field added successfully! What would you like to do next? Adding
           another field will add it to the same row. You can add up to three
           fields per row.
         </p>
         <div class="flex space-x-2">
-          <button
+          <app-button
+            text="Add Another Field"
             (click)="addAnotherField()"
-            class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded"
-          >
-            Add Another Field
-          </button>
-          <button
+          ></app-button>
+          <app-button
+            text="Add New Row"
+            theme="tertiary"
             (click)="addNewRow()"
-            class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded"
-          >
-            Add New Row
-          </button>
-          <button
+          ></app-button>
+          <app-button
+            text="Add New Section"
+            theme="secondary"
             (click)="addNewSection()"
-            class="bg-purple-500 hover:bg-purple-600 text-white font-bold py-2 px-4 rounded"
-          >
-            Add New Section
-          </button>
+          ></app-button>
         </div>
       </div>
     </form>
@@ -224,7 +219,7 @@
       </div>
 
       @if (showRawJsonControl.value) {
-      <pre class="bg-[#f5f2f0] text-gray-800 p-4 rounded-lg overflow-auto">
+      <pre class="text-gray-800 p-4 rounded-lg overflow-auto">
             <code [innerHTML]="formConfig | jsonHighlight"></code>
         </pre>
       } @else {

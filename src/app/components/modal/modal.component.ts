@@ -10,11 +10,17 @@ import { Subscription } from 'rxjs';
 import { FormVisibilityService } from '../../services/form-visibility.service';
 import { ModalConfig, ModalService } from '../../services/modal.service';
 import { AdapterSelectionComponent } from '../adapters/adapter-selection/adapter-selection.component';
+import { ButtonComponent } from '../button/button.component';
 
 @Component({
   selector: 'app-modal',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, AdapterSelectionComponent],
+  imports: [
+    CommonModule,
+    ReactiveFormsModule,
+    AdapterSelectionComponent,
+    ButtonComponent,
+  ],
   templateUrl: './modal.component.html',
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })

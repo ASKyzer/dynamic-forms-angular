@@ -16,7 +16,7 @@
     <div *ngFor="let option of options; let i = index">
       <label
         [for]="option.value"
-        class="flex gap-3 cursor-pointer justify-start align-top content-start mb-1"
+        class="flex gap-3 cursor-pointer justify-start align-top content-start mb-2"
       >
         <input
           type="radio"
@@ -27,7 +27,7 @@
           (change)="onRadioChange(option.value)"
           [required]="isRequired"
           [formControl]="control"
-          class="self-start mt-1 w-4 h-4"
+          class="self-start w-4 h-4"
         />
         <span>{{ option.label }}</span>
       </label>
