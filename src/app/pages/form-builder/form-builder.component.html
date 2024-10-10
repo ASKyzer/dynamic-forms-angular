@@ -1,5 +1,6 @@
 <div class="container mx-auto p-4 max-w-5xl relative">
-  <div *ngIf="!showForm">
+  @if (!showForm) {
+  <div>
     <h2 class="text-2xl font-bold mb-4">Welcome to the Form Builder</h2>
     <p class="mb-4 text-lg text-semibold">
       Follow these steps to build your form:
@@ -39,15 +40,13 @@
     </p>
     <app-button (click)="startForm()" text="Let's Get Started"></app-button>
   </div>
-
-  <div *ngIf="showForm" class="space-y-6">
+  } @else {
+  <div class="space-y-6">
     <div class="flex justify-between items-center">
       <h2 class="text-2xl font-bold mb-4">Form Builder</h2>
       <div class="flex gap-2">
-        <div
-          *ngIf="currentSection && formConfig.sections.length > 0"
-          class="flex gap-2"
-        >
+        @if (currentSection && formConfig.sections.length > 0) {
+        <div class="flex gap-2">
           <app-button
             text="Save Form"
             (click)="saveForm()"
@@ -59,13 +58,12 @@
             theme="secondary"
           ></app-button>
         </div>
+        }
       </div>
     </div>
 
-    <div
-      *ngIf="currentSection && !currentSection.title"
-      class="bg-white p-4 rounded"
-    >
+    @if (currentSection && !currentSection.title) {
+    <div class="bg-white p-4 rounded">
       <h3 class="text-xl font-semibold mb-2">Add Section Title</h3>
       <form [formGroup]="builderForm" class="space-y-4">
         <div class="relative mb-4">
@@ -98,28 +96,24 @@
         ></app-button>
       </form>
     </div>
-
-    <div
-      *ngIf="currentSection && currentSection.title"
-      class="bg-white p-4 rounded"
-    >
+    } @if (currentSection && currentSection.title) {
+    <div class="bg-white p-4 rounded">
       <h3 class="text-xl font-semibold mb-2">
         {{ currentSection.title }}
       </h3>
     </div>
+    }
 
     <form [formGroup]="builderForm" class="space-y-6">
-      <div
-        *ngIf="currentRow && !currentAdapter && !showFieldAddedPrompt"
-        class="bg-white p-4 rounded"
-      >
+      @if (currentRow && !currentAdapter && !showFieldAddedPrompt) {
+      <div class="bg-white p-4 rounded">
         <app-adapter-selector
           [parentForm]="builderForm"
           (buttonAction)="addAdapter($event)"
         ></app-adapter-selector>
       </div>
-
-      <div *ngIf="currentRow && currentAdapter" class="bg-white p-4 rounded">
+      } @if (currentRow && currentAdapter) {
+      <div class="bg-white p-4 rounded">
         <h3 class="text-xl font-semibold mb-2">
           {{ capitalizeFirstLetter(currentAdapter) }}
         </h3>
@@ -129,7 +123,7 @@
         ></app-button>
       </div>
 
-      <div *ngIf="currentRow && currentAdapter" class="bg-white p-4 rounded">
+      <div class="bg-white p-4 rounded">
         <h4 class="text-lg font-semibold mb-2">Add Field</h4>
         @switch (currentAdapter) { @case ('texts') {
         <app-text-builder
@@ -164,8 +158,8 @@
         ></app-input-builder>
         } }
       </div>
-
-      <div *ngIf="showFieldAddedPrompt" class="mt-4 p-4 bg-white rounded">
+      } @if (showFieldAddedPrompt) {
+      <div class="mt-4 p-4 bg-white rounded">
         <p class="font-semibold mb-4">
           Field added successfully! What would you like to do next? Adding
           another field will add it to the same row. You can add up to three
@@ -188,8 +182,11 @@
           ></app-button>
         </div>
       </div>
+      }
     </form>
   </div>
+
+  }
 </div>
 
 @if (showFormPreview) {
@@ -216,11 +213,12 @@
             [control]="showRawJsonControl"
             [label]="'Raw JSON'"
             [id]="'showRawJson'"
+            [margin]="'0'"
           ></app-toggle>
         </div>
 
         @if (showRawJsonControl.value) {
-        <pre class="text-gray-800 p-4 rounded-lg overflow-aut mb-4">
+        <pre class="text-gray-800 p-4 rounded-lg overflow-aut my-4">
               <code [innerHTML]="formConfig | jsonHighlight"></code>
           </pre>
         <div class="flex justify-between items-center">
@@ -238,10 +236,6 @@
         <app-form-preview [FORM_CONFIG]="formConfig"></app-form-preview>
         }
       </div>
-      } @else {
-      <p class="pt-4">
-        No form data available. Please start building your form.
-      </p>
       }
     </div>
   </div>

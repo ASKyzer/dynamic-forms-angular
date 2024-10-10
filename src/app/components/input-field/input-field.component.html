@@ -1,50 +1,46 @@
 <div class="mb-4">
   <label [for]="label" class="input-label">
     {{ label }}
+    @if (isRequired && label) {
     <span
-      *ngIf="isRequired && label"
       [class]="control.errors?.['required'] && (control.touched || control.dirty) ? 'text-red-500' : 'text-gray-500'"
       >*</span
     >
+    }
   </label>
 
-  <ng-container [ngSwitch]="type">
-    <textarea
-      *ngSwitchCase="'textarea'"
-      [formControl]="control"
-      [id]="controlName"
-      [placeholder]="placeholder"
-      [rows]="rows"
-      class="input-field"
-      [class.input-border]="
-        !control.invalid || (!control.dirty && !control.touched)
-      "
-      [class.input-border-error]="
-        control.invalid && (control.dirty || control.touched)
-      "
-    >
-    </textarea>
-
-    <input
-      *ngSwitchDefault
-      [type]="type"
-      [formControl]="control"
-      [id]="controlName"
-      [placeholder]="placeholder"
-      class="input-field"
-      [class.input-border]="
-        !control.invalid || (!control.dirty && !control.touched)
-      "
-      [class.input-border-error]="
-        control.invalid && (control.dirty || control.touched)
-      "
-    />
-  </ng-container>
-
-  <div
-    *ngIf="control.invalid && (control.dirty || control.touched)"
-    class="error-message"
+  @switch (type) { @case ('textarea') {
+  <textarea
+    [formControl]="control"
+    [id]="controlName"
+    [placeholder]="placeholder"
+    [rows]="rows"
+    class="input-field"
+    [class.input-border]="
+      !control.invalid || (!control.dirty && !control.touched)
+    "
+    [class.input-border-error]="
+      control.invalid && (control.dirty || control.touched)
+    "
   >
+  </textarea>
+  } @default {
+  <input
+    [type]="type"
+    [formControl]="control"
+    [id]="controlName"
+    [placeholder]="placeholder"
+    class="input-field"
+    [class.input-border]="
+      !control.invalid || (!control.dirty && !control.touched)
+    "
+    [class.input-border-error]="
+      control.invalid && (control.dirty || control.touched)
+    "
+  />
+  } } @if (control.invalid && (control.dirty || control.touched)) {
+  <div class="error-message">
     <p *ngFor="let error of getErrors()">{{ error }}</p>
   </div>
+  }
 </div>

@@ -1,5 +1,5 @@
+@if (isOpen) {
 <div
-  *ngIf="isOpen"
   class="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto flex items-center justify-center min-h-screen z-50"
 >
   <div
@@ -55,6 +55,7 @@
           [fullWidth]="true"
           class="w-full"
         ></app-button>
+
         @if (config?.secondaryButtonText) {
         <app-button
           [text]="config?.secondaryButtonText ?? ''"
@@ -68,3 +69,4 @@
     </div>
   </div>
 </div>
+}
