@@ -37,15 +37,11 @@
     </div>
   </div>
   }
-
-  <button
+  <app-button
+    text="Submit"
     type="submit"
-    class="w-6/12 float-right mb-24 bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600 mt-4"
-  >
-    Submit
-  </button>
-
-  @if (formSubmitted && validForm) {
-  <div class="mt-4 text-green-500">Form submitted successfully!</div>
-  }
+    [fullWidth]="true"
+    (click)="onSubmit()"
+    class="w-6/12 float-right mb-8"
+  ></app-button>
 </form>

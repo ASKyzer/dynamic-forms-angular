@@ -4,10 +4,12 @@ import { INPUT_BUILDER_CONFIG } from '../../../../constants/input-builder.consta
 import { FormBuilderService } from '../../../../services/form-builder.service';
 import { FormVisibilityService } from '../../../../services/form-visibility.service';
 import { AdapterSelectionComponent } from '../../../adapters/adapter-selection/adapter-selection.component';
+import { ButtonComponent } from '../../../button/button.component';
+
 @Component({
   selector: 'app-input-builder',
   standalone: true,
-  imports: [AdapterSelectionComponent],
+  imports: [AdapterSelectionComponent, ButtonComponent],
   templateUrl: './input-builder.component.html',
 })
 export class InputBuilderComponent {
