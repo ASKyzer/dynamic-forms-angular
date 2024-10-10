@@ -138,6 +138,16 @@ export const INPUT_BUILDER_CONFIG = {
         {
           fields: [
             {
+              adapterType: 'texts',
+              config: {
+                type: 'line',
+              },
+            },
+          ],
+        },
+        {
+          fields: [
+            {
               adapterType: 'toggle',
               config: {
                 label: 'Would you like to add validation?',

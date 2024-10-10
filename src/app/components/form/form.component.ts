@@ -1,8 +1,10 @@
 import { CommonModule } from '@angular/common';
 import { Component, CUSTOM_ELEMENTS_SCHEMA, Input } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
+import { FORM_SUCCESS_MODAL_CONFIG } from '../../constants/modal/form-success.constant';
 import { FormBuilderService } from '../../services/form-builder.service';
 import { FormVisibilityService } from '../../services/form-visibility.service';
+import { ModalService } from '../../services/modal.service';
 import { AdapterSelectionComponent } from '../adapters/adapter-selection/adapter-selection.component';
 import { InputAdapterComponent } from '../adapters/input-adapter/input-adapter.component';
 import { InputFieldComponent } from '../input-field/input-field.component';
@@ -30,7 +32,8 @@ export class FormComponent {
   constructor(
     private fb: FormBuilder,
     private formBuilderService: FormBuilderService,
-    public formVisibilityService: FormVisibilityService
+    public formVisibilityService: FormVisibilityService,
+    private modalService: ModalService
   ) {}
 
   ngOnInit() {
@@ -97,6 +100,20 @@ export class FormComponent {
     if (this.formBuilderService.checkFormValidity(this.config, this.form)) {
       console.log('Form is valid', this.form.getRawValue());
       this.validForm = true;
+      this.modalService.openModal({
+        title: 'Form Submitted',
+        modalConfig: FORM_SUCCESS_MODAL_CONFIG,
+        primaryButtonText: 'Close',
+        secondaryButtonText: 'Reset Form',
+        primaryAction: () => {
+          this.modalService.closeModal();
+        },
+        secondaryAction: () => {
+          this.modalService.closeModal();
+          this.resetForm();
+        },
+        showCloseButton: false,
+      });
     } else {
       console.log('Form is invalid', this.form.getRawValue());
       const form = document.querySelector('form');
@@ -116,5 +133,12 @@ export class FormComponent {
       this.formSubmitted = false;
       this.validForm = false;
     }, 1000);
+  }
+
+  resetForm() {
+    this.form.reset();
+    this.formSubmitted = false;
+    this.validForm = false;
+    this.formVisibilityService.updateVisibility(this.config, this.form);
   }
 }
