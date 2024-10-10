@@ -123,6 +123,7 @@ export class FormBuilderComponent implements OnInit {
 
     sectionTitleControl?.markAsDirty();
     sectionTitleControl?.markAsTouched();
+
     if (!sectionTitleControl?.value) {
       sectionTitleControl?.setErrors({ required: true });
       return;
