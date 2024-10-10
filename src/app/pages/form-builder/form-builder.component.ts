@@ -19,8 +19,10 @@ import { CheckboxComponent } from '../../components/checkbox/checkbox.component'
 import { FormPreviewComponent } from '../../components/form-preview/form-preview.component';
 import { InputFieldComponent } from '../../components/input-field/input-field.component';
 import { ToggleComponent } from '../../components/toggle/toggle.component';
+import { FORM_SAVED_SUCCESS_MODAL_CONFIG } from '../../constants/modal/form-saved-success.constant';
 import { JsonHighlightPipe } from '../../pipes/json-highlight.pipe';
 import { FormBuilderService } from '../../services/form-builder.service';
+import { ModalService } from '../../services/modal.service';
 
 @Component({
   selector: 'app-form-builder',
@@ -62,10 +64,12 @@ export class FormBuilderComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private formBuilderService: FormBuilderService,
-    private router: Router
+    private router: Router,
+    private modalService: ModalService
   ) {}
 
   ngOnInit() {
+    this.formConfig = { sections: [] };
     this.builderForm = this.fb.group({
       adapterType: [''],
       sectionTitle: [''],
@@ -164,7 +168,16 @@ export class FormBuilderComponent implements OnInit {
 
   saveForm() {
     this.formBuilderService.saveFormConfig(this.formConfig);
-    // Open a dialog to confirm saving
+    this.modalService.openModal({
+      title: 'Form Saved',
+      modalConfig: FORM_SAVED_SUCCESS_MODAL_CONFIG,
+      primaryButtonText: 'Continue',
+      primaryAction: () => {
+        this.router.navigate(['/form-example']);
+        this.modalService.closeModal();
+      },
+      showCloseButton: true,
+    });
     // Navigate to form preview or edit page
   }
 

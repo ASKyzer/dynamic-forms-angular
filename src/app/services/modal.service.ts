@@ -7,11 +7,11 @@ export interface ModalConfig {
   modalConfig: any;
   primaryButtonText: string;
   secondaryButtonText?: string;
-  primaryAction?: () => void;
-  secondaryAction?: () => void;
-  showCloseButton: boolean;
+  showCloseButton?: boolean;
   size?: 'sm' | 'md' | 'lg';
   closeOnAction?: () => void;
+  primaryAction?: () => void;
+  secondaryAction?: () => void;
 }
 
 const MODAL_DEFAULT_CONFIG: ModalConfig = {
