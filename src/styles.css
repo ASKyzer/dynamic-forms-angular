@@ -5,6 +5,12 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  --primary-color: #f6666e;
+  --secondary-color: #f6c24d;
+  --tertiary-color: #4db6ac;
+}
+
 body {
   font-family: "Raleway", sans-serif;
   background-color: #f0f0f0;
