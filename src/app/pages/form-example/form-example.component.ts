@@ -10,10 +10,17 @@ import { FormBuilderService } from '../../services/form-builder.service';
   imports: [FormComponent, InputFieldComponent],
   template: `
     <div class="py-8 px-16 mx-auto max-w-[1200px]">
-      <h1 class="text-4xl font-bold mb-4">Form Builder</h1>
+      <h1 class="text-4xl font-bold mb-4">
+        {{
+          isFromFormBuilder ? 'Behold the form you just built!' : 'Example Form'
+        }}
+      </h1>
       <p class="mb-4">
-        This is a simple form builder that allows you to create forms with
-        different types of input fields.
+        {{
+          isFromFormBuilder
+            ? 'Below is the form you just built. Click the button to submit the form.'
+            : 'This form is an example of what you can build with the form builder. Each section is a different type of adapter and the various options that are available.'
+        }}
       </p>
       <app-form [config]="FORM_CONFIG"></app-form>
     </div>
@@ -21,8 +28,10 @@ import { FormBuilderService } from '../../services/form-builder.service';
 })
 export class FormPageComponent {
   FORM_CONFIG: any = null; // TODO: Get config from backend
+  isFromFormBuilder: boolean = false;
 
   constructor(private formBuilderService: FormBuilderService) {
+    this.isFromFormBuilder = !!this.formBuilderService.getFormConfig();
     this.FORM_CONFIG = this.formBuilderService.getFormConfig() || FORM_CONFIG;
   }
 }
