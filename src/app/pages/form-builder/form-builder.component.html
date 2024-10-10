@@ -195,40 +195,55 @@
 @if (showFormPreview) {
 <div class="mx-auto p-4 max-w-3xl">
   <div
-    class="mx-auto py-4 px-8 max-w-5xl absolute top-0 left-0 right-0 bottom-0 bg-gray-100 z-50 border border-gray-400"
+    class="mx-auto py-4 px-8 absolute top-0 left-0 right-0 bottom-0 bg-secondary-lightest z-50 border border-gray-400"
   >
-    <div class="flex justify-between items-center border-b border-gray-400">
-      <h2 class="text-2xl font-bold mb-4">Form Preview</h2>
-      <button
-        type="button"
-        (click)="closePreview()"
-        class="text-2xl font-bold mb-4"
-      >
-        X
-      </button>
-    </div>
-
-    @if (formConfig.sections.length > 0) {
-    <div class="overflow-y-auto h-[calc(100vh-10rem)]">
-      <div class="flex justify-end mt-4">
-        <app-toggle
-          [control]="showRawJsonControl"
-          [label]="'Show Raw JSON'"
-          [id]="'showRawJson'"
-        ></app-toggle>
+    <div class="max-w-5xl mx-auto">
+      <div class="flex justify-between items-center border-b border-gray-400">
+        <h2 class="text-2xl font-bold mb-4">Form Preview</h2>
+        <button
+          type="button"
+          (click)="closePreview()"
+          class="text-2xl font-bold mb-4"
+        >
+          X
+        </button>
       </div>
 
-      @if (showRawJsonControl.value) {
-      <pre class="text-gray-800 p-4 rounded-lg overflow-auto">
-            <code [innerHTML]="formConfig | jsonHighlight"></code>
-        </pre>
+      @if (formConfig.sections.length > 0) {
+      <div class="overflow-y-auto h-[calc(100vh-10rem)]">
+        <div class="flex justify-end mt-4">
+          <app-toggle
+            [control]="showRawJsonControl"
+            [label]="'Raw JSON'"
+            [id]="'showRawJson'"
+          ></app-toggle>
+        </div>
+
+        @if (showRawJsonControl.value) {
+        <pre class="text-gray-800 p-4 rounded-lg overflow-aut mb-4">
+              <code [innerHTML]="formConfig | jsonHighlight"></code>
+          </pre>
+        <div class="flex justify-between items-center">
+          @if (copiedSuccess) {
+          <p class="text-primary mb-4">JSON copied to clipboard!</p>
+          }
+          <app-button
+            text="Copy JSON"
+            (click)="copyJsonToClipboard()"
+            theme="tertiary"
+            class="mb-4 ml-auto"
+          ></app-button>
+        </div>
+        } @else {
+        <app-form-preview [FORM_CONFIG]="formConfig"></app-form-preview>
+        }
+      </div>
       } @else {
-      <app-form-preview [FORM_CONFIG]="formConfig"></app-form-preview>
+      <p class="pt-4">
+        No form data available. Please start building your form.
+      </p>
       }
     </div>
-    } @else {
-    <p class="pt-4">No form data available. Please start building your form.</p>
-    }
   </div>
 </div>
 }
