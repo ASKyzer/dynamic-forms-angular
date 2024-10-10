@@ -2,7 +2,7 @@
   <label class="input-label"
     >{{ label }}
     <span
-      *ngIf="isRequired"
+      *ngIf="isRequired && label"
       [class]="control.errors?.['required'] && (control.touched || control.dirty) ? 'text-red-500' : 'text-gray-500'"
       >*</span
     >
@@ -11,6 +11,7 @@
     [ngClass]="{
       'flex flex-row flex-wrap gap-6': orientation === 'horizontal'
     }"
+    [id]="controlName"
   >
     <div *ngFor="let option of options; let i = index">
       <label

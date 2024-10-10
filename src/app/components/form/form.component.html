@@ -1,31 +1,33 @@
 <form [formGroup]="form" (ngSubmit)="onSubmit()">
-  @for (section of config; track section) {
+  @for (section of config.sections; track section) {
   <div class="border rounded-md shadow-md my-8 bg-white">
     <div class="py-2">
       <h2 class="text-xl font-bold border-b py-2 px-4 flex justify-between">
-        {{ section.sectionTitle }}
+        {{ section.title }}
         @if (section.hasRequiredFields) {
         <span class="text-sm font-light italic pr-4">* Required</span>
         }
       </h2>
     </div>
     <div class="p-4">
-      @if (section.sectionContent.length > 0) { @for (adapter of
-      section.sectionContent; track adapter) {
+      @if (section.rows.length > 0) { @for (row of section.rows; track row) {
       <div
         [class]="
-          adapter.row.length > 1
-            ? adapter.row.length === 3
+          row.fields.length > 1
+            ? row.fields.length === 3
               ? 'grid grid-cols-1 md:grid-cols-3 gap-0 md:gap-4'
               : 'grid grid-cols-1 md:grid-cols-2 gap-0 md:gap-4'
             : ''
         "
       >
-        @for (row of adapter.row; track row) {
-        <div class="flex flex-col">
+        @for (field of row.fields; track field) {
+        <div
+          class="flex flex-col"
+          *ngIf="formVisibilityService.isFieldVisible(field, form)"
+        >
           <app-adapter-selection
-            [adapterType]="row.adapterType"
-            [contentConfig]="row.contentConfig"
+            [adapterType]="field.adapterType"
+            [contentConfig]="field.config"
             [parentForm]="form"
           ></app-adapter-selection>
         </div>
@@ -43,7 +45,7 @@
     Submit
   </button>
 
-  @if (formSubmitted && form.valid) {
+  @if (formSubmitted && validForm) {
   <div class="mt-4 text-green-500">Form submitted successfully!</div>
   }
 </form>

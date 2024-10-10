@@ -1,0 +1,29 @@
+@for (row of config.sections[0].rows; track row) {
+<div
+  [class]="
+    row.fields.length > 1
+      ? row.fields.length === 3
+        ? 'grid grid-cols-1 md:grid-cols-3 gap-0 md:gap-4'
+        : 'grid grid-cols-1 md:grid-cols-2 gap-0 md:gap-4'
+      : ''
+  "
+>
+  @for (field of row.fields; track field) { @if
+  (formVisibilityService.isFieldVisible(field, inputBuildForm)) {
+  <div class="flex flex-col">
+    <app-adapter-selection
+      [adapterType]="field.adapterType"
+      [contentConfig]="field.config"
+      [parentForm]="inputBuildForm"
+    ></app-adapter-selection>
+  </div>
+  } }
+</div>
+}
+
+<button
+  (click)="onClick()"
+  class="mt-4 bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded"
+>
+  Add Field
+</button>

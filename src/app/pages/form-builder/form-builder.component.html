@@ -1,0 +1,239 @@
+<div class="container mx-auto p-4 max-w-5xl relative">
+  <div *ngIf="!showForm" class="text-center">
+    <h2 class="text-2xl font-bold mb-4">Welcome to the Form Builder</h2>
+    <p class="mb-4">Click the button below to start creating your form.</p>
+    <button
+      (click)="startForm()"
+      class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded"
+    >
+      Let's Get Started
+    </button>
+  </div>
+
+  <div *ngIf="showForm" class="space-y-6">
+    <div class="flex justify-between items-center">
+      <h2 class="text-2xl font-bold mb-4">Form Builder</h2>
+      <div class="flex gap-2">
+        <div *ngIf="currentSection">
+          <button
+            (click)="saveForm()"
+            class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded"
+          >
+            Save Form
+          </button>
+          <button
+            (click)="previewForm()"
+            class="ml-4 bg-purple-500 hover:bg-purple-600 text-white font-bold py-2 px-4 rounded"
+          >
+            Preview Form
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div *ngIf="!currentSection" class="">
+      <h3 class="text-xl font-semibold mb-4">Creating Your Form</h3>
+      <p class="mb-4">Follow these steps to build your form:</p>
+      <ol class="list-decimal list-inside space-y-2 mb-4">
+        <li>Click the "Add Section" button below to start a new section.</li>
+        <li>Enter a title for your section.</li>
+        <li>
+          Choose an adapter type for your first field (input, checkbox, radio,
+          dropdown, etc.) for the first row.
+        </li>
+        <li>
+          Fill in the details for your chosen adapter (e.g., label, placeholder,
+          required status).
+        </li>
+        <li>Add the field to your form.</li>
+        <li>
+          Repeat steps 3-5 to add more fields to the current row (up to 3 fields
+          per row).
+        </li>
+        <li>To start a new row, choose "Add New Row" after adding a field.</li>
+        <li>
+          To start a new section, choose "Add New Section" after adding a field.
+        </li>
+        <li>
+          Once you've added all desired sections and fields, click "Save Form".
+        </li>
+        <li>
+          After saving, you can click "View Form" to see and interact with your
+          created form.
+        </li>
+      </ol>
+      <p class="mb-4">
+        Remember, you can add multiple sections, each with multiple rows, and
+        each row can contain up to three fields. The fields will be
+        automatically arranged in columns based on the number of fields in each
+        row.
+      </p>
+      <button
+        (click)="addSection()"
+        class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded"
+      >
+        Add Section
+      </button>
+    </div>
+
+    <div
+      *ngIf="currentSection && !currentSection.title"
+      class="bg-white p-4 rounded"
+    >
+      <h3 class="text-xl font-semibold mb-2">Add Section Title</h3>
+      <form [formGroup]="builderForm" class="space-y-4">
+        <input
+          formControlName="sectionTitle"
+          placeholder="Section Title"
+          class="w-full p-2 border rounded"
+        />
+        <button
+          (click)="saveSectionTitle()"
+          class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded"
+        >
+          Save Section Title
+        </button>
+      </form>
+    </div>
+
+    <div
+      *ngIf="currentSection && currentSection.title"
+      class="bg-white p-4 rounded"
+    >
+      <h3 class="text-xl font-semibold mb-2">
+        {{ currentSection.title }}
+      </h3>
+    </div>
+
+    <!-- Wrap the entire form in a formGroup -->
+    <form [formGroup]="builderForm" class="space-y-6">
+      <div
+        *ngIf="currentRow && !currentAdapter && !showFieldAddedPrompt"
+        class="bg-white p-4 rounded"
+      >
+        <app-adapter-selector
+          [parentForm]="builderForm"
+          (buttonAction)="addAdapter($event)"
+        ></app-adapter-selector>
+      </div>
+
+      <div *ngIf="currentRow && currentAdapter" class="bg-white p-4 rounded">
+        <h3 class="text-xl font-semibold mb-2">
+          {{ capitalizeFirstLetter(currentAdapter) }}
+        </h3>
+        <button
+          (click)="changeAdapter()"
+          class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded"
+        >
+          Change Input Type
+        </button>
+      </div>
+
+      <div *ngIf="currentRow && currentAdapter" class="bg-white p-4 rounded">
+        <h4 class="text-lg font-semibold mb-2">Add Field</h4>
+        @switch (currentAdapter) { @case ('texts') {
+        <app-text-builder
+          (addField)="addField($event)"
+          (addConditions)="addConditions($event)"
+        ></app-text-builder>
+        } @case ('dropdown') {
+        <app-dropdown-builder
+          (addField)="addField($event)"
+          (addConditions)="addConditions($event)"
+        ></app-dropdown-builder>
+        } @case ('toggle') {
+        <app-toggle-builder
+          (addField)="addField($event)"
+          (addConditions)="addConditions($event)"
+        ></app-toggle-builder>
+        } @case ('checkbox') {
+        <app-checkbox-builder
+          (addConditions)="addConditions($event)"
+          (addField)="addField($event)"
+        ></app-checkbox-builder>
+        } @case ('radio') {
+        <app-radio-builder
+          (addConditions)="addConditions($event)"
+          (addField)="addField($event)"
+        ></app-radio-builder>
+        } @case ('input') {
+        <app-input-builder
+          (addConditions)="addConditions($event)"
+          (addField)="addField($event)"
+          [isInput]="true"
+        ></app-input-builder>
+        } }
+      </div>
+
+      <!-- Add this new section after adding a field -->
+      <div *ngIf="showFieldAddedPrompt" class="mt-4 p-4 bg-orange-100 rounded">
+        <p class="font-semibold mb-4">
+          Field added successfully! What would you like to do next? Adding
+          another field will add it to the same row. You can add up to three
+          fields per row.
+        </p>
+        <div class="flex space-x-2">
+          <button
+            (click)="addAnotherField()"
+            class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded"
+          >
+            Add Another Field
+          </button>
+          <button
+            (click)="addNewRow()"
+            class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded"
+          >
+            Add New Row
+          </button>
+          <button
+            (click)="addNewSection()"
+            class="bg-purple-500 hover:bg-purple-600 text-white font-bold py-2 px-4 rounded"
+          >
+            Add New Section
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+
+@if (showFormPreview) {
+<div class="mx-auto p-4 max-w-3xl">
+  <div
+    class="mx-auto py-4 px-8 max-w-5xl absolute top-0 left-0 right-0 bottom-0 bg-gray-100 z-50 border border-gray-400"
+  >
+    <div class="flex justify-between items-center border-b border-gray-400">
+      <h2 class="text-2xl font-bold mb-4">Form Preview</h2>
+      <button
+        type="button"
+        (click)="closePreview()"
+        class="text-2xl font-bold mb-4"
+      >
+        X
+      </button>
+    </div>
+
+    @if (formConfig.sections.length > 0) {
+    <div class="overflow-y-auto h-[calc(100vh-10rem)]">
+      <div class="flex justify-end mt-4">
+        <app-toggle
+          [control]="showRawJsonControl"
+          [label]="'Show Raw JSON'"
+          [id]="'showRawJson'"
+        ></app-toggle>
+      </div>
+
+      @if (showRawJsonControl.value) {
+      <pre class="bg-[#f5f2f0] text-gray-800 p-4 rounded-lg overflow-auto">
+            <code [innerHTML]="formConfig | jsonHighlight"></code>
+        </pre>
+      } @else {
+      <app-form-preview [FORM_CONFIG]="formConfig"></app-form-preview>
+      }
+    </div>
+    } @else {
+    <p class="pt-4">No form data available. Please start building your form.</p>
+    }
+  </div>
+</div>
+}

@@ -1,5 +1,6 @@
 <app-input-field
   [control]="parentForm?.controls[contentConfig.controlName]"
+  [controlName]="contentConfig.controlName"
   [customErrorMessage]="contentConfig.customErrorMessage || ''"
   [isRequired]="contentConfig.isRequired || false"
   [label]="contentConfig.label"

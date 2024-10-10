@@ -10,6 +10,34 @@ body {
   background-color: #f0f0f0;
 }
 
+pre {
+  background-color: #f4f4f4;
+  padding: 5px;
+  border-radius: 5px;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
+
+.key {
+  color: #c92c2c;
+}
+
+.string {
+  color: #0b7500;
+}
+
+.number {
+  color: #1a01cc;
+}
+
+.boolean {
+  color: #1a01cc;
+}
+
+.null {
+  color: #1a01cc;
+}
+
 /* Custom Tailwind */
 .error-message {
   @apply text-red-500 text-sm mt-1 italic;

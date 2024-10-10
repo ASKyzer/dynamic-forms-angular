@@ -5,14 +5,7 @@ import {
   NO_ERRORS_SCHEMA,
   OnInit,
 } from '@angular/core';
-import {
-  AbstractControl,
-  FormArray,
-  FormControl,
-  FormGroup,
-  ValidatorFn,
-  Validators,
-} from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import {
   CheckboxComponent,
   CheckboxOption,
@@ -51,50 +44,12 @@ export class CheckboxAdapterComponent implements OnInit {
     this.initializeFormControl();
   }
 
-  atLeastOneCheckboxCheckedValidator(): ValidatorFn {
-    return (control: AbstractControl): { [key: string]: any } | null => {
-      const checkboxes = control as FormArray;
-      const checked = checkboxes.controls.some((checkbox) => checkbox.value);
-
-      return checked
-        ? null
-        : this.contentConfig.isRequired
-        ? { requireCheckbox: true }
-        : null;
-    };
-  }
-
-  getValidators() {
-    return this.contentConfig.validation.map((validation: any) => {
-      switch (validation.type) {
-        case 'requiredTrue':
-          return Validators.requiredTrue;
-        default:
-          return null;
-      }
-    });
-  }
-
   initializeFormControl() {
-    if (this.contentConfig.isGroup) {
-      const formArray = this.getFormArray(this.contentConfig.options);
-      this.parentForm?.addControl(this.contentConfig.controlName, formArray);
-      formArray.setValidators(this.atLeastOneCheckboxCheckedValidator());
-    } else {
-      this.parentForm?.addControl(
-        this.contentConfig.controlName,
-        new FormControl(
-          this.contentConfig.option.checked || false,
-          this.contentConfig.isRequired ? Validators.requiredTrue : null
-        )
-      );
-    }
-  }
-
-  getFormArray(options: CheckboxOption[]) {
-    return new FormArray<FormControl>(
-      options.map(
-        (option: CheckboxOption) => new FormControl(option.checked || false)
+    this.parentForm.addControl(
+      this.contentConfig.controlName,
+      new FormControl(
+        this.contentConfig.option.checked || false,
+        this.contentConfig.isRequired ? Validators.requiredTrue : null
       )
     );
   }

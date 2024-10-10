@@ -1,0 +1,14 @@
+<div>
+  <h4 class="text-lg font-bold">Choose the type of input you want to use.</h4>
+  <app-adapter-selection
+    [adapterType]="field.adapterType"
+    [contentConfig]="field.config"
+    [parentForm]="parentForm"
+  ></app-adapter-selection>
+  <button
+    (click)="chooseAdapter()"
+    class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded"
+  >
+    Choose
+  </button>
+</div>

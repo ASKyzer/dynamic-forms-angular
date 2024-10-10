@@ -2,7 +2,7 @@
   <label [for]="label" class="input-label">
     {{ label }}
     <span
-      *ngIf="isRequired"
+      *ngIf="isRequired && label"
       [class]="control.errors?.['required'] && (control.touched || control.dirty) ? 'text-red-500' : 'text-gray-500'"
       >*</span
     >
@@ -12,7 +12,7 @@
     <textarea
       *ngSwitchCase="'textarea'"
       [formControl]="control"
-      [id]="label"
+      [id]="controlName"
       [placeholder]="placeholder"
       [rows]="rows"
       class="input-field"
@@ -29,7 +29,7 @@
       *ngSwitchDefault
       [type]="type"
       [formControl]="control"
-      [id]="label"
+      [id]="controlName"
       [placeholder]="placeholder"
       class="input-field"
       [class.input-border]="
