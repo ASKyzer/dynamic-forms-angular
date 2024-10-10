@@ -2,11 +2,12 @@
   <p class="input-label">
     {{ label }}
 
+    @if (isRequired && label) {
     <span
-      *ngIf="isRequired && label"
       [class]="control.errors?.['required'] && (control.touched || control.dirty) ? 'text-red-500' : 'text-gray-500'"
       >*</span
     >
+    }
   </p>
 
   <div class="flex flex-col gap-2 w-fit cursor-pointer">

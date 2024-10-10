@@ -1,11 +1,12 @@
 <div class="{{ 'mb-' + margin }}">
   <label class="input-label"
     >{{ label }}
+    @if (isRequired && label) {
     <span
-      *ngIf="isRequired && label"
       [class]="control.errors?.['required'] && (control.touched || control.dirty) ? 'text-red-500' : 'text-gray-500'"
       >*</span
     >
+    }
   </label>
   <div
     [ngClass]="{
@@ -13,7 +14,8 @@
     }"
     [id]="controlName"
   >
-    <div *ngFor="let option of options; let i = index">
+    @for (option of options; track option; let i = $index) {
+    <div>
       <label
         [for]="option.value"
         class="flex gap-3 cursor-pointer justify-start align-top content-start mb-2"
@@ -32,6 +34,7 @@
         <span>{{ option.label }}</span>
       </label>
     </div>
+    }
   </div>
   @if (control.invalid && (control.dirty || control.touched)) {
   <div class="error-message">

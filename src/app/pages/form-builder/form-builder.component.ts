@@ -63,6 +63,7 @@ export class FormBuilderComponent implements OnInit {
   showFieldAddedPrompt: boolean = false;
   showFormPreview: boolean = false;
   toggleForm: FormGroup = new FormGroup({});
+  copiedSuccess: boolean = false;
 
   constructor(
     private fb: FormBuilder,
@@ -168,7 +169,6 @@ export class FormBuilderComponent implements OnInit {
     this.currentRow = null;
     this.resetFieldForm();
     this.addRow();
-    // Assuming you have an addRow method
   }
 
   changeAdapter() {
@@ -193,7 +193,6 @@ export class FormBuilderComponent implements OnInit {
       },
       showCloseButton: true,
     });
-    // Navigate to form preview or edit page
   }
 
   previewForm() {
@@ -202,5 +201,21 @@ export class FormBuilderComponent implements OnInit {
 
   closePreview() {
     this.showFormPreview = false;
+    this.showRawJsonControl.setValue(false);
+  }
+
+  copyJsonToClipboard() {
+    const jsonString = JSON.stringify(this.formConfig, null, 2);
+    navigator.clipboard
+      .writeText(jsonString)
+      .then(() => {
+        this.copiedSuccess = true;
+        setTimeout(() => {
+          this.copiedSuccess = false;
+        }, 500);
+      })
+      .catch((err) => {
+        console.error('Failed to copy JSON: ', err);
+      });
   }
 }

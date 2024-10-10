@@ -14,6 +14,7 @@ export class ToggleComponent {
   @Input() label: string = '';
   @Input() value: boolean = false;
   @Input() control!: FormControl;
+  @Input() margin: string = '4';
 
   ngOnInit() {
     if (!this.control) {
