@@ -93,6 +93,7 @@ export class FormBuilderComponent implements OnInit {
 
   startForm() {
     this.showForm = true;
+    this.addSection();
   }
 
   addAdapter(adapterType: string) {
@@ -108,13 +109,13 @@ export class FormBuilderComponent implements OnInit {
   }
 
   addNewSection() {
-    this.resetFieldForm();
     this.showFieldAddedPrompt = false;
     this.currentSection = null;
     this.currentRow = null;
     this.currentField = null;
     this.currentAdapter = null;
-    this.builderForm.get('sectionTitle')?.setValue('');
+    this.builderForm.reset();
+    this.resetFieldForm();
     this.addSection();
   }
 
@@ -142,7 +143,6 @@ export class FormBuilderComponent implements OnInit {
     this.currentRow = {
       fields: [],
     };
-
     this.currentSection.rows.push(this.currentRow);
   }
 
@@ -160,12 +160,13 @@ export class FormBuilderComponent implements OnInit {
 
   addAnotherField() {
     this.showFieldAddedPrompt = false;
-    // The form is already reset, so we're ready for a new field
+    this.resetFieldForm();
   }
 
   addNewRow() {
     this.showFieldAddedPrompt = false;
     this.currentRow = null;
+    this.resetFieldForm();
     this.addRow();
     // Assuming you have an addRow method
   }
@@ -176,9 +177,8 @@ export class FormBuilderComponent implements OnInit {
   }
 
   resetFieldForm() {
-    this.builderForm.patchValue({
-      adapterType: '',
-    });
+    this.builderForm.reset();
+    this.builderForm.markAsPristine();
   }
 
   saveForm() {
