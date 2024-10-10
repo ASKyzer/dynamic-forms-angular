@@ -6,7 +6,7 @@
 @tailwind utilities;
 
 :root {
-  /* Primary Color (formerly Tertiary) */
+  /* Primary Color  */
   --color-primary-lightest: #d4f0ed;
   --color-primary-lighter: #a3ddd8;
   --color-primary-light: #72cac4;
@@ -15,7 +15,7 @@
   --color-primary-darker: #2d6e64;
   --color-primary-darkest: #1e4841;
 
-  /* Secondary Color (unchanged) */
+  /* Secondary Color  */
   --color-secondary-lightest: #fceccc;
   --color-secondary-lighter: #fae0a1;
   --color-secondary-light: #f8d075;
@@ -24,7 +24,7 @@
   --color-secondary-darker: #9a7a31;
   --color-secondary-darkest: #705725;
 
-  /* Tertiary Color (formerly Primary) */
+  /* Tertiary Color  */
   --color-tertiary-lightest: #fbc9cc;
   --color-tertiary-lighter: #f9989d;
   --color-tertiary-light: #f76775;
@@ -33,7 +33,7 @@
   --color-tertiary-darker: #933d41;
   --color-tertiary-darkest: #62292c;
 
-  /* Neutral Color (unchanged) */
+  /* Neutral Color  */
   --color-neutral-lightest: #f9f9f9;
   --color-neutral-lighter: #f4f4f4;
   --color-neutral-light: #e0e0e0;
@@ -41,6 +41,15 @@
   --color-neutral-dark: #8d8d8d;
   --color-neutral-darker: #6b6b6b;
   --color-neutral-darkest: #4a4a4a;
+
+  /* Quaternary Color  */
+  --color-quaternary-lightest: #d1c2e8;
+  --color-quaternary-lighter: #a995d4;
+  --color-quaternary-light: #846bc0;
+  --color-quaternary: #583b8b; /* Original color */
+  --color-quaternary-dark: #462f6f;
+  --color-quaternary-darker: #352354;
+  --color-quaternary-darkest: #231738;
 }
 
 body {
@@ -55,7 +64,7 @@ input[type="checkbox"] {
   width: 20px;
   border: 1px solid var(--color-neutral-darkest);
   border-radius: 4px;
-  background-color: white;
+  background-color: #fff;
 }
 
 input[type="checkbox"]:checked {
@@ -74,7 +83,7 @@ input[type="radio"] {
   height: 20px;
   border: 1px solid var(--color-neutral-darkest);
   border-radius: 50%;
-  background-color: white;
+  background-color: #fff;
   position: relative;
 }
 
@@ -87,7 +96,7 @@ input[type="radio"]:checked::after {
   content: "";
   width: 10px;
   height: 10px;
-  background-color: white;
+  background-color: #fff;
   border-radius: 50%;
   position: absolute;
   top: 50%;
@@ -104,23 +113,23 @@ pre {
 }
 
 .key {
-  color: #c92c2c;
+  color: var(--color-tertiary-dark);
 }
 
 .string {
-  color: #0b7500;
+  color: var(--color-primary-dark);
 }
 
 .number {
-  color: #1a01cc;
+  color: var(--color-quaternary-light);
 }
 
 .boolean {
-  color: #1a01cc;
+  color: var(--color-quaternary-light);
 }
 
 .null {
-  color: #1a01cc;
+  color: var(--color-quaternary-light);
 }
 
 /* Custom Tailwind */
