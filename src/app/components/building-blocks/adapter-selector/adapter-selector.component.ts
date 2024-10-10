@@ -32,6 +32,7 @@ export class AdapterSelectorComponent {
 
   chooseAdapter() {
     const adapterControl = this.parentForm.get(this.field.config.controlName);
+
     adapterControl?.markAsDirty();
     adapterControl?.markAsTouched();
 
