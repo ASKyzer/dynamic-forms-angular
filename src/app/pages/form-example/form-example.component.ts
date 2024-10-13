@@ -9,7 +9,7 @@ import { FormBuilderService } from '../../services/form-builder.service';
   standalone: true,
   imports: [FormComponent, InputFieldComponent],
   template: `
-    <div class="py-8 px-16 mx-auto max-w-[1200px]">
+    <div class="py-8 px-2 mx-auto max-w-[1200px]">
       <h1 class="text-4xl font-bold mb-4">
         {{
           isFromFormBuilder ? 'Behold the form you just built!' : 'Example Form'
