@@ -5,8 +5,12 @@ import { FormComponent } from '../form/form.component';
   selector: 'app-form-preview',
   standalone: true,
   imports: [FormComponent],
-  template: `<app-form [config]="FORM_CONFIG"></app-form>`,
+  template: `<app-form
+    [config]="FORM_CONFIG"
+    [isFromFormBuilder]="isFromFormBuilder"
+  ></app-form>`,
 })
 export class FormPreviewComponent {
   @Input() FORM_CONFIG: any = null;
+  @Input() isFromFormBuilder: boolean = false;
 }

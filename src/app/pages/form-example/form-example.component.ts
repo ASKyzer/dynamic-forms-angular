@@ -22,7 +22,10 @@ import { FormBuilderService } from '../../services/form-builder.service';
             : 'This form is an example of what you can build with the form builder. Each section is a different type of adapter and the various options that are available.'
         }}
       </p>
-      <app-form [config]="FORM_CONFIG"></app-form>
+      <app-form
+        [config]="FORM_CONFIG"
+        [isFromFormBuilder]="isFromFormBuilder"
+      ></app-form>
     </div>
   `,
 })

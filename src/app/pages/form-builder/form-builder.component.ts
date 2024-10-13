@@ -1,5 +1,10 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit, ViewChild } from '@angular/core';
+import {
+  Component,
+  CUSTOM_ELEMENTS_SCHEMA,
+  OnInit,
+  ViewChild,
+} from '@angular/core';
 import {
   FormBuilder,
   FormControl,
@@ -48,6 +53,7 @@ import { ModalService } from '../../services/modal.service';
     ButtonComponent,
   ],
   templateUrl: './form-builder.component.html',
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class FormBuilderComponent implements OnInit {
   @ViewChild(InputBuilderComponent) public inputBuildComponent:
@@ -106,7 +112,7 @@ export class FormBuilderComponent implements OnInit {
   }
 
   addSection() {
-    this.currentSection = { title: '', rows: [] };
+    this.currentSection = { hasRequiredFields: false, title: '', rows: [] };
   }
 
   addNewSection() {
@@ -153,6 +159,10 @@ export class FormBuilderComponent implements OnInit {
       config: formData.config,
       conditions: formData.conditions,
     };
+
+    if (this.currentField.config.isRequired) {
+      this.currentSection.hasRequiredFields = true;
+    }
 
     this.currentRow.fields.push(this.currentField);
     this.showFieldAddedPrompt = true;
@@ -225,6 +235,8 @@ export class FormBuilderComponent implements OnInit {
     this.currentRow = null;
     this.currentField = null;
     this.currentAdapter = null;
+    this.showFieldAddedPrompt = false;
+    this.showFormPreview = false;
     this.builderForm.reset();
     this.toggleForm.reset();
 

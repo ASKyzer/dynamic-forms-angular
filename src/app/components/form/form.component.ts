@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, CUSTOM_ELEMENTS_SCHEMA, Input } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { FORM_SUCCESS_MODAL_CONFIG } from '../../constants/modal/form-success.constant';
+import { JsonHighlightPipe } from '../../pipes/json-highlight.pipe';
 import { FormBuilderService } from '../../services/form-builder.service';
 import { FormVisibilityService } from '../../services/form-visibility.service';
 import { ModalService } from '../../services/modal.service';
@@ -20,16 +21,22 @@ import { InputFieldComponent } from '../input-field/input-field.component';
     InputAdapterComponent,
     AdapterSelectionComponent,
     ButtonComponent,
+    JsonHighlightPipe,
   ],
   templateUrl: './form.component.html',
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class FormComponent {
   @Input() config: any = this.formBuilderService.getFormConfig();
+  @Input() isFromFormBuilder: boolean = false;
+
+  copiedSuccess = false;
   form = this.fb.group({});
   formSubmitted = false;
   validForm = false;
   fieldsWithConditions: any[] = [];
+  visibleIndex: number | null = null;
+  jsonView = false;
 
   constructor(
     private fb: FormBuilder,
@@ -142,5 +149,36 @@ export class FormComponent {
     this.formSubmitted = false;
     this.validForm = false;
     this.formVisibilityService.updateVisibility(this.config, this.form);
+  }
+
+  showJson(section: any, index: number) {
+    this.visibleIndex = this.visibleIndex === index ? null : index;
+    console.log({
+      sections: section,
+      index,
+    });
+  }
+
+  copyJsonToClipboard() {
+    const jsonString = JSON.stringify(this.config, null, 2);
+    navigator.clipboard
+      .writeText(jsonString)
+      .then(() => {
+        this.copiedSuccess = true;
+        setTimeout(() => {
+          this.copiedSuccess = false;
+        }, 500);
+      })
+      .catch((err) => {
+        console.error('Failed to copy JSON: ', err);
+      });
+  }
+
+  viewJson() {
+    this.jsonView = true;
+  }
+
+  closeJson() {
+    this.jsonView = false;
   }
 }
