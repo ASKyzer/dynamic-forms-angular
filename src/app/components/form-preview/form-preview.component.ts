@@ -8,6 +8,7 @@ import { FormComponent } from '../form/form.component';
   template: `<app-form
     [config]="FORM_CONFIG"
     [isFromFormBuilder]="isFromFormBuilder"
+    [isPreview]="true"
   ></app-form>`,
 })
 export class FormPreviewComponent {
