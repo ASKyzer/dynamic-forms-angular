@@ -218,4 +218,16 @@ export class FormBuilderComponent implements OnInit {
         console.error('Failed to copy JSON: ', err);
       });
   }
+
+  resetForm() {
+    this.formConfig = { sections: [] };
+    this.currentSection = null;
+    this.currentRow = null;
+    this.currentField = null;
+    this.currentAdapter = null;
+    this.builderForm.reset();
+    this.toggleForm.reset();
+
+    this.addSection();
+  }
 }
