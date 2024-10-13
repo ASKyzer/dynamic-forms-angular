@@ -105,20 +105,6 @@ export const INPUT_BUILDER_CONFIG = {
         {
           fields: [
             {
-              adapterType: 'input',
-              config: {
-                controlName: 'errorMessage',
-                label: 'Error Message',
-                placeholder:
-                  'Enter a custom error message, leave blank for default (optional)',
-                type: 'text',
-              },
-            },
-          ],
-        },
-        {
-          fields: [
-            {
               conditions: {
                 field: 'fieldType',
                 operator: '==',
