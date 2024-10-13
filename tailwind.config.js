@@ -3,6 +3,7 @@ module.exports = {
   theme: {
     extend: {
       colors: {
+        background: "var(--color-background)",
         primary: {
           lightest: "var(--color-primary-lightest)",
           lighter: "var(--color-primary-lighter)",
@@ -29,6 +30,13 @@ module.exports = {
           dark: "var(--color-tertiary-dark)",
           darker: "var(--color-tertiary-darker)",
           darkest: "var(--color-tertiary-darkest)",
+        },
+        quaternary: {
+          lightest: "var(--color-quaternary-lightest)",
+          lighter: "var(--color-quaternary-lighter)",
+          light: "var(--color-quaternary-light)",
+          DEFAULT: "var(--color-quaternary)",
+          dark: "var(--color-quaternary-dark)",
         },
         neutral: {
           lightest: "var(--color-neutral-lightest)",
