@@ -20,4 +20,11 @@
   } }
 </div>
 }
-<app-button text="Add Field" (click)="onClick()"></app-button>
+<div class="flex justify-between">
+  <app-button text="Add Field" (click)="onClick()"></app-button>
+  <app-button
+    text="Clear Form"
+    (click)="clearForm()"
+    theme="secondary"
+  ></app-button>
+</div>

@@ -33,8 +33,11 @@ import { ButtonComponent } from '../../components/button/button.component';
 
       <p class="text-sm text-gray-600">
         Start building your dynamic forms today and experience the ease of our
-        form creation process!
+        form creation process! Below is a section of the form that you can
+        build.
       </p>
+
+      <img src="assets/images/personal-info.png" alt="Form Builder Demo" />
     </div>
   `,
   styles: [],
