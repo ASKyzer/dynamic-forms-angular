@@ -371,7 +371,7 @@ export const FORM_CONFIG = {
           fields: [
             {
               config: {
-                content: 'Header 1 Large',
+                content: 'Heading Large (h1)',
                 isBold: true,
                 type: 'h1',
               },
@@ -383,7 +383,7 @@ export const FORM_CONFIG = {
           fields: [
             {
               config: {
-                content: 'Header 2 Medium',
+                content: 'Heading Medium (h2)',
                 isBold: true,
                 type: 'h2',
               },
@@ -395,7 +395,7 @@ export const FORM_CONFIG = {
           fields: [
             {
               config: {
-                content: 'Header 3 Small',
+                content: 'Heading Small (h3)',
                 type: 'h3',
               },
               adapterType: 'texts',
@@ -406,7 +406,7 @@ export const FORM_CONFIG = {
           fields: [
             {
               config: {
-                content: 'Paragraph example',
+                content: 'Paragraph (p)',
                 type: 'p',
               },
               adapterType: 'texts',
@@ -417,9 +417,8 @@ export const FORM_CONFIG = {
           fields: [
             {
               config: {
-                listTitle: 'List title',
+                listTitle: 'Unordered List (ul) title is optional',
                 listItems: ['Item 1', 'Item 2', 'Item 3'],
-                isBold: true,
                 type: 'ul',
               },
               adapterType: 'texts',
@@ -440,9 +439,9 @@ export const FORM_CONFIG = {
           fields: [
             {
               config: {
+                listTitle: 'Ordered List (ol) title is optional',
                 listItems: ['Item 1', 'Item 2', 'Item 3'],
                 type: 'ol',
-                isItalic: true,
               },
               adapterType: 'texts',
             },
@@ -453,8 +452,46 @@ export const FORM_CONFIG = {
             {
               config: {
                 content:
-                  'In reality, you might need to create wrapper components for these HTML elements or use a different approach to create the elements dynamically.',
+                  'This is a blockquote. In reality, you might need to create wrapper components for these HTML elements or use a different approach to create the elements dynamically.',
                 type: 'blockquote',
+              },
+              adapterType: 'texts',
+            },
+          ],
+        },
+        {
+          fields: [
+            {
+              config: {
+                content: 'Font style bold',
+                isBold: true,
+                type: 'p',
+                margin: '0',
+              },
+              adapterType: 'texts',
+            },
+          ],
+        },
+        {
+          fields: [
+            {
+              config: {
+                content: 'Font style italic',
+                isItalic: true,
+                type: 'p',
+                margin: '0',
+              },
+              adapterType: 'texts',
+            },
+          ],
+        },
+        {
+          fields: [
+            {
+              config: {
+                content: 'Font style underline',
+                isUnderline: true,
+                type: 'p',
               },
               adapterType: 'texts',
             },
@@ -473,6 +510,7 @@ export const FORM_CONFIG = {
                 label: 'First Name',
                 type: 'text',
                 controlName: 'firstName',
+                placeholder: 'Input type text.',
                 isRequired: true,
                 validation: [
                   {
@@ -488,6 +526,7 @@ export const FORM_CONFIG = {
                 label: 'Last Name',
                 type: 'text',
                 controlName: 'lastName',
+                placeholder: 'Input type text.',
                 isRequired: true,
                 validation: [
                   {
@@ -506,6 +545,7 @@ export const FORM_CONFIG = {
                 label: 'Email',
                 type: 'email',
                 controlName: 'email',
+                placeholder: 'Input type email.',
                 isRequired: true,
                 validation: [
                   {
@@ -527,6 +567,7 @@ export const FORM_CONFIG = {
                 label: 'Password',
                 type: 'password',
                 controlName: 'password',
+                placeholder: 'Input type password.',
                 isRequired: true,
                 validation: [
                   {
@@ -549,13 +590,7 @@ export const FORM_CONFIG = {
                 label: 'Phone',
                 type: 'text',
                 controlName: 'phone',
-                placeholder: '123456789',
-                validation: [
-                  {
-                    type: 'pattern',
-                    value: '^[0-9]{9}$',
-                  },
-                ],
+                placeholder: 'Input type text. Example: 123456789',
               },
               adapterType: 'input',
             },
@@ -568,6 +603,22 @@ export const FORM_CONFIG = {
                 label: 'Date of Birth',
                 type: 'date',
                 controlName: 'dateOfBirth',
+                placeholder: 'Input type date.',
+                isRequired: true,
+                validation: [
+                  {
+                    type: 'required',
+                  },
+                ],
+              },
+              adapterType: 'input',
+            },
+            {
+              config: {
+                label: 'Years employed',
+                type: 'number',
+                controlName: 'yearsEmployed',
+                placeholder: 'Input type number.',
                 isRequired: true,
                 validation: [
                   {
@@ -586,7 +637,7 @@ export const FORM_CONFIG = {
                 label: 'Website',
                 type: 'url',
                 controlName: 'website',
-                placeholder: 'https://example.com',
+                placeholder: 'Input type url. Example: https://www.example.com',
                 validation: [
                   {
                     type: 'pattern',
@@ -605,7 +656,8 @@ export const FORM_CONFIG = {
                 label: 'Message',
                 type: 'textarea',
                 controlName: 'message',
-                placeholder: 'Enter your message',
+                placeholder:
+                  'Input type textarea. The default number of rows is 4.',
                 isRequired: true,
                 validation: [
                   {
