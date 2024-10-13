@@ -116,4 +116,8 @@ export class InputBuilderComponent {
 
     return validation;
   }
+
+  clearForm() {
+    this.inputBuildForm.reset();
+  }
 }
