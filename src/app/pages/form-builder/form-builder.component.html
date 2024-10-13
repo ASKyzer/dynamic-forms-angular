@@ -223,6 +223,7 @@
         </div>
 
         @if (showRawJsonControl.value) {
+
         <pre class="text-gray-800 p-4 rounded-lg overflow-aut my-4">
               <code [innerHTML]="formConfig | jsonHighlight"></code>
           </pre>
@@ -238,7 +239,10 @@
           ></app-button>
         </div>
         } @else {
-        <app-form-preview [FORM_CONFIG]="formConfig"></app-form-preview>
+        <app-form-preview
+          [FORM_CONFIG]="formConfig"
+          [isFromFormBuilder]="true"
+        ></app-form-preview>
         }
       </div>
       }

@@ -1,5 +1,12 @@
+<app-button
+  text="View JSON"
+  (click)="viewJson()"
+  theme="tertiary"
+  class="mb-4 w-[max-content] flex ml-auto"
+></app-button>
+
 <form [formGroup]="form" (ngSubmit)="onSubmit()">
-  @for (section of config.sections; track section) {
+  @for (section of config.sections; track section; let i = $index) {
   <div class="border rounded-md shadow-md my-8 bg-white">
     <div class="py-2">
       <h2 class="text-xl font-bold border-b py-2 px-4 flex justify-between">
@@ -34,12 +41,52 @@
       } }
     </div>
   </div>
-  }
+  @if (!isFromFormBuilder) {
+  <div
+    (click)="showJson(section, i)"
+    class="flex justify-end cursor-pointer w-auto mb-4 text-bold text-primary-dark"
+  >
+    {{ visibleIndex === i ? "Hide" : "Show" }} {{ section.title }} Config
+  </div>
+
+  @if (visibleIndex === i) {
+  <div class="pb-4 max-h-[500px] overflow-y-auto mb-10">
+    <pre class="p-4 overflow-auto">
+    <code [innerHTML]="section | jsonHighlight"></code>
+  </pre>
+  </div>
+  } } }
   <app-button
     text="Submit"
     type="submit"
     [fullWidth]="true"
     (click)="onSubmit()"
-    class="w-6/12 float-right mb-8"
+    class="w-6/12 float-right mb-8 mt-4"
   ></app-button>
 </form>
+
+@if (jsonView) {
+<div class="absolute top-0 left-0 right-0 bottom-0 bg-background z-50">
+  <button
+    (click)="closeJson()"
+    type="button"
+    class="text-2xl font-bold mb-24 fixed top-0 right-0 z-60 pt-8 pr-8"
+  >
+    X
+  </button>
+  <pre class="text-gray-800 rounded-lg overflow-auto min-h-[100vh] px-8 py-4">
+    <code [innerHTML]="config | jsonHighlight"></code>
+  </pre>
+  <div class="flex justify-between items-center">
+    @if (copiedSuccess) {
+    <p class="text-primary mb-4">JSON copied to clipboard!</p>
+    }
+    <app-button
+      text="Copy JSON"
+      (click)="copyJsonToClipboard()"
+      theme="tertiary"
+      class="my-8 ml-auto"
+    ></app-button>
+  </div>
+</div>
+}

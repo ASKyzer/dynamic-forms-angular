@@ -9,7 +9,7 @@ export const FORM_CONFIG = {
               config: {
                 controlName: 'additionalCoverages',
                 label:
-                  'Would you like to add additional coverates for family members?',
+                  'Would you like to add additional coverages for family members?',
               },
               adapterType: 'toggle',
             },
