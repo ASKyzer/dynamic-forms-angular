@@ -29,6 +29,7 @@ import { InputFieldComponent } from '../input-field/input-field.component';
 export class FormComponent {
   @Input() config: any = this.formBuilderService.getFormConfig();
   @Input() isFromFormBuilder: boolean = false;
+  @Input() isPreview: boolean = false;
 
   copiedSuccess = false;
   form = this.fb.group({});

@@ -1,9 +1,11 @@
+@if (!isPreview) {
 <app-button
   text="View JSON"
   (click)="viewJson()"
   theme="tertiary"
   class="mb-4 w-[max-content] flex ml-auto"
 ></app-button>
+}
 
 <form [formGroup]="form" (ngSubmit)="onSubmit()">
   @for (section of config.sections; track section; let i = $index) {
