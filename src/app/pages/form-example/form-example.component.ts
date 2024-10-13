@@ -34,4 +34,8 @@ export class FormPageComponent {
     this.isFromFormBuilder = !!this.formBuilderService.getFormConfig();
     this.FORM_CONFIG = this.formBuilderService.getFormConfig() || FORM_CONFIG;
   }
+
+  ngOnDestroy() {
+    this.formBuilderService.saveFormConfig(null);
+  }
 }

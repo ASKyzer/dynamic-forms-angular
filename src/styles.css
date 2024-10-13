@@ -50,11 +50,15 @@
   --color-quaternary-dark: #462f6f;
   --color-quaternary-darker: #352354;
   --color-quaternary-darkest: #231738;
+
+  --color-background: #dad0ae;
 }
 
 body {
+  /* color: var(--color-tertiary-darkest); */
   font-family: "Raleway", sans-serif;
-  background-color: var(--color-secondary-lightest);
+  /* background-color: var(--color-secondary-lightest); */
+  background-color: var(--color-background);
 }
 
 input[type="checkbox"] {
