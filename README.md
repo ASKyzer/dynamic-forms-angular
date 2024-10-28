@@ -1,6 +1,26 @@
 # DynamicFormsAngular
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.3.10.
+A powerful dynamic form builder application that allows users to create, customize, and manage forms through an intuitive drag-and-drop interface. Built with Angular 17, this tool enables users to:
+
+- Create forms with various field types (text, number, dropdown, etc.)
+- Configure field properties and validation rules
+- Preview forms in real-time
+- Generate form submissions
+- Export form definitions
+
+Try the live demo: [Dynamic Forms Builder](https://dynamic-forms-builder.netlify.app/)
+
+## Getting Started
+
+### Prerequisites
+
+- Node.js (v18 or higher)
+- npm (v9 or higher)
+- Angular CLI (v17.3.10)
+
+### Local Setup
+
+1. Clone the repository
 
 ## Development server
 
